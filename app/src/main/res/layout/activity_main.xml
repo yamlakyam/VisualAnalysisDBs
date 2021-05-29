@@ -45,7 +45,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="282dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -83,7 +83,7 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="200dp" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
@@ -169,7 +169,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             app:cardBackgroundColor="#f8f8fa">
 
@@ -204,7 +204,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             app:cardBackgroundColor="#f8f8fa">
 
@@ -236,7 +236,7 @@
         <View
             android:id="@+id/view4"
             android:layout_width="5dp"
-            android:layout_height="1dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -248,7 +248,7 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/piechart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="150dp" />
     </LinearLayout>
 
 </LinearLayout>

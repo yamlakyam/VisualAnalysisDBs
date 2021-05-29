@@ -101,13 +101,15 @@ public class MainActivity extends AppCompatActivity {
 
         PieDataSet pieDataSet = new PieDataSet(piedatas, "Piedata label");
         pieDataSet.setColors(
-                Color.parseColor("#f8f8fa"),
                 Color.parseColor("#e73a55"),
-                Color.parseColor("#d9f5ff"),
-                Color.parseColor("#110f49")
+                Color.parseColor("#110f49"),
+                Color.parseColor("#f8f8fa"),
+                Color.parseColor("#d9f5ff")
         );
+        pieDataSet.setDrawValues(false);
 
-        PieData pieData =new PieData(pieDataSet);
+
+        PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
 
     }
