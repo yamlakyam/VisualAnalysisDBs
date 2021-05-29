@@ -6,10 +6,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
@@ -19,10 +23,6 @@ import java.util.TimerTask;
 import java.util.concurrent.Future;
 
 public class MainActivity extends AppCompatActivity {
-
-    int negativeColor = Color.rgb(17, 15, 71);
-    int positiveColor = Color.rgb(217, 245, 255);
-
 
     @Override
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         dataVals.add(new BarEntry(8, 10));
         dataVals.add(new BarEntry(9, 9));
         dataVals.add(new BarEntry(10, 12));
-        dataVals.add(new BarEntry(11, -3));
+        dataVals.add(new BarEntry(11, -6));
         //dataVals.add(new BarEntry(5, -5));
 
 
@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
         BarDataSett barDataSet = new BarDataSett(dataVals, "dataset1");
 
         barDataSet.setDrawValues(false);
-//        for (int i = 0; i < dataVals.size(); i++) {
-//            if (dataVals.get(i).getY() < 0) {
-//                barDataSet.setColors(negativeColor,positiveColor);
-//            } else if(dataVals.get(i).getY()>0) {
-//                barDataSet.setColors(positiveColor,negativeColor);
-//            }
-//
-//        }
+        for (int i = 0; i < dataVals.size(); i++) {
+            if (dataVals.get(i).getY() < 0) {
+                barDataSet.setColors(Color.parseColor("#d9f5ff"));
+            } else if (dataVals.get(i).getY() > 0) {
+                barDataSet.setColors(Color.parseColor("#110f49"));
+            }
+
+        }//this code sets all the dataset color based on the last condition.//has to be fixed
 
         //barChart.getAxisLeft().setDrawGridLines(false);
         barChart.setDrawGridBackground(false);
@@ -87,9 +87,28 @@ public class MainActivity extends AppCompatActivity {
         barChart.setData(barData);
         barChart.invalidate();
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisVals));
-
+        barChart.getXAxis().setLabelRotationAngle(-15);
         barChart.animateXY(1000, 1000);
 
+
+        PieChart pieChart = findViewById(R.id.piechart);
+
+        ArrayList<PieEntry> piedatas = new ArrayList<>();
+        piedatas.add(new PieEntry((float) 690.8, "Poland"));
+        piedatas.add(new PieEntry((float) 84.4, "United States"));
+        piedatas.add(new PieEntry((float) 71.2, "India"));
+        piedatas.add(new PieEntry((float) 437.7, "Others"));
+
+        PieDataSet pieDataSet = new PieDataSet(piedatas, "Piedata label");
+        pieDataSet.setColors(
+                Color.parseColor("#f8f8fa"),
+                Color.parseColor("#e73a55"),
+                Color.parseColor("#d9f5ff"),
+                Color.parseColor("#110f49")
+        );
+
+        PieData pieData =new PieData(pieDataSet);
+        pieChart.setData(pieData);
 
     }
 }

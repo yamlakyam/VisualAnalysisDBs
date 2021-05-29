@@ -13,14 +13,14 @@ public class BarDataSett extends BarDataSet {
         super(yVals, label);
     }
 
-    @Override
-    public int getColor(int index) {
-        if (getEntryForIndex(index).getY()>0)
-            return Color.parseColor("#d9f5ff");
-        else if(getEntryForIndex(index).getY()<0)
-            return Color.parseColor("#d9f5ff");
-       else
-            return Color.parseColor("#d9f5ff");
 
-    }
+//    public int getColor(int index) {
+//        if (getEntryForIndex(index).getY()>0)
+//            return Color.parseColor("#110f49");
+//        else if(getEntryForIndex(index).getY()<0)
+//            return Color.parseColor("#110f49");
+//       else
+//            return Color.parseColor("#110f49");
+//
+//    }
 }
