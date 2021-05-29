@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
+        pieChart.setDrawSliceText(false);
 
     }
 }
