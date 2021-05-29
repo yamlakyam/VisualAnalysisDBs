@@ -110,9 +110,13 @@ public class MainActivity extends AppCompatActivity {
         pieDataSet.setDrawValues(false);
 
 
+
         PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.setDrawSliceText(false);
+        //pieChart.setHoleRadius(0);
+        pieChart.setDrawHoleEnabled(false);
+
 
         Legend legend = pieChart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
