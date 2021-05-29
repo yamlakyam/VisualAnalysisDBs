@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelCount(dataVals.size());
 
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getAxisLeft().setDrawAxisLine(false);
