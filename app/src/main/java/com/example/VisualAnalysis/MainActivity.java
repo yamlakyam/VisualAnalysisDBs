@@ -21,17 +21,6 @@ public class MainActivity extends AppCompatActivity {
     int positiveColor = Color.rgb(217, 245, 255);
 
 
-//        for(
-//    int i = 0;i<dataVals.size();i++)
-//
-//    {
-//        BarEntry d = dataVals.get(i);
-//
-//        if (d.getY() <= 0) {
-//
-//        }
-
-
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
         barChart.getAxisRight().setDrawGridLines(false);
         XAxis xAxis = barChart.getXAxis();
         xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        barChart.getAxisLeft().setDrawGridLines(false);
+        barChart.getAxisLeft().setDrawAxisLine(false);
+        barChart.getAxisRight().setDrawGridLines(false);
+        barChart.getAxisRight().setDrawAxisLine(false);
+
 
 
         //baChart.setDrawGridBackground(false);
