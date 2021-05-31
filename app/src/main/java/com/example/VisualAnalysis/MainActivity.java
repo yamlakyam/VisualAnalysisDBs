@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setDrawSliceText(false);
         //pieChart.setHoleRadius(0);
         pieChart.setDrawHoleEnabled(false);
+        //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
+        pieChart.spin(5000,90f, 360f, Easing.EaseInOutQuad);
 
 
         Legend legend = pieChart.getLegend();
