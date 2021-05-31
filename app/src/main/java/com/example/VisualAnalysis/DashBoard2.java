@@ -34,9 +34,7 @@ public class DashBoard2 extends AppCompatActivity {
         lineData.addDataSet(lineDataSet);
         lineChart.setData(lineData);
 
-        lineChart.getAxisLeft().setDrawLabels(false);
-        lineChart.getAxisLeft().setDrawGridLines(false);
-        lineChart.getAxisRight().setDrawGridLines(false);
+        lineChart.getAxisLeft().setDrawLabels(false);lineChart.getAxisRight().setDrawGridLines(false);
         lineChart.getAxisRight().setDrawAxisLine(false);
         lineChart.getAxisRight().setDrawLabels(false);
         lineChart.getDescription().setEnabled(false);
@@ -44,9 +42,11 @@ public class DashBoard2 extends AppCompatActivity {
         lineChart.getXAxis().setDrawGridLines(false);
         lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         lineChart.setDrawGridBackground(false);
+        lineChart.getAxisLeft().setDrawGridLines(false);
 
-        //lineDataSet.setDrawCircles(true);
+
         lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        lineDataSet.setDrawValues(false);
 
 
     }

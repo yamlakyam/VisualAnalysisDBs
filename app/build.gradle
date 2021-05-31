@@ -38,5 +38,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.lecho:hellocharts-android:v1.5.8'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+//    implementation 'com.android.support:leanback-v17:30.0.0'
 
 }

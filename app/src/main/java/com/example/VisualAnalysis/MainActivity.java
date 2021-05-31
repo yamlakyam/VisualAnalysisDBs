@@ -1,12 +1,16 @@
 package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 //import android.content.Intent;
+import android.app.UiModeManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -28,13 +32,27 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Future;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
+
+
+    public static final String TAG = "DeviceTypeRuntimeCheck";
+
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+        if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
+            Log.d(TAG, "Running on a TV Device");
+        } else {
+            Log.d(TAG, "Running on a non-TV Device");
+        }
+
+
 
         ArrayList<String> xAxisVals = new ArrayList<>(Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"));
 
@@ -51,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         dataVals.add(new BarEntry(8, 10));
         dataVals.add(new BarEntry(9, 9));
         dataVals.add(new BarEntry(10, 12));
-        dataVals.add(new BarEntry(11, -6));
+        dataVals.add(new BarEntry(11, 7));
         //dataVals.add(new BarEntry(5, -5));
 
 
@@ -63,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             if (dataVals.get(i).getY() < 0) {
                 barDataSet.setColors(Color.parseColor("#d9f5ff"));
             } else if (dataVals.get(i).getY() > 0) {
-                barDataSet.setColors(Color.parseColor("#110f49"));
+                barDataSet.setColors(Color.parseColor("#212c5d"));
             }
 
         }//this code sets all the dataset color based on the last condition.//has to be fixed
@@ -141,15 +159,15 @@ public class MainActivity extends AppCompatActivity {
         circleDisplay.showValue(75f, 100f, true);
         circleDisplay.setTouchEnabled(true);
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, DashBoard2.class);
-                startActivity(intent);
-                finish();
-            }
-        },2000);
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(MainActivity.this, DashBoard2.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        },2000);
 
 
     }
