@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         barChart.getXAxis().setLabelRotationAngle(-15);
         barChart.animateXY(1000, 1000);
         barChart.getAxisRight().setDrawLabels(false);
+        barChart.getDescription().setEnabled(false);
 
 
         PieChart pieChart = findViewById(R.id.piechart);
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setDrawHoleEnabled(false);
         //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
         pieChart.spin(5000,90f, 360f, Easing.EaseInOutQuad);
+        pieChart.getDescription().setEnabled(false);
 
 
         Legend legend = pieChart.getLegend();
