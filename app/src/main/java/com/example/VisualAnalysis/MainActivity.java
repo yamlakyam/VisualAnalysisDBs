@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisVals));
         barChart.getXAxis().setLabelRotationAngle(-15);
         barChart.animateXY(1000, 1000);
+        barChart.getAxisRight().setDrawLabels(false);
 
 
         PieChart pieChart = findViewById(R.id.piechart);
