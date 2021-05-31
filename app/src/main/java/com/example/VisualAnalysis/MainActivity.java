@@ -2,8 +2,11 @@ package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//import android.content.Intent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -114,18 +117,16 @@ public class MainActivity extends AppCompatActivity {
         pieDataSet.setDrawValues(false);
 
 
-
         PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.setDrawSliceText(false);
         //pieChart.setHoleRadius(0);
         pieChart.setDrawHoleEnabled(false);
         //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
-        pieChart.spin(5000,90f, 360f, Easing.EaseInOutQuad);
+        pieChart.spin(5000, 90f, 360f, Easing.EaseInOutQuad);
         pieChart.getDescription().setEnabled(false);
-       // pieChart.getRadius();
+        // pieChart.getRadius();
         //Toast.makeText(this, (int) pieChart.getRadius(),Toast.LENGTH_LONG).show();
-
 
 
         Legend legend = pieChart.getLegend();
@@ -133,12 +134,22 @@ public class MainActivity extends AppCompatActivity {
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         legend.setOrientation(Legend.LegendOrientation.VERTICAL);
 
-        CircleDisplay circleDisplay= findViewById(R.id.circleDisplay);
-        circleDisplay.setColor(Color.parseColor("#110f48"));
+        CircleDisplay circleDisplay = findViewById(R.id.circleDisplay);
+        circleDisplay.setColor(Color.parseColor("#d68894"));
         circleDisplay.setAnimDuration(3000);
         circleDisplay.setStepSize(1f);
-        circleDisplay.showValue(75f, 100f,true);
+        circleDisplay.showValue(75f, 100f, true);
+        circleDisplay.setTouchEnabled(true);
 
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, DashBoard2.class);
+                startActivity(intent);
+                finish();
+            }
+        },2000);
 
 
     }
