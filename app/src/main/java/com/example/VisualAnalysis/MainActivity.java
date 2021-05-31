@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -122,12 +123,23 @@ public class MainActivity extends AppCompatActivity {
         //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
         pieChart.spin(5000,90f, 360f, Easing.EaseInOutQuad);
         pieChart.getDescription().setEnabled(false);
+       // pieChart.getRadius();
+        //Toast.makeText(this, (int) pieChart.getRadius(),Toast.LENGTH_LONG).show();
+
 
 
         Legend legend = pieChart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+
+        CircleDisplay circleDisplay= findViewById(R.id.circleDisplay);
+        circleDisplay.setColor(Color.parseColor("#110f48"));
+        circleDisplay.setAnimDuration(3000);
+        circleDisplay.setStepSize(1f);
+        circleDisplay.showValue(75f, 100f,true);
+
+
 
     }
 }
