@@ -6,11 +6,16 @@ import androidx.fragment.app.FragmentActivity;
 //import android.content.Intent;
 import android.app.UiModeManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -48,10 +53,15 @@ public class MainActivity extends FragmentActivity {
         UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
         if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
             Log.d(TAG, "Running on a TV Device");
+        } else if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK)) {
+            Log.d(TAG, "has leanback features");
+
+        } else if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
+            Log.d(TAG, "has hardware type tv");
+
         } else {
             Log.d(TAG, "Running on a non-TV Device");
         }
-
 
 
         ArrayList<String> xAxisVals = new ArrayList<>(Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"));
@@ -169,6 +179,30 @@ public class MainActivity extends FragmentActivity {
 //            }
 //        },2000);
 
+        Button nxtbtn =findViewById(R.id.button2);
+        nxtbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DashBoard2.class);
+                startActivity(intent);
+            }
+        });
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                BarChart barChart = findViewById(R.id.barchart);
+                barChart.setFocusable(true);
+                barChart.requestFocus();
+                return true;
+
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                findViewById(R.id.sessionscard).setFocusable(true);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

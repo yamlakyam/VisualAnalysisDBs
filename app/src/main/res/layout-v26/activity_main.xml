@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f7f6f9"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
+    android:layout_marginStart="50dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="50dp"
     android:orientation="vertical"
-    android:paddingStart="50dp"
-    android:paddingTop="20dp"
-    android:paddingEnd="50dp"
-    tools:context=".MainActivity"
-    tools:deviceId="tv">
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    tools:deviceId="tv"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,12 +35,10 @@
             app:srcCompat="@android:drawable/ic_menu_mapmode" />
 
         <SearchView
-            android:id="@+id/search_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#f8f8fa"
-            android:nextFocusDown="@id/button2" />
+            android:background="#f8f8fa" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -95,21 +92,21 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                app:cardBackgroundColor="#ffffff"
                 app:cardCornerRadius="1dp"
-                app:cardElevation="0.7dp"
                 app:cardMaxElevation="1dp"
-                app:cardPreventCornerOverlap="true">
+                app:cardElevation="0.7dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardBackgroundColor="#f7f6f9">
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barchart"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:nextFocusRight="@id/sessionscard"
-                    android:nextFocusDown="@id/circleDisplay" />
+                    android:focusable="true"
+                    android:focusedByDefault="true"
+                    android:nextFocusDown="@id/circleDisplay"
+                    android:nextFocusRight="@id/sessionscard"/>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
@@ -126,7 +123,7 @@
             android:layout_height="200dp"
             android:layout_marginTop="35dp"
             android:layout_weight="2"
-            app:cardBackgroundColor="#ffffff">
+            app:cardBackgroundColor="#f8f8fa">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,7 +171,7 @@
             android:layout_height="200dp"
             android:layout_marginTop="35dp"
             android:layout_weight="2"
-            app:cardBackgroundColor="#ffffff">
+            app:cardBackgroundColor="#f8f8fa">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -220,7 +217,7 @@
             android:layout_height="200dp"
             android:layout_marginTop="35dp"
             android:layout_weight="2"
-            app:cardBackgroundColor="#ffffff">
+            app:cardBackgroundColor="#f8f8fa">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -266,7 +263,7 @@
             android:layout_height="200dp"
             android:layout_marginTop="35dp"
             android:layout_weight="2"
-            app:cardBackgroundColor="#ffffff">
+            app:cardBackgroundColor="#f8f8fa">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -310,81 +307,36 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:elevation="20dp"
-            android:padding="5dp"
-            app:cardBackgroundColor="#ffffff"
-            app:cardUseCompatPadding="true"
-            app:contentPadding="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <com.example.VisualAnalysis.CircleDisplay
-                    android:id="@+id/circleDisplay"
-                    android:layout_width="500dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true" />
-
-
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/piechart"
-                    android:layout_width="500dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true">
-
-                </com.github.mikephil.charting.charts.PieChart>
-
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        android:elevation="20dp"
+        app:cardBackgroundColor="#f7f6f9"
+        app:contentPadding="10dp"
+        app:cardUseCompatPadding="true"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <View
-                android:id="@+id/view8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.example.VisualAnalysis.CircleDisplay
+                android:id="@+id/circleDisplay"
+                android:layout_width="500dp"
+                android:layout_height="150dp"
                 android:layout_weight="1" />
 
-            <View
-                android:id="@+id/view9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/piechart"
+                android:layout_width="500dp"
+                android:layout_height="150dp"
                 android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:backgroundTint="#959191"
-                android:focusableInTouchMode="true"
-                android:nextFocusUp="@id/search_bar"
-                android:text="Next"
-                android:textAllCaps="false" />
+
         </LinearLayout>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
