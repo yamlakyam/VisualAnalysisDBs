@@ -104,7 +104,7 @@ public class MainActivity extends FragmentActivity {
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelCount(dataVals.size());
+        xAxis.setLabelCount(dataVals.size());//if it doesn't show all the labels, use this
 
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getAxisLeft().setDrawAxisLine(false);

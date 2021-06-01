@@ -2,6 +2,7 @@ package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -36,9 +37,10 @@ public class DashBoard2 extends AppCompatActivity {
         lineData.addDataSet(lineDataSet);
         lineChart.setData(lineData);
 
-        lineChart.getAxisLeft().setDrawLabels(false);
+        lineChart.getAxisLeft().setDrawLabels(true);
         lineChart.getAxisRight().setDrawGridLines(false);
-        lineChart.getAxisLeft().setEnabled(false);
+        lineChart.getAxisLeft().setDrawGridLines(false);
+        //lineChart.getAxisLeft().setEnabled(false);
         lineChart.getAxisRight().setDrawAxisLine(false);
         lineChart.getAxisRight().setDrawLabels(false);
         lineChart.getDescription().setEnabled(false);
@@ -51,11 +53,16 @@ public class DashBoard2 extends AppCompatActivity {
 
         lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         lineDataSet.setDrawValues(false);
+        lineDataSet.setColors(Color.parseColor("#5b79e7"));
+        lineDataSet.setDrawCircles(false);
+
 
         ArrayList<String> xAxisVals = new ArrayList<>(Arrays.asList("Apr 6", "Apr 7", "Apr 8", "Apr 9", "Apr 10", "Apr 11", "Apr 12"));
         ArrayList<String> yAxisVals = new ArrayList<>(Arrays.asList("0", "10k", "20k", "30k", "40k", "50k", "60k"));
         lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisVals));
         lineChart.getAxisLeft().setValueFormatter(new IndexAxisValueFormatter(yAxisVals));
+        lineChart.getAxisLeft().setLabelCount(yAxisVals.size());
+
 
 
     }
