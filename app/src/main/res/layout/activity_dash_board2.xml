@@ -361,6 +361,7 @@
                 android:id="@+id/textView49"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Popular Pages"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
@@ -368,7 +369,8 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart2"
                 android:layout_width="match_parent"
-                android:layout_height="170dp" />
+                android:layout_height="170dp"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/textView50"
@@ -377,6 +379,10 @@
                 android:text="Event actions"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
+            <com.github.mikephil.charting.charts.BubbleChart
+                android:id="@+id/bubblechart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

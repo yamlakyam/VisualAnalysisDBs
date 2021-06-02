@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.BubbleChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -13,6 +14,9 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.BubbleData;
+import com.github.mikephil.charting.data.BubbleDataSet;
+import com.github.mikephil.charting.data.BubbleEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -179,11 +183,51 @@ public class DashBoard2 extends AppCompatActivity {
 
         barChart2.setData(barData2);
         barChart2.groupBars(0, 0.4f,0f);
-        barChart2.setVisibleXRangeMaximum(10);
+        barChart2.setVisibleXRangeMaximum(dataVal3.size());
 
         barDataSet2.setColor(Color.parseColor("#5b79e7"));
         barDataSet3.setColor(Color.parseColor("#27adb9"));
         barData2.setBarWidth(0.3f);
+
+        BubbleChart bubbleChart=findViewById(R.id.bubblechart);
+
+        ArrayList<BubbleEntry> bubbleEntries = new ArrayList<BubbleEntry>();
+        bubbleEntries.add(new BubbleEntry(1, 1, 0.001f));
+        bubbleEntries.add(new BubbleEntry(2, 2, 0.0021f));
+        bubbleEntries.add(new BubbleEntry(3, 3, 0.0017f));
+        bubbleEntries.add(new BubbleEntry(4, 4, 0.0008f));
+        bubbleEntries.add(new BubbleEntry(5, 1, 0.0012f));
+//        bubbleEntries.add(new BubbleEntry(2, 2, 0.008f));
+//        bubbleEntries.add(new BubbleEntry(2, 3, 0.0015f));
+//        bubbleEntries.add(new BubbleEntry(2, 4, 0.0016f));
+
+        BubbleDataSet bubbleDataSet=new BubbleDataSet(bubbleEntries,"Event actions");
+        bubbleDataSet.setColors(Color.parseColor("#5d78df"), Color.parseColor("#768fec"),Color.parseColor("#7790ec"));
+        BubbleData bubbleData =new BubbleData();
+        bubbleData.addDataSet(bubbleDataSet);
+        bubbleChart.setData(bubbleData);
+        bubbleChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        //bubbleChart.getAxisLeft().setDrawLabels(false);
+        bubbleChart.setDrawGridBackground(false);
+        //bubbleChart.getAxisLeft().setDrawAxisLine(false);
+        bubbleChart.getAxisLeft().setDrawGridLines(false);
+        bubbleChart.getAxisRight().setDrawLabels(false);
+        bubbleChart.getAxisRight().setDrawGridLines(false);
+        bubbleChart.getAxisRight().setDrawAxisLine(false);
+        bubbleChart.getXAxis().setDrawGridLines(false);
+        bubbleChart.getXAxis().setCenterAxisLabels(true);
+
+        String[] bubbleXlabel = {"Apr 6", "Apr 7", "Apr 8", "Apr 9", "Apr 10", "Apr 11", "Apr 12"};
+        String [] bubbleYlablel={"Payment","Scan","Activate","Serach"};
+
+        bubbleChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(bubbleXlabel));
+        bubbleChart.getAxisRight().setValueFormatter(new IndexAxisValueFormatter(bubbleYlablel));
+        bubbleChart.getXAxis().setLabelCount(bubbleEntries.size());
+        bubbleChart.setViewPortOffsets(20,10,20,20);
+
+
+
+
 
 
 
