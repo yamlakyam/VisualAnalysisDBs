@@ -118,7 +118,6 @@ public class DashBoard2 extends AppCompatActivity {
         lineDataSet2.setForm(Legend.LegendForm.CIRCLE);
 
 
-
         LineData lineData2 = new LineData();
         lineData2.addDataSet(lineDataSet1);
         lineData2.addDataSet(lineDataSet2);
@@ -133,7 +132,7 @@ public class DashBoard2 extends AppCompatActivity {
         lineChart2.getXAxis().setDrawGridLines(false);
         lineChart2.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        ArrayList<String> chart2xAxis=new ArrayList<String>(Arrays.asList("Apr 6", "Apr 7", "Apr8 ", "Apr 9", "Apr 10", "Apr 11", "Apr 12"));
+        ArrayList<String> chart2xAxis = new ArrayList<String>(Arrays.asList("Apr 6", "Apr 7", "Apr8 ", "Apr 9", "Apr 10", "Apr 11", "Apr 12"));
         lineChart2.getXAxis().setValueFormatter(new IndexAxisValueFormatter(chart2xAxis));
         lineChart2.setExtraBottomOffset(15f);
         lineChart.getXAxis().setTextColor(Color.parseColor("#708099"));
@@ -178,17 +177,17 @@ public class DashBoard2 extends AppCompatActivity {
         //barChart2.getXAxis().setGranularity(1f);
 
 
-        BarDataSet barDataSet2 = new BarDataSet(dataVal3,"Most Visited");
-        BarDataSet barDataSet3 = new BarDataSet(dataVal4,"Leaving Page");
+        BarDataSet barDataSet2 = new BarDataSet(dataVal3, "Most Visited");
+        BarDataSet barDataSet3 = new BarDataSet(dataVal4, "Leaving Page");
         barDataSet2.setForm(Legend.LegendForm.CIRCLE);
         barDataSet3.setForm(Legend.LegendForm.CIRCLE);
 
-        BarData barData2= new BarData(barDataSet2, barDataSet3);
+        BarData barData2 = new BarData(barDataSet2, barDataSet3);
 //        barData2.addDataSet(barDataSet2);
 //        barData2.addDataSet(barDataSet3);
 
         barChart2.setData(barData2);
-        barChart2.groupBars(0, 0.4f,0f);
+        barChart2.groupBars(0, 0.4f, 0f);
         barChart2.setVisibleXRangeMaximum(dataVal3.size());
         barChart2.setExtraBottomOffset(15f);
 
@@ -203,7 +202,7 @@ public class DashBoard2 extends AppCompatActivity {
         barChart2.getAxisRight().setDrawLabels(false);
 
 
-        BubbleChart bubbleChart=findViewById(R.id.bubblechart);
+        BubbleChart bubbleChart = findViewById(R.id.bubblechart);
 
         ArrayList<BubbleEntry> bubbleEntries = new ArrayList<BubbleEntry>();
         bubbleEntries.add(new BubbleEntry(1, 1, 0.001f));
@@ -215,11 +214,11 @@ public class DashBoard2 extends AppCompatActivity {
 //        bubbleEntries.add(new BubbleEntry(2, 3, 0.0015f));
 //        bubbleEntries.add(new BubbleEntry(2, 4, 0.0016f));
 
-        BubbleDataSet bubbleDataSet=new BubbleDataSet(bubbleEntries,"Event actions");
-        bubbleDataSet.setColors(Color.parseColor("#5d78df"), Color.parseColor("#768fec"),Color.parseColor("#7790ec"));
+        BubbleDataSet bubbleDataSet = new BubbleDataSet(bubbleEntries, "Event actions");
+        bubbleDataSet.setColors(Color.parseColor("#5d78df"), Color.parseColor("#768fec"), Color.parseColor("#7790ec"));
         bubbleDataSet.setForm(Legend.LegendForm.CIRCLE);
-
-        BubbleData bubbleData =new BubbleData();
+        bubbleDataSet.setDrawValues(false);
+        BubbleData bubbleData = new BubbleData();
         bubbleData.addDataSet(bubbleDataSet);
         bubbleChart.setData(bubbleData);
         bubbleChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -234,7 +233,7 @@ public class DashBoard2 extends AppCompatActivity {
         bubbleChart.getXAxis().setCenterAxisLabels(true);
 
         String[] bubbleXlabel = {"Apr 6", "Apr 7", "Apr 8", "Apr 9", "Apr 10", "Apr 11", "Apr 12"};
-        String [] bubbleYlablel={"Payment","Scan","Activate","Serach"};
+        String[] bubbleYlablel = {"Payment", "Scan", "Activate", "Serach"};
 
         bubbleChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(bubbleXlabel));
         bubbleChart.getAxisRight().setValueFormatter(new IndexAxisValueFormatter(bubbleYlablel));
@@ -242,17 +241,6 @@ public class DashBoard2 extends AppCompatActivity {
         //bubbleChart.setViewPortOffsets(60,10,50,60);
         bubbleChart.animateXY(3000, 3000);
         bubbleChart.getLegend().setEnabled(false);
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
