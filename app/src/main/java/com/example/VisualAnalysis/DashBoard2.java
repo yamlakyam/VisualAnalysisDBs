@@ -195,9 +195,13 @@ public class DashBoard2 extends AppCompatActivity {
 
         barDataSet2.setColor(Color.parseColor("#5b79e7"));
         barDataSet3.setColor(Color.parseColor("#27adb9"));
+        barDataSet2.setDrawValues(false);
+        barDataSet3.setDrawValues(false);
         barData2.setBarWidth(0.3f);
 
         barChart2.animateXY(3000, 3000);
+        barChart2.getAxisRight().setDrawLabels(false);
+
 
         BubbleChart bubbleChart=findViewById(R.id.bubblechart);
 
@@ -238,6 +242,7 @@ public class DashBoard2 extends AppCompatActivity {
         //bubbleChart.setViewPortOffsets(60,10,50,60);
         bubbleChart.animateXY(3000, 3000);
         bubbleChart.getLegend().setEnabled(false);
+
 
 
 
