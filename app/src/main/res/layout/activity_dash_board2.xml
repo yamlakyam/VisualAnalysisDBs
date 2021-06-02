@@ -326,7 +326,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/rightcard"
-        android:layout_width="245dp"
+        android:layout_width="260dp"
         android:layout_height="0dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="16dp"
@@ -379,10 +379,11 @@
                 android:text="Event actions"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
+
             <com.github.mikephil.charting.charts.BubbleChart
                 android:id="@+id/bubblechart"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

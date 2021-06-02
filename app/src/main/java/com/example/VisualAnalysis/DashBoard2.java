@@ -222,8 +222,8 @@ public class DashBoard2 extends AppCompatActivity {
 
         bubbleChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(bubbleXlabel));
         bubbleChart.getAxisRight().setValueFormatter(new IndexAxisValueFormatter(bubbleYlablel));
-        bubbleChart.getXAxis().setLabelCount(bubbleEntries.size());
-        bubbleChart.setViewPortOffsets(20,10,20,20);
+        bubbleChart.getXAxis().setLabelCount(5);
+        //bubbleChart.setViewPortOffsets(60,10,50,60);
 
 
 
