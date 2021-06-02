@@ -5,13 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -67,6 +74,9 @@ public class DashBoard2 extends AppCompatActivity {
         lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisVals));
         //lineChart.getAxisLeft().setValueFormatter(new IndexAxisValueFormatter(yAxisVals));
         lineChart.getAxisLeft().setLabelCount(yAxisVals.size());
+        lineChart.setExtraBottomOffset(15f);
+        lineChart.setExtraTopOffset(15f);
+
 
         LineChart lineChart2 = findViewById(R.id.linechart2);
         ArrayList<Entry> dataVal1 = new ArrayList<Entry>();
@@ -92,11 +102,93 @@ public class DashBoard2 extends AppCompatActivity {
 
         lineDataSet1.setColors(Color.parseColor("#27adb9"));
         lineDataSet2.setColors(Color.parseColor("#5473e8"));
+        lineDataSet1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        lineDataSet2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        lineDataSet1.setDrawCircles(false);
+        lineDataSet2.setDrawCircles(false);
+        lineDataSet1.setDrawValues(false);
+        lineDataSet2.setDrawValues(false);
+        lineDataSet1.setForm(Legend.LegendForm.CIRCLE);
+        lineDataSet2.setForm(Legend.LegendForm.CIRCLE);
+
+
 
         LineData lineData2 = new LineData();
         lineData2.addDataSet(lineDataSet1);
         lineData2.addDataSet(lineDataSet2);
         lineChart2.setData(lineData2);
+        lineChart2.setDrawGridBackground(false);
+        lineChart2.getAxisRight().setDrawGridLines(false);
+        lineChart2.getAxisLeft().setDrawGridLines(false);
+        lineChart2.getAxisRight().setDrawAxisLine(false);
+        lineChart2.getAxisRight().setDrawLabels(false);
+        lineChart2.getDescription().setEnabled(false);
+        lineChart2.getXAxis().setDrawAxisLine(false);
+        lineChart2.getXAxis().setDrawGridLines(false);
+        lineChart2.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        ArrayList<String> chart2xAxis=new ArrayList<String>(Arrays.asList("Apr 6", "Apr 7", "Apr8 ", "Apr 9", "Apr 10", "Apr 11", "Apr 12"));
+        lineChart2.getXAxis().setValueFormatter(new IndexAxisValueFormatter(chart2xAxis));
+        lineChart2.setExtraBottomOffset(15f);
+        lineChart.getXAxis().setTextColor(Color.parseColor("#708099"));
+        lineChart2.getXAxis().setTextColor(Color.parseColor("#708099"));
+        lineChart.getAxisLeft().setTextColor(Color.parseColor("#708099"));
+        lineChart2.getAxisLeft().setTextColor(Color.parseColor("#708099"));
+        lineChart.getLegend().setTextColor(Color.parseColor("#708099"));
+        lineChart2.getLegend().setTextColor(Color.parseColor("#708099"));
+
+
+//        lineChart.getXAxis().enableAxisLineDashedLine(10f,10f,0);
+//        lineChart.getAxisRight().enableAxisLineDashedLine(10f,10f,0);
+//        lineChart.getAxisLeft().enableAxisLineDashedLine(10f,10f,0);
+
+        ArrayList<BarEntry> dataVal3 = new ArrayList<BarEntry>();
+        dataVal3.add(new BarEntry(1, 12.5f));
+        dataVal3.add(new BarEntry(2, 10));
+        dataVal3.add(new BarEntry(3, 7.5f));
+        dataVal3.add(new BarEntry(4, 8));
+        dataVal3.add(new BarEntry(5, 6.5f));
+
+        ArrayList<BarEntry> dataVal4 = new ArrayList<BarEntry>();
+        dataVal4.add(new BarEntry(1, 6f));
+        dataVal4.add(new BarEntry(2, 8));
+        dataVal4.add(new BarEntry(3, 5));
+        dataVal4.add(new BarEntry(4, 2));
+        dataVal4.add(new BarEntry(5, 3.5f));
+
+        BarChart barChart2 = findViewById(R.id.barchart2);
+        barChart2.getDescription().setEnabled(false);
+        barChart2.setDrawGridBackground(false);
+        barChart2.getXAxis().setCenterAxisLabels(true);
+        barChart2.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart2.getXAxis().setDrawGridLines(false);
+        barChart2.getAxisRight().setDrawGridLines(false);
+        barChart2.getAxisRight().setDrawAxisLine(false);
+        barChart2.getAxisRight().setDrawLabels(false);
+        barChart2.getAxisLeft().setDrawGridLines(false);
+        barChart2.setPinchZoom(false);
+        //barChart2.getXAxis().setGranularity(1f);
+
+
+        BarDataSet barDataSet2 = new BarDataSet(dataVal3,"Most Visited");
+        BarDataSet barDataSet3 = new BarDataSet(dataVal4,"Leaving Page");
+
+        BarData barData2= new BarData(barDataSet2, barDataSet3);
+//        barData2.addDataSet(barDataSet2);
+//        barData2.addDataSet(barDataSet3);
+
+        barChart2.setData(barData2);
+        barChart2.groupBars(0, 0.4f,0f);
+        barChart2.setVisibleXRangeMaximum(10);
+
+        barDataSet2.setColor(Color.parseColor("#5b79e7"));
+        barDataSet3.setColor(Color.parseColor("#27adb9"));
+        barData2.setBarWidth(0.3f);
+
+
+
+
+
 
 
 
