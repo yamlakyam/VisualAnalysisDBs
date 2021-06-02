@@ -81,7 +81,7 @@ public class DashBoard2 extends AppCompatActivity {
         lineChart.getAxisLeft().setLabelCount(yAxisVals.size());
         lineChart.setExtraBottomOffset(15f);
         lineChart.setExtraTopOffset(15f);
-        lineChart.animateX(3000, Easing.EaseInCubic);
+        lineChart.animateX(500, Easing.EaseInCubic);
 
 
         LineChart lineChart2 = findViewById(R.id.linechart2);
@@ -180,6 +180,8 @@ public class DashBoard2 extends AppCompatActivity {
 
         BarDataSet barDataSet2 = new BarDataSet(dataVal3,"Most Visited");
         BarDataSet barDataSet3 = new BarDataSet(dataVal4,"Leaving Page");
+        barDataSet2.setForm(Legend.LegendForm.CIRCLE);
+        barDataSet3.setForm(Legend.LegendForm.CIRCLE);
 
         BarData barData2= new BarData(barDataSet2, barDataSet3);
 //        barData2.addDataSet(barDataSet2);
@@ -209,6 +211,7 @@ public class DashBoard2 extends AppCompatActivity {
 
         BubbleDataSet bubbleDataSet=new BubbleDataSet(bubbleEntries,"Event actions");
         bubbleDataSet.setColors(Color.parseColor("#5d78df"), Color.parseColor("#768fec"),Color.parseColor("#7790ec"));
+        bubbleDataSet.setForm(Legend.LegendForm.CIRCLE);
         BubbleData bubbleData =new BubbleData();
         bubbleData.addDataSet(bubbleDataSet);
         bubbleChart.setData(bubbleData);
