@@ -190,6 +190,8 @@ public class DashBoard2 extends AppCompatActivity {
         barChart2.setData(barData2);
         barChart2.groupBars(0, 0.4f,0f);
         barChart2.setVisibleXRangeMaximum(dataVal3.size());
+        barChart2.setExtraBottomOffset(15f);
+
 
         barDataSet2.setColor(Color.parseColor("#5b79e7"));
         barDataSet3.setColor(Color.parseColor("#27adb9"));
