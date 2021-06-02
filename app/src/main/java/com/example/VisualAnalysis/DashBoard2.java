@@ -70,22 +70,22 @@ public class DashBoard2 extends AppCompatActivity {
 
         LineChart lineChart2 = findViewById(R.id.linechart2);
         ArrayList<Entry> dataVal1 = new ArrayList<Entry>();
-        dataVals.add(new Entry(0, 10f));
-        dataVals.add(new Entry(1, 2));
-        dataVals.add(new Entry(2, 10f));
-        dataVals.add(new Entry(3, 6f));
-        dataVals.add(new Entry(4, 15f));
-        dataVals.add(new Entry(5, 4f));
-        dataVals.add(new Entry(6, 8f));
+        dataVal1.add(new Entry(0, 10f));
+        dataVal1.add(new Entry(1, 2));
+        dataVal1.add(new Entry(2, 10f));
+        dataVal1.add(new Entry(3, 6f));
+        dataVal1.add(new Entry(4, 15f));
+        dataVal1.add(new Entry(5, 4f));
+        dataVal1.add(new Entry(6, 8f));
 
         ArrayList<Entry> dataVal2 = new ArrayList<Entry>();
-        dataVals.add(new Entry(0, 5f));
-        dataVals.add(new Entry(1, 18f));
-        dataVals.add(new Entry(2, 11f));
-        dataVals.add(new Entry(3, 14f));
-        dataVals.add(new Entry(4, 4f));
-        dataVals.add(new Entry(5, 16f));
-        dataVals.add(new Entry(6, 18f));
+        dataVal2.add(new Entry(0, 5f));
+        dataVal2.add(new Entry(1, 18f));
+        dataVal2.add(new Entry(2, 11f));
+        dataVal2.add(new Entry(3, 14f));
+        dataVal2.add(new Entry(4, 4f));
+        dataVal2.add(new Entry(5, 16f));
+        dataVal2.add(new Entry(6, 18f));
 
         LineDataSet lineDataSet1 = new LineDataSet(dataVal1, "Install");
         LineDataSet lineDataSet2 = new LineDataSet(dataVal2, "Uninstall");
@@ -95,6 +95,7 @@ public class DashBoard2 extends AppCompatActivity {
 
         LineData lineData2 = new LineData();
         lineData2.addDataSet(lineDataSet1);
+        lineData2.addDataSet(lineDataSet2);
         lineChart2.setData(lineData2);
 
 
