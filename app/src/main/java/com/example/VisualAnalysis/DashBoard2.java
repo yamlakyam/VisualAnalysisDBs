@@ -214,6 +214,7 @@ public class DashBoard2 extends AppCompatActivity {
         BubbleDataSet bubbleDataSet=new BubbleDataSet(bubbleEntries,"Event actions");
         bubbleDataSet.setColors(Color.parseColor("#5d78df"), Color.parseColor("#768fec"),Color.parseColor("#7790ec"));
         bubbleDataSet.setForm(Legend.LegendForm.CIRCLE);
+
         BubbleData bubbleData =new BubbleData();
         bubbleData.addDataSet(bubbleDataSet);
         bubbleChart.setData(bubbleData);
@@ -236,6 +237,7 @@ public class DashBoard2 extends AppCompatActivity {
         bubbleChart.getXAxis().setLabelCount(5);
         //bubbleChart.setViewPortOffsets(60,10,50,60);
         bubbleChart.animateXY(3000, 3000);
+        bubbleChart.getLegend().setEnabled(false);
 
 
 
