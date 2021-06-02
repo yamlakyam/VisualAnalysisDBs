@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.BubbleChart;
 import com.github.mikephil.charting.charts.Chart;
@@ -80,6 +81,7 @@ public class DashBoard2 extends AppCompatActivity {
         lineChart.getAxisLeft().setLabelCount(yAxisVals.size());
         lineChart.setExtraBottomOffset(15f);
         lineChart.setExtraTopOffset(15f);
+        lineChart.animateX(3000, Easing.EaseInCubic);
 
 
         LineChart lineChart2 = findViewById(R.id.linechart2);
@@ -141,6 +143,8 @@ public class DashBoard2 extends AppCompatActivity {
         lineChart.getLegend().setTextColor(Color.parseColor("#708099"));
         lineChart2.getLegend().setTextColor(Color.parseColor("#708099"));
 
+        lineChart2.animateY(3000, Easing.EaseInOutBack);
+
 
 //        lineChart.getXAxis().enableAxisLineDashedLine(10f,10f,0);
 //        lineChart.getAxisRight().enableAxisLineDashedLine(10f,10f,0);
@@ -189,6 +193,8 @@ public class DashBoard2 extends AppCompatActivity {
         barDataSet3.setColor(Color.parseColor("#27adb9"));
         barData2.setBarWidth(0.3f);
 
+        barChart2.animateXY(3000, 3000);
+
         BubbleChart bubbleChart=findViewById(R.id.bubblechart);
 
         ArrayList<BubbleEntry> bubbleEntries = new ArrayList<BubbleEntry>();
@@ -224,6 +230,7 @@ public class DashBoard2 extends AppCompatActivity {
         bubbleChart.getAxisRight().setValueFormatter(new IndexAxisValueFormatter(bubbleYlablel));
         bubbleChart.getXAxis().setLabelCount(5);
         //bubbleChart.setViewPortOffsets(60,10,50,60);
+        bubbleChart.animateXY(3000, 3000);
 
 
 
