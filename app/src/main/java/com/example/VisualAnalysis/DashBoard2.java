@@ -257,6 +257,9 @@ public class DashBoard2 extends AppCompatActivity {
 
         PieChart pieChartos = findViewById(R.id.piechartOS);
         pieChartos.setDrawSliceText(false);
+        pieChartos.setHoleRadius(90);
+
+
 
         ArrayList<PieEntry> piedatas = new ArrayList<>();
         piedatas.add(new PieEntry(58,"iOS"));
@@ -265,6 +268,7 @@ public class DashBoard2 extends AppCompatActivity {
         PieDataSet pieDataSetOS = new PieDataSet(piedatas,"");
         pieDataSetOS.setColors(Color.parseColor("#5472e8"),Color.parseColor("#26adb9"));
         pieDataSetOS.setDrawValues(false);
+
 
 
 
