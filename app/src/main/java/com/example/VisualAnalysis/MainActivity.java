@@ -157,6 +157,7 @@ public class MainActivity extends FragmentActivity {
         //Toast.makeText(this, (int) pieChart.getRadius(),Toast.LENGTH_LONG).show();
 
 
+
         Legend legend = pieChart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);

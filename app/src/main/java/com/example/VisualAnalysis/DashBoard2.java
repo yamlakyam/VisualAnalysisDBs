@@ -168,7 +168,7 @@ public class DashBoard2 extends AppCompatActivity {
         BarChart barChart2 = findViewById(R.id.barchart2);
         barChart2.getDescription().setEnabled(false);
         barChart2.setDrawGridBackground(false);
-        barChart2.getXAxis().setCenterAxisLabels(true);
+        //barChart2.getXAxis().setCenterAxisLabels(true);
         barChart2.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart2.getXAxis().setDrawGridLines(false);
         barChart2.getAxisRight().setDrawGridLines(false);
@@ -187,7 +187,6 @@ public class DashBoard2 extends AppCompatActivity {
         BarData barData2 = new BarData(barDataSet2, barDataSet3);
 
         barChart2.setData(barData2);
-        barChart2.groupBars(0, 0.4f, 0f);
         barChart2.setVisibleXRangeMaximum(dataVal3.size());
         barChart2.setExtraBottomOffset(15f);
 
@@ -196,7 +195,12 @@ public class DashBoard2 extends AppCompatActivity {
         barDataSet3.setColor(Color.parseColor("#27adb9"));
         barDataSet2.setDrawValues(false);
         barDataSet3.setDrawValues(false);
+
         barData2.setBarWidth(0.3f);
+        barChart2.getXAxis().setAxisMaximum(0);
+        barChart2.getXAxis().setAxisMaximum(0+barChart2.getBarData().getGroupWidth(0.4f,0f)*5);
+        barChart2.groupBars(1, 0.4f, 0f);
+
 
         barChart2.animateXY(3000, 3000);
         barChart2.getAxisRight().setDrawLabels(false);
@@ -245,13 +249,10 @@ public class DashBoard2 extends AppCompatActivity {
         progressBar1.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5472e8")));
         progressBar2.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#26adb9")));
 
-
         PieChart pieChartos = findViewById(R.id.piechartOS);
         pieChartos.setDrawSliceText(false);
         pieChartos.setHoleRadius(80);
         pieChartos.animateX(3000, Easing.EaseInOutCirc);
-
-
 
         ArrayList<PieEntry> piedatas = new ArrayList<>();
         piedatas.add(new PieEntry(58,"iOS"));
@@ -261,14 +262,8 @@ public class DashBoard2 extends AppCompatActivity {
         pieDataSetOS.setColors(Color.parseColor("#5472e8"),Color.parseColor("#26adb9"));
         pieDataSetOS.setDrawValues(false);
 
-
-
-
         PieData pieDataos = new PieData(pieDataSetOS);
         pieChartos.setData(pieDataos);
-
-
-
 
     }
 }
