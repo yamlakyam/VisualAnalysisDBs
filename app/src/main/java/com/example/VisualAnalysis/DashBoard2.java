@@ -151,10 +151,6 @@ public class DashBoard2 extends AppCompatActivity {
         lineChart2.animateY(3000, Easing.EaseInOutBack);
 
 
-//        lineChart.getXAxis().enableAxisLineDashedLine(10f,10f,0);
-//        lineChart.getAxisRight().enableAxisLineDashedLine(10f,10f,0);
-//        lineChart.getAxisLeft().enableAxisLineDashedLine(10f,10f,0);
-
         ArrayList<BarEntry> dataVal3 = new ArrayList<BarEntry>();
         dataVal3.add(new BarEntry(1, 12.5f));
         dataVal3.add(new BarEntry(2, 10));
@@ -189,8 +185,6 @@ public class DashBoard2 extends AppCompatActivity {
         barDataSet3.setForm(Legend.LegendForm.CIRCLE);
 
         BarData barData2 = new BarData(barDataSet2, barDataSet3);
-//        barData2.addDataSet(barDataSet2);
-//        barData2.addDataSet(barDataSet3);
 
         barChart2.setData(barData2);
         barChart2.groupBars(0, 0.4f, 0f);
@@ -216,9 +210,6 @@ public class DashBoard2 extends AppCompatActivity {
         bubbleEntries.add(new BubbleEntry(3, 3, 0.0017f));
         bubbleEntries.add(new BubbleEntry(4, 4, 0.0008f));
         bubbleEntries.add(new BubbleEntry(5, 1, 0.0012f));
-//        bubbleEntries.add(new BubbleEntry(2, 2, 0.008f));
-//        bubbleEntries.add(new BubbleEntry(2, 3, 0.0015f));
-//        bubbleEntries.add(new BubbleEntry(2, 4, 0.0016f));
 
         BubbleDataSet bubbleDataSet = new BubbleDataSet(bubbleEntries, "Event actions");
         bubbleDataSet.setColors(Color.parseColor("#5d78df"), Color.parseColor("#768fec"), Color.parseColor("#7790ec"));
