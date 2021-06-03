@@ -257,7 +257,8 @@ public class DashBoard2 extends AppCompatActivity {
 
         PieChart pieChartos = findViewById(R.id.piechartOS);
         pieChartos.setDrawSliceText(false);
-        pieChartos.setHoleRadius(90);
+        pieChartos.setHoleRadius(80);
+        pieChartos.animateX(3000, Easing.EaseInOutCirc);
 
 
 
