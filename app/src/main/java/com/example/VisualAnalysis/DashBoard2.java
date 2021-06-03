@@ -168,7 +168,7 @@ public class DashBoard2 extends AppCompatActivity {
         BarChart barChart2 = findViewById(R.id.barchart2);
         barChart2.getDescription().setEnabled(false);
         barChart2.setDrawGridBackground(false);
-        //barChart2.getXAxis().setCenterAxisLabels(true);
+        barChart2.getXAxis().setCenterAxisLabels(true);
         barChart2.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart2.getXAxis().setDrawGridLines(false);
         barChart2.getAxisRight().setDrawGridLines(false);
@@ -176,7 +176,7 @@ public class DashBoard2 extends AppCompatActivity {
         barChart2.getAxisRight().setDrawLabels(false);
         barChart2.getAxisLeft().setDrawGridLines(false);
         barChart2.setPinchZoom(false);
-        //barChart2.getXAxis().setGranularity(1f);
+        barChart2.getXAxis().setGranularity(1f);
 
 
         BarDataSet barDataSet2 = new BarDataSet(dataVal3, "Most Visited");
