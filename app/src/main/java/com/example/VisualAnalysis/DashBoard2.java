@@ -231,14 +231,15 @@ public class DashBoard2 extends AppCompatActivity {
         bubbleChart.getAxisRight().setDrawGridLines(false);
         bubbleChart.getAxisRight().setDrawAxisLine(false);
         bubbleChart.getXAxis().setDrawGridLines(false);
-        bubbleChart.getXAxis().setCenterAxisLabels(true);
+        //bubbleChart.getXAxis().setCenterAxisLabels(true);
 
         String[] bubbleXlabel = {"Apr 6", "Apr 7", "Apr 8", "Apr 9", "Apr 10", "Apr 11", "Apr 12"};
         String[] bubbleYlablel = {"Payment", "Scan", "Activate", "Serach"};
 
         bubbleChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(bubbleXlabel));
-        bubbleChart.getAxisRight().setValueFormatter(new IndexAxisValueFormatter(bubbleYlablel));
-        bubbleChart.getXAxis().setLabelCount(5);
+        //bubbleChart.getAxisLeft().setValueFormatter(new IndexAxisValueFormatter(bubbleYlablel));
+        bubbleChart.getXAxis().setGranularity(1f);
+        //bubbleChart.getXAxis().setLabelCount(10);
         //bubbleChart.setViewPortOffsets(60,10,50,60);
         bubbleChart.animateXY(3000, 3000);
         bubbleChart.getLegend().setEnabled(false);
