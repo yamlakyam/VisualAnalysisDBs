@@ -198,7 +198,7 @@ public class DashBoard2 extends AppCompatActivity {
 
         barData2.setBarWidth(0.3f);
         barChart2.getXAxis().setAxisMaximum(0);
-        barChart2.getXAxis().setAxisMaximum(0+barChart2.getBarData().getGroupWidth(0.4f,0f)*5);
+        barChart2.getXAxis().setAxisMaximum(0+barChart2.getBarData().getGroupWidth(0.4f,0f)*6);
         barChart2.groupBars(1, 0.4f, 0f);
 
 
