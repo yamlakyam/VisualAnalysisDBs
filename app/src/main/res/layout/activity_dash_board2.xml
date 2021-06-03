@@ -242,7 +242,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/userslinechart"
         android:layout_width="0dp"
-        android:layout_height="175dp"
+        android:layout_height="215dp"
         android:background="#ffffff"
         android:paddingStart="15dp"
         android:paddingTop="5dp"
@@ -264,7 +264,7 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/linechart"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:layout_marginTop="15dp"
             android:paddingStart="20dp" />
     </androidx.cardview.widget.CardView>
@@ -273,6 +273,8 @@
         android:id="@+id/demographyheatmap"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/gendercard"
         app:layout_constraintStart_toStartOf="@+id/userscard"
         app:layout_constraintTop_toBottomOf="@+id/space2">
@@ -383,8 +385,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/oscard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/userslinechart"
         app:layout_constraintStart_toEndOf="@+id/gendercard"
         app:layout_constraintTop_toBottomOf="@id/space2">
@@ -397,6 +401,13 @@
             android:text="Operating systems"
             android:textColor="#374e6e"
             android:textSize="20sp" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechartOS"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center_vertical" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

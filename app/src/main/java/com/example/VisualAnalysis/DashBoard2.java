@@ -12,6 +12,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.BubbleChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -23,6 +24,9 @@ import com.github.mikephil.charting.data.BubbleEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.lang.reflect.Array;
@@ -249,6 +253,24 @@ public class DashBoard2 extends AppCompatActivity {
         ProgressBar progressBar2 = findViewById(R.id.progressBar2);
         progressBar1.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5472e8")));
         progressBar2.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#26adb9")));
+
+
+        PieChart pieChartos = findViewById(R.id.piechartOS);
+        pieChartos.setDrawSliceText(false);
+
+        ArrayList<PieEntry> piedatas = new ArrayList<>();
+        piedatas.add(new PieEntry(58,"iOS"));
+        piedatas.add(new PieEntry(42, "Android"));
+
+        PieDataSet pieDataSetOS = new PieDataSet(piedatas,"");
+        pieDataSetOS.setColors(Color.parseColor("#5472e8"),Color.parseColor("#26adb9"));
+        pieDataSetOS.setDrawValues(false);
+
+
+
+        PieData pieDataos = new PieData(pieDataSetOS);
+        pieChartos.setData(pieDataos);
+
 
 
 
