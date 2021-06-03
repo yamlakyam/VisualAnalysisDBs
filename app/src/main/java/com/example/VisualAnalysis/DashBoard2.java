@@ -213,7 +213,9 @@ public class DashBoard2 extends AppCompatActivity {
         bubbleEntries.add(new BubbleEntry(2, 2, 0.0021f));
         bubbleEntries.add(new BubbleEntry(3, 3, 0.0017f));
         bubbleEntries.add(new BubbleEntry(4, 4, 0.0008f));
-        bubbleEntries.add(new BubbleEntry(5, 1, 0.0012f));
+        bubbleEntries.add(new BubbleEntry(5, 1, 0.0002f));
+        bubbleEntries.add(new BubbleEntry(6, 3, 0.0018f));
+        bubbleEntries.add(new BubbleEntry(7, 1, 0.0012f));
 
         BubbleDataSet bubbleDataSet = new BubbleDataSet(bubbleEntries, "Event actions");
         bubbleDataSet.setColors(Color.parseColor("#5d78df"), Color.parseColor("#768fec"), Color.parseColor("#7790ec"));
@@ -231,7 +233,10 @@ public class DashBoard2 extends AppCompatActivity {
         bubbleChart.getAxisRight().setDrawGridLines(false);
         bubbleChart.getAxisRight().setDrawAxisLine(false);
         bubbleChart.getXAxis().setDrawGridLines(false);
-        //bubbleChart.getXAxis().setCenterAxisLabels(true);
+        //bubbleChart.getXAxis().setAvoidFirstLastClipping(true);
+        bubbleChart.getXAxis().setCenterAxisLabels(true);
+        bubbleChart.getXAxis().setAxisMinimum(0.5f);
+        bubbleChart.getXAxis().setAxisMaximum(7.5f);
 
         String[] bubbleXlabel = {"Apr 6", "Apr 7", "Apr 8", "Apr 9", "Apr 10", "Apr 11", "Apr 12"};
         String[] bubbleYlablel = {"Payment", "Scan", "Activate", "Serach"};
