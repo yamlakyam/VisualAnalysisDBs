@@ -2,8 +2,10 @@ package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -241,6 +243,13 @@ public class DashBoard2 extends AppCompatActivity {
         //bubbleChart.setViewPortOffsets(60,10,50,60);
         bubbleChart.animateXY(3000, 3000);
         bubbleChart.getLegend().setEnabled(false);
+
+
+        ProgressBar progressBar1= findViewById(R.id.progressBar1);
+        ProgressBar progressBar2 = findViewById(R.id.progressBar2);
+        progressBar1.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#5472e8")));
+        progressBar2.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#26adb9")));
+
 
 
     }
