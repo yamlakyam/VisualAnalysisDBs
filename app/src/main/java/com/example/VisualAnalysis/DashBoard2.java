@@ -11,6 +11,7 @@ import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.BubbleChart;
 import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -270,6 +271,30 @@ public class DashBoard2 extends AppCompatActivity {
 
         PieData pieDataos = new PieData(pieDataSetOS);
         pieChartos.setData(pieDataos);
+
+        HorizontalBarChart horizontalBarChart= findViewById(R.id.horizontalbC);
+
+        ArrayList<BarEntry> hbardatavals = new ArrayList<>();
+        hbardatavals.add(new BarEntry(4f, 0));
+        hbardatavals.add(new BarEntry(8f, 1));
+        hbardatavals.add(new BarEntry(6f, 2));
+        hbardatavals.add(new BarEntry(12f, 3));
+        hbardatavals.add(new BarEntry(18f, 4));
+        hbardatavals.add(new BarEntry(9f, 5));
+
+        BarDataSet hbarDataSet = new BarDataSet(hbardatavals,"sample horizontal bar graph");
+        BarData hbarData = new BarData(hbarDataSet);
+        horizontalBarChart.setData(hbarData);
+        horizontalBarChart.getXAxis().setDrawAxisLine(false);
+        horizontalBarChart.getXAxis().setDrawGridLines(false);
+        horizontalBarChart.getAxisRight().setDrawAxisLine(false);
+        horizontalBarChart.getAxisRight().setDrawGridLines(false);
+        horizontalBarChart.getAxisLeft().setDrawGridLines(false);
+        horizontalBarChart.getAxisLeft().setDrawLabels(false);
+        horizontalBarChart.getAxisRight().setDrawLabels(false);
+
+
+
 
     }
 }

@@ -181,6 +181,9 @@ public class MainActivity extends FragmentActivity {
 //        },2000);
 
         Button nxtbtn =findViewById(R.id.button2);
+        nxtbtn.setFocusable(true);
+        nxtbtn.setFocusableInTouchMode(true);
+        nxtbtn.requestFocus();
         nxtbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

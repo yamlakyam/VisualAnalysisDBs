@@ -369,6 +369,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:backgroundTint="#959191"
+                android:focusable="true"
+                android:background="@drawable/btnbkgnd"
                 android:focusableInTouchMode="true"
                 android:nextFocusUp="@id/search_bar"
                 android:text="Next"
