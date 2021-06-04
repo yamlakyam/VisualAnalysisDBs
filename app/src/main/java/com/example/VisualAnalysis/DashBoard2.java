@@ -275,24 +275,33 @@ public class DashBoard2 extends AppCompatActivity {
         HorizontalBarChart horizontalBarChart= findViewById(R.id.horizontalbC);
 
         ArrayList<BarEntry> hbardatavals = new ArrayList<>();
-        hbardatavals.add(new BarEntry(4f, 0));
-        hbardatavals.add(new BarEntry(8f, 1));
-        hbardatavals.add(new BarEntry(6f, 2));
-        hbardatavals.add(new BarEntry(12f, 3));
-        hbardatavals.add(new BarEntry(18f, 4));
-        hbardatavals.add(new BarEntry(9f, 5));
+        hbardatavals.add(new BarEntry(0, 27f));
+        hbardatavals.add(new BarEntry(1, 45f));
+        hbardatavals.add(new BarEntry(2, 65f));
+        hbardatavals.add(new BarEntry(3, 77f));
+        hbardatavals.add(new BarEntry(4, 93f));
+        hbardatavals.add(new BarEntry(5, 100f));
 
         BarDataSet hbarDataSet = new BarDataSet(hbardatavals,"sample horizontal bar graph");
         BarData hbarData = new BarData(hbarDataSet);
+
         horizontalBarChart.setData(hbarData);
         horizontalBarChart.getXAxis().setDrawAxisLine(false);
         horizontalBarChart.getXAxis().setDrawGridLines(false);
         horizontalBarChart.getAxisRight().setDrawAxisLine(false);
         horizontalBarChart.getAxisRight().setDrawGridLines(false);
         horizontalBarChart.getAxisLeft().setDrawGridLines(false);
+        horizontalBarChart.getAxisLeft().setDrawAxisLine(false);
         horizontalBarChart.getAxisLeft().setDrawLabels(false);
         horizontalBarChart.getAxisRight().setDrawLabels(false);
+        horizontalBarChart.getXAxis().setDrawLabels(false);
 
+        horizontalBarChart.getAxisRight().setSpaceMax(0f);
+        horizontalBarChart.getAxisRight().setGranularity(1f);
+        horizontalBarChart.getLegend().setEnabled(false);
+        horizontalBarChart.getDescription().setEnabled(false);
+        horizontalBarChart.getAxisLeft().setAxisMinimum(0f);
+        horizontalBarChart.getXAxis().setLabelCount(6);
 
 
 
