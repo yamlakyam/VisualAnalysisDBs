@@ -283,7 +283,15 @@ public class DashBoard2 extends AppCompatActivity {
         hbardatavals.add(new BarEntry(5, 100f));
 
         BarDataSet hbarDataSet = new BarDataSet(hbardatavals,"sample horizontal bar graph");
+
+        hbarDataSet.setColors(Color.parseColor("#5b79e7"),
+                Color.parseColor("#317892"),
+                Color.parseColor("#61c2cc"),
+                Color.parseColor("#61c2cc"),
+                Color.parseColor("#92a4d4"),
+                Color.parseColor("#abdbe3"));
         BarData hbarData = new BarData(hbarDataSet);
+        hbarData.setBarWidth(0.5f);
 
         horizontalBarChart.setData(hbarData);
         horizontalBarChart.getXAxis().setDrawAxisLine(false);
@@ -294,7 +302,7 @@ public class DashBoard2 extends AppCompatActivity {
         horizontalBarChart.getAxisLeft().setDrawAxisLine(false);
         horizontalBarChart.getAxisLeft().setDrawLabels(false);
         horizontalBarChart.getAxisRight().setDrawLabels(false);
-        horizontalBarChart.getXAxis().setDrawLabels(false);
+        //horizontalBarChart.getXAxis().setDrawLabels(false);
 
         horizontalBarChart.getAxisRight().setSpaceMax(0f);
         horizontalBarChart.getAxisRight().setGranularity(1f);
@@ -302,6 +310,12 @@ public class DashBoard2 extends AppCompatActivity {
         horizontalBarChart.getDescription().setEnabled(false);
         horizontalBarChart.getAxisLeft().setAxisMinimum(0f);
         horizontalBarChart.getXAxis().setLabelCount(6);
+
+        ArrayList<String> hbarxlabels = new ArrayList<>(Arrays.asList("1 *","2 *","3 *", "4 *","5 *","6 *"));
+        horizontalBarChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(hbarxlabels));
+        horizontalBarChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        horizontalBarChart.animateY(3000);
+
 
 
 
