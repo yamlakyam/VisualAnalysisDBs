@@ -2,6 +2,7 @@ package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 //import android.content.Intent;
 import android.app.UiModeManager;
@@ -187,6 +188,11 @@ public class MainActivity extends FragmentActivity {
 
 
         SpeedView speedView= findViewById(R.id.gauge);
+        speedView.speedTo(50);
+        speedView.speedTo(50, 4000);
+        //speedView.setTrembleData(5,2);
+        speedView.setWithTremble(false);
+        speedView.setUnit("%");
 
 //        Handler handler = new Handler();
 //        handler.postDelayed(new Runnable() {
@@ -197,6 +203,28 @@ public class MainActivity extends FragmentActivity {
 //                finish();
 //            }
 //        },2000);
+
+
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.map, new MapsFragment()).commit();
+//                }
+//
+//        }, 2000);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 2000);
+
 
 
     }
