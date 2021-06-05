@@ -257,7 +257,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
-            android:text="Daily Active Users"
+            android:text="Out of Stock rate (OOS)"
             android:textColor="#374e6e"
             android:textSize="20sp" />
 
@@ -285,7 +285,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingStart="20dp"
-            android:text="Demography"
+            android:text="Goods"
             android:textColor="#374e6e"
             android:textSize="20sp" />
 
@@ -315,7 +315,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingStart="20dp"
-            android:text="Gender"
+            android:text="Sales"
             android:textColor="#374e6e"
             android:textSize="20sp" />
 
@@ -337,7 +337,7 @@
                     android:id="@+id/textView21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female" />
+                    android:text="Cash sales" />
 
                 <TextView
                     android:id="@+id/textView22"
@@ -368,7 +368,7 @@
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male" />
+                    android:text="Credit Sales" />
 
                 <TextView
                     android:id="@+id/textView24"
@@ -408,7 +408,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingStart="20dp"
-            android:text="Operating systems"
+            android:text="Sales Adjustment"
             android:textColor="#374e6e"
             android:textSize="20sp" />
 
@@ -444,7 +444,7 @@
                 android:id="@+id/textView48"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Installs"
+                android:text="Total  Customers \&amp; Visitors"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
 
@@ -458,7 +458,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Popular Pages"
+                android:text="On Time In Full Deliveries (OTIF)"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
 
@@ -473,7 +473,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Event actions"
+                android:text="Product Sales"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
 

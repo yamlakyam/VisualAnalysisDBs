@@ -110,8 +110,8 @@ public class DashBoard2 extends AppCompatActivity {
         dataVal2.add(new Entry(5, 16f));
         dataVal2.add(new Entry(6, 18f));
 
-        LineDataSet lineDataSet1 = new LineDataSet(dataVal1, "Install");
-        LineDataSet lineDataSet2 = new LineDataSet(dataVal2, "Uninstall");
+        LineDataSet lineDataSet1 = new LineDataSet(dataVal1, "Customers");
+        LineDataSet lineDataSet2 = new LineDataSet(dataVal2, "Visitors");
 
         lineDataSet1.setColors(Color.parseColor("#27adb9"));
         lineDataSet2.setColors(Color.parseColor("#5473e8"));
@@ -180,8 +180,8 @@ public class DashBoard2 extends AppCompatActivity {
         barChart2.getXAxis().setGranularity(1f);
 
 
-        BarDataSet barDataSet2 = new BarDataSet(dataVal3, "Most Visited");
-        BarDataSet barDataSet3 = new BarDataSet(dataVal4, "Leaving Page");
+        BarDataSet barDataSet2 = new BarDataSet(dataVal3, "On time");
+        BarDataSet barDataSet3 = new BarDataSet(dataVal4, "In full");
         barDataSet2.setForm(Legend.LegendForm.CIRCLE);
         barDataSet3.setForm(Legend.LegendForm.CIRCLE);
 
@@ -262,8 +262,8 @@ public class DashBoard2 extends AppCompatActivity {
         pieChartos.animateX(3000, Easing.EaseInOutCirc);
 
         ArrayList<PieEntry> piedatas = new ArrayList<>();
-        piedatas.add(new PieEntry(58,"iOS"));
-        piedatas.add(new PieEntry(42, "Android"));
+        piedatas.add(new PieEntry(58,"Cash Sales Adjustment"));
+        piedatas.add(new PieEntry(42, "Credit Sales Adjustment"));
 
         PieDataSet pieDataSetOS = new PieDataSet(piedatas,"");
         pieDataSetOS.setColors(Color.parseColor("#5472e8"),Color.parseColor("#26adb9"));
@@ -275,12 +275,12 @@ public class DashBoard2 extends AppCompatActivity {
         HorizontalBarChart horizontalBarChart= findViewById(R.id.horizontalbC);
 
         ArrayList<BarEntry> hbardatavals = new ArrayList<>();
-        hbardatavals.add(new BarEntry(0, 27f));
-        hbardatavals.add(new BarEntry(1, 45f));
-        hbardatavals.add(new BarEntry(2, 65f));
-        hbardatavals.add(new BarEntry(3, 77f));
-        hbardatavals.add(new BarEntry(4, 93f));
-        hbardatavals.add(new BarEntry(5, 100f));
+        hbardatavals.add(new BarEntry(0, 10f));
+        hbardatavals.add(new BarEntry(1, 20f));
+        hbardatavals.add(new BarEntry(2, 30f));
+        hbardatavals.add(new BarEntry(3, 40f));
+        hbardatavals.add(new BarEntry(4, 50f));
+        hbardatavals.add(new BarEntry(5, 60f));
 
         BarDataSet hbarDataSet = new BarDataSet(hbardatavals,"sample horizontal bar graph");
 
@@ -311,7 +311,7 @@ public class DashBoard2 extends AppCompatActivity {
         horizontalBarChart.getAxisLeft().setAxisMinimum(0f);
         horizontalBarChart.getXAxis().setLabelCount(6);
 
-        ArrayList<String> hbarxlabels = new ArrayList<>(Arrays.asList("1 *","2 *","3 *", "4 *","5 *","6 *"));
+        ArrayList<String> hbarxlabels = new ArrayList<>(Arrays.asList("Damaged Goods","Shortage Goods","Loaded Goods","Sold Goods","Imported Goods", "Consignment Goods"));
         horizontalBarChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(hbarxlabels));
         horizontalBarChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         horizontalBarChart.animateY(3000);

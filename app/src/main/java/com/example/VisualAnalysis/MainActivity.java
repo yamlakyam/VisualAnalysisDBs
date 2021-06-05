@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
+import com.github.anastr.speedviewlib.SpeedView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -170,6 +171,23 @@ public class MainActivity extends FragmentActivity {
         circleDisplay.showValue(75f, 100f, true);
         circleDisplay.setTouchEnabled(true);
 
+
+
+//        Button nxtbtn =findViewById(R.id.button2);
+//        nxtbtn.setFocusable(true);
+//        nxtbtn.setFocusableInTouchMode(true);
+//        nxtbtn.requestFocus();
+//        nxtbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, DashBoard2.class);
+//                startActivity(intent);
+//            }
+//        });
+
+
+        SpeedView speedView= findViewById(R.id.gauge);
+
 //        Handler handler = new Handler();
 //        handler.postDelayed(new Runnable() {
 //            @Override
@@ -180,33 +198,7 @@ public class MainActivity extends FragmentActivity {
 //            }
 //        },2000);
 
-        Button nxtbtn =findViewById(R.id.button2);
-        nxtbtn.setFocusable(true);
-        nxtbtn.setFocusableInTouchMode(true);
-        nxtbtn.requestFocus();
-        nxtbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DashBoard2.class);
-                startActivity(intent);
-            }
-        });
 
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_DPAD_DOWN:
-                BarChart barChart = findViewById(R.id.barchart);
-                barChart.setFocusable(true);
-                barChart.requestFocus();
-                return true;
-
-            case KeyEvent.KEYCODE_DPAD_LEFT:
-                findViewById(R.id.sessionscard).setFocusable(true);
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 }
