@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f7f6f9"
+    android:onClick="handleTestClick"
     android:orientation="vertical"
     android:paddingStart="50dp"
     android:paddingTop="20dp"
@@ -13,6 +15,7 @@
     tools:deviceId="tv">
 
     <LinearLayout
+        android:id="@+id/LL1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -34,7 +37,6 @@
             app:srcCompat="@android:drawable/ic_menu_mapmode" />
 
 
-
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
@@ -48,6 +50,7 @@
         android:layout_height="20dp" />
 
     <LinearLayout
+        android:id="@+id/LL2"
         android:layout_width="match_parent"
         android:layout_height="282dp"
         android:orientation="horizontal">
@@ -301,6 +304,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/LL3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
@@ -358,6 +362,13 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>

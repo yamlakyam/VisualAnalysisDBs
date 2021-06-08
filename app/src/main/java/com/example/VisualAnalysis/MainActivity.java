@@ -1,7 +1,9 @@
 package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 //import android.content.Intent;
@@ -16,9 +18,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.anastr.speedviewlib.SpeedView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -33,11 +37,14 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
+import java.security.interfaces.DSAKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Future;
+
+import maes.tech.intentanim.CustomIntent;
 
 public class MainActivity extends FragmentActivity {
 
@@ -45,14 +52,26 @@ public class MainActivity extends FragmentActivity {
     public static final String TAG = "DeviceTypeRuntimeCheck";
 
 
+    public View handleTestClick(View v) {
+//        FragmentManager fragmentManager=getSupportFragmentManager();
+//        DashBoardFragment dashBoardFragment=new DashBoardFragment();
+//        fragmentManager.beginTransaction().replace(R.id.container,dashBoardFragment).commit();
+        Log.i("TAg", "hello ");
+        return v;
+    }
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
+
+        //overridePendingTransition(R.anim.slide_out_bottom,R.anim.slide_in_bottom);
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
 
-        UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+       /* UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
         if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
             Log.d(TAG, "Running on a TV Device");
         } else if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK)) {
@@ -64,6 +83,8 @@ public class MainActivity extends FragmentActivity {
         } else {
             Log.d(TAG, "Running on a non-TV Device");
         }
+
+        */
 
 
         ArrayList<String> xAxisVals = new ArrayList<>(Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"));
@@ -159,7 +180,6 @@ public class MainActivity extends FragmentActivity {
         //Toast.makeText(this, (int) pieChart.getRadius(),Toast.LENGTH_LONG).show();
 
 
-
         Legend legend = pieChart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
@@ -171,7 +191,6 @@ public class MainActivity extends FragmentActivity {
         circleDisplay.setStepSize(1f);
         circleDisplay.showValue(75f, 100f, true);
         circleDisplay.setTouchEnabled(true);
-
 
 
 //        Button nxtbtn =findViewById(R.id.button2);
@@ -187,7 +206,7 @@ public class MainActivity extends FragmentActivity {
 //        });
 
 
-        SpeedView speedView= findViewById(R.id.gauge);
+        SpeedView speedView = findViewById(R.id.gauge);
         speedView.speedTo(50);
         speedView.speedTo(50, 4000);
         //speedView.setTrembleData(5,2);
@@ -215,16 +234,62 @@ public class MainActivity extends FragmentActivity {
 //
 //        }, 2000);
 
+        Animatoo.animateZoom(this);
         Handler handler = new Handler();
+       /* handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animatoo.animateZoom(MainActivity.this);
+
+                Intent intent = new Intent(MainActivity.this, DashBoard2.class);
+                startActivity(intent);
+                //MainActivity.this.finish();
+                overridePendingTransition(R.anim.slide_out_bottom, R.anim.slide_in_bottom);
+                Animatoo.animateZoom(MainActivity.this);
+//                ActivityCompat.finishAfterTransition(MainActivity.this);
+                //CustomIntent.customType(MainActivity.this,"left-to-right");
+            }
+        }, 4000);
+        Animatoo.animateZoom(this);
+
+         */
+
+        LinearLayout ll1 = findViewById(R.id.LL1);
+        LinearLayout ll2 = findViewById(R.id.LL2);
+        LinearLayout ll3 = findViewById(R.id.LL3);
+        View view7 = findViewById(R.id.view7);
+
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }, 2000);
 
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                DashBoardFragment dashBoardFragment = new DashBoardFragment();
+                fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_out_bottom, R.anim.slide_in_bottom).
+                        replace(R.id.container, dashBoardFragment).commit();
+                ll1.setVisibility(View.GONE);
+                ll2.setVisibility(View.GONE);
+                ll3.setVisibility(View.GONE);
+                view7.setVisibility(View.GONE);
+
+            }
+        }, 4000);
+
+        /*Button testBtn = findViewById(R.id.test);
+
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DashBoard2.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom, R.anim.slide_in_bottom);
+
+
+            }
+        });
+
+         */
 
 
     }

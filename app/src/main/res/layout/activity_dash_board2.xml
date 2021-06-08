@@ -1,504 +1,507 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="15dp"
-    android:background="#f8f8f8"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp"
-    tools:context=".DashBoard2">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/userscard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toStartOf="@id/sessionscard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="15dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:id="@+id/dbcontainer"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:background="#f8f8f8"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
-            <TextView
-                android:id="@+id/textView32"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Users"
-                android:textColor="#b6c3d7" />
-
-            <TextView
-                android:id="@+id/textView36"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="46468"
-                android:textColor="#344b6b"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView37"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+33,32%"
-                    android:textColor="#27adb9" />
-
-                <TextView
-                    android:id="@+id/textView51"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=" vs last week"
-                    android:textColor="#c3ccdb" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/sessionscard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toStartOf="@id/durationcard"
-        app:layout_constraintStart_toEndOf="@+id/userscard"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="15dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp">
-
-            <TextView
-                android:id="@+id/textView33"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sessions"
-                android:textColor="#b6c3d7" />
-
-            <TextView
-                android:id="@+id/textView38"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="98.3K"
-                android:textColor="#344b6b"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView39"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+18,77%"
-                    android:textColor="#27adb9" />
-
-                <TextView
-                    android:id="@+id/textView52"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=" vs last week"
-                    android:textColor="#c3ccdb" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/durationcard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toStartOf="@id/ratecard"
-        app:layout_constraintStart_toEndOf="@+id/sessionscard"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="15dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp">
-
-            <TextView
-                android:id="@+id/textView34"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Avg. Session Duration"
-                android:textColor="#b6c3d7" />
-
-            <TextView
-                android:id="@+id/textView40"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="3m 40sec"
-                android:textColor="#344b6b"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-5,77%"
-                    android:textColor="#ea6f6a" />
-
-                <TextView
-                    android:id="@+id/textView53"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=" vs last week"
-                    android:textColor="#c3ccdb" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/ratecard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toStartOf="@id/rightcard"
-        app:layout_constraintStart_toEndOf="@+id/durationcard"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="15dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp">
-
-            <TextView
-                android:id="@+id/textView35"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bounce Rate"
-                android:textColor="#b6c3d7" />
-
-            <TextView
-                android:id="@+id/textView42"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="45.72%"
-                android:textColor="#344b6b"
-                android:textSize="24sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView43"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+13,16%"
-                    android:textColor="#ea6f6a" />
-
-                <TextView
-                    android:id="@+id/textView54"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=" vs last week"
-                    android:textColor="#c3ccdb" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/userslinechart"
-        android:layout_width="0dp"
-        android:layout_height="215dp"
-        android:background="#ffffff"
-        android:paddingStart="15dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="15dp"
-        android:paddingBottom="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/ratecard"
-        app:layout_constraintStart_toStartOf="@+id/userscard"
-        app:layout_constraintTop_toBottomOf="@+id/space1">
-
-        <TextView
-            android:id="@+id/textView44"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/userscard"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:text="Out of Stock rate (OOS)"
-            android:textColor="#374e6e"
-            android:textSize="20sp" />
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/linechart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="15dp"
-            android:paddingStart="20dp" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/demographyheatmap"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/gendercard"
-        app:layout_constraintStart_toStartOf="@+id/userscard"
-        app:layout_constraintTop_toBottomOf="@+id/space2">
-
-        <TextView
-            android:id="@+id/textView45"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:paddingStart="20dp"
-            android:text="Goods"
-            android:textColor="#374e6e"
-            android:textSize="20sp" />
-
-        <com.github.mikephil.charting.charts.HorizontalBarChart
-            android:id="@+id/horizontalbC"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginTop="15dp" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/gendercard"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/oscard"
-        app:layout_constraintStart_toEndOf="@+id/demographyheatmap"
-        app:layout_constraintTop_toBottomOf="@+id/space2">
-
-        <TextView
-            android:id="@+id/textView46"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:paddingStart="20dp"
-            android:text="Sales"
-            android:textColor="#374e6e"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            android:paddingStart="20dp">
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toStartOf="@id/sessionscard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingEnd="20dp">
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/textView32"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cash sales" />
+                    android:text="Users"
+                    android:textColor="#b6c3d7" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/textView36"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="53%" />
+                    android:text="46468"
+                    android:textColor="#344b6b"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView37"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+33,32%"
+                        android:textColor="#27adb9" />
+
+                    <TextView
+                        android:id="@+id/textView51"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=" vs last week"
+                        android:textColor="#c3ccdb" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <ProgressBar
-                android:id="@+id/progressBar1"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:max="100"
-                android:paddingEnd="20dp"
-                android:progress="53" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/sessionscard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toStartOf="@id/durationcard"
+            app:layout_constraintStart_toEndOf="@+id/userscard"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingEnd="20dp">
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/textView33"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Credit Sales" />
+                    android:text="Sessions"
+                    android:textColor="#b6c3d7" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/textView38"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="47%" />
+                    android:text="98.3K"
+                    android:textColor="#344b6b"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView39"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+18,77%"
+                        android:textColor="#27adb9" />
+
+                    <TextView
+                        android:id="@+id/textView52"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=" vs last week"
+                        android:textColor="#c3ccdb" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <ProgressBar
-                android:id="@+id/progressBar2"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:max="100"
-                android:paddingEnd="20dp"
-                android:progress="47" />
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/oscard"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/userslinechart"
-        app:layout_constraintStart_toEndOf="@+id/gendercard"
-        app:layout_constraintTop_toBottomOf="@id/space2">
-
-        <TextView
-            android:id="@+id/textView47"
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/durationcard"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:paddingStart="20dp"
-            android:text="Sales Adjustment"
-            android:textColor="#374e6e"
-            android:textSize="20sp" />
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toStartOf="@id/ratecard"
+            app:layout_constraintStart_toEndOf="@+id/sessionscard"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/piechartOS"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal|center_vertical" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avg. Session Duration"
+                    android:textColor="#b6c3d7" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/rightcard"
-        android:layout_width="260dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toEndOf="@+id/ratecard"
-        app:layout_constraintTop_toTopOf="@+id/durationcard">
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3m 40sec"
+                    android:textColor="#344b6b"
+                    android:textSize="24sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-5,77%"
+                        android:textColor="#ea6f6a" />
+
+                    <TextView
+                        android:id="@+id/textView53"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=" vs last week"
+                        android:textColor="#c3ccdb" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ratecard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toStartOf="@id/rightcard"
+            app:layout_constraintStart_toEndOf="@+id/durationcard"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bounce Rate"
+                    android:textColor="#b6c3d7" />
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="45.72%"
+                    android:textColor="#344b6b"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView43"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+13,16%"
+                        android:textColor="#ea6f6a" />
+
+                    <TextView
+                        android:id="@+id/textView54"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=" vs last week"
+                        android:textColor="#c3ccdb" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/userslinechart"
+            android:layout_width="0dp"
+            android:layout_height="215dp"
+            android:background="#ffffff"
             android:paddingStart="15dp"
-            android:paddingTop="5dp">
+            android:paddingTop="5dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="5dp"
+            app:layout_constraintEnd_toEndOf="@+id/ratecard"
+            app:layout_constraintStart_toStartOf="@+id/userscard"
+            app:layout_constraintTop_toBottomOf="@+id/space1">
 
             <TextView
-                android:id="@+id/textView48"
-                android:layout_width="match_parent"
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total  Customers \&amp; Visitors"
+                android:paddingStart="20dp"
+                android:text="Out of Stock rate (OOS)"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
 
             <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/linechart2"
+                android:id="@+id/linechart"
                 android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                android:paddingStart="20dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/demographyheatmap"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/gendercard"
+            app:layout_constraintStart_toStartOf="@+id/userscard"
+            app:layout_constraintTop_toBottomOf="@+id/space2">
 
             <TextView
-                android:id="@+id/textView49"
+                android:id="@+id/textView45"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="On Time In Full Deliveries (OTIF)"
+                android:layout_marginTop="5dp"
+                android:paddingStart="20dp"
+                android:text="Goods"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/barchart2"
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/horizontalbC"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:layout_marginTop="10dp" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="15dp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/gendercard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/oscard"
+            app:layout_constraintStart_toEndOf="@+id/demographyheatmap"
+            app:layout_constraintTop_toBottomOf="@+id/space2">
 
             <TextView
-                android:id="@+id/textView50"
+                android:id="@+id/textView46"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Product Sales"
+                android:layout_marginTop="5dp"
+                android:paddingStart="20dp"
+                android:text="Sales"
                 android:textColor="#374e6e"
                 android:textSize="20sp" />
 
-            <com.github.mikephil.charting.charts.BubbleChart
-                android:id="@+id/bubblechart"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:paddingStart="20dp">
 
-    <View
-        android:id="@+id/space1"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        app:layout_constraintBottom_toTopOf="@id/userslinechart"
-        app:layout_constraintEnd_toEndOf="@id/ratecard"
-        app:layout_constraintStart_toStartOf="@id/userscard"
-        app:layout_constraintTop_toBottomOf="@id/sessionscard" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingEnd="20dp">
 
-    <View
-        android:id="@+id/space2"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        app:layout_constraintEnd_toEndOf="@id/ratecard"
-        app:layout_constraintStart_toStartOf="@id/userscard"
-        app:layout_constraintTop_toBottomOf="@id/userslinechart" />
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cash sales" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="53%" />
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:max="100"
+                    android:paddingEnd="20dp"
+                    android:progress="53" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:paddingEnd="20dp">
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Credit Sales" />
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="47%" />
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:max="100"
+                    android:paddingEnd="20dp"
+                    android:progress="47" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/oscard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/userslinechart"
+            app:layout_constraintStart_toEndOf="@+id/gendercard"
+            app:layout_constraintTop_toBottomOf="@id/space2">
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingStart="20dp"
+                android:text="Sales Adjustment"
+                android:textColor="#374e6e"
+                android:textSize="20sp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/piechartOS"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal|center_vertical" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rightcard"
+            android:layout_width="260dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toEndOf="@+id/ratecard"
+            app:layout_constraintTop_toTopOf="@+id/durationcard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/textView48"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total  Customers \&amp; Visitors"
+                    android:textColor="#374e6e"
+                    android:textSize="20sp" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/linechart2"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+                <TextView
+                    android:id="@+id/textView49"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="On Time In Full Deliveries (OTIF)"
+                    android:textColor="#374e6e"
+                    android:textSize="20sp" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barchart2"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/textView50"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Product Sales"
+                    android:textColor="#374e6e"
+                    android:textSize="20sp" />
+
+                <com.github.mikephil.charting.charts.BubbleChart
+                    android:id="@+id/bubblechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/space1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintBottom_toTopOf="@id/userslinechart"
+            app:layout_constraintEnd_toEndOf="@id/ratecard"
+            app:layout_constraintStart_toStartOf="@id/userscard"
+            app:layout_constraintTop_toBottomOf="@id/sessionscard" />
+
+        <View
+            android:id="@+id/space2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintEnd_toEndOf="@id/ratecard"
+            app:layout_constraintStart_toStartOf="@id/userscard"
+            app:layout_constraintTop_toBottomOf="@id/userslinechart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -2,11 +2,14 @@ package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ProgressBar;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.BubbleChart;
@@ -316,8 +319,21 @@ public class DashBoard2 extends AppCompatActivity {
         horizontalBarChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         horizontalBarChart.animateY(3000);
 
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(DashBoard2.this, MapActivity.class);
+                startActivity(intent);
+                Animatoo.animateInAndOut(DashBoard2.this);
+            }
+        }, 3500);
 
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateFade(this);
     }
 }
