@@ -86,7 +86,7 @@ public class MainActivity extends FragmentActivity {
 
         */
 
-
+/*
         ArrayList<String> xAxisVals = new ArrayList<>(Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"));
 
 
@@ -192,6 +192,8 @@ public class MainActivity extends FragmentActivity {
         circleDisplay.showValue(75f, 100f, true);
         circleDisplay.setTouchEnabled(true);
 
+ */
+
 
 //        Button nxtbtn =findViewById(R.id.button2);
 //        nxtbtn.setFocusable(true);
@@ -205,13 +207,15 @@ public class MainActivity extends FragmentActivity {
 //            }
 //        });
 
-
+/*
         SpeedView speedView = findViewById(R.id.gauge);
         speedView.speedTo(50);
         speedView.speedTo(50, 4000);
         //speedView.setTrembleData(5,2);
         speedView.setWithTremble(false);
         speedView.setUnit("%");
+
+ */
 
 //        Handler handler = new Handler();
 //        handler.postDelayed(new Runnable() {
@@ -234,8 +238,7 @@ public class MainActivity extends FragmentActivity {
 //
 //        }, 2000);
 
-        Animatoo.animateZoom(this);
-        Handler handler = new Handler();
+       // Handler handler = new Handler();
        /* handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -254,7 +257,7 @@ public class MainActivity extends FragmentActivity {
 
          */
 
-        LinearLayout ll1 = findViewById(R.id.LL1);
+        /*LinearLayout ll1 = findViewById(R.id.LL1);
         LinearLayout ll2 = findViewById(R.id.LL2);
         LinearLayout ll3 = findViewById(R.id.LL3);
         View view7 = findViewById(R.id.view7);
@@ -265,7 +268,7 @@ public class MainActivity extends FragmentActivity {
             public void run() {
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                DashBoardFragment dashBoardFragment = new DashBoardFragment();
+                DashBoardMain dashBoardFragment = new DashBoardMain();
                 fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_out_bottom, R.anim.slide_in_bottom).
                         replace(R.id.container, dashBoardFragment).commit();
                 ll1.setVisibility(View.GONE);
@@ -275,6 +278,8 @@ public class MainActivity extends FragmentActivity {
 
             }
         }, 4000);
+
+         */
 
         /*Button testBtn = findViewById(R.id.test);
 

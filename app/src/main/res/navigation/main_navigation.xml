@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/dashBoardMain">
+
+    <fragment
+        android:id="@+id/dashBoardMain"
+        android:name="com.example.VisualAnalysis.DashBoardMain"
+        android:label="DashBoardMain" >
+        <action
+            android:id="@+id/action_dashBoardMain_to_dashBoardFragment2"
+            app:destination="@id/dashBoardFragment"
+            app:enterAnim="@anim/push_left_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashBoardFragment"
+        android:name="com.example.VisualAnalysis.DashBoardFragment"
+        android:label="DashBoardFragment" >
+        <action
+            android:id="@+id/action_dashBoardFragment_to_mapActivity3"
+            app:destination="@id/mapActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/mapActivity"
+        android:name="com.example.VisualAnalysis.MapActivity"
+        android:label="activity_map"
+        tools:layout="@layout/activity_map" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.VisualAnalysis.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+</navigation>
