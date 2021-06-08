@@ -34,13 +34,12 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class DashBoardMain extends Fragment {
 
-    static String[] tableHeaders = {"No","Name","Age"};
+    static String[] tableHeaders = {"Rank","Subcity","Sales"};
     static String[][] tableValues = {
-            {"1", "Nahom", "22"},
-            {"2", "Dagem", "20"},
-            {"3", "Dawit", "35"},
-            {"4", "Abebe", "45"},
-            {"5", "kebede", "18"}
+            {"1", "Kirkos", "22K"},
+            {"2", "Nifas Silk", "20K"},
+            {"3", "Bole", "35K"},
+            {"4", "Lideta", "45K"},
     };
 
     @Override
