@@ -109,7 +109,7 @@ class MarkerThread extends Thread {
             msg.obj = ""+i;
             MapActivity.handler.sendMessage(msg);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
