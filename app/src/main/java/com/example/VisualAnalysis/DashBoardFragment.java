@@ -43,10 +43,15 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
+import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+
 
 public class DashBoardFragment extends Fragment {
 
     LineChart lineChart;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -337,9 +342,10 @@ public class DashBoardFragment extends Fragment {
             }
         },3500);
 
+//        Table view
+
 
         return rootView;
-
 
     }
 
@@ -351,7 +357,6 @@ public class DashBoardFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
 
     }
 

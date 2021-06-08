@@ -27,8 +27,21 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
+import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+
 
 public class DashBoardMain extends Fragment {
+
+    static String[] tableHeaders = {"No","Name","Age"};
+    static String[][] tableValues = {
+            {"1", "Nahom", "22"},
+            {"2", "Dagem", "20"},
+            {"3", "Dawit", "35"},
+            {"4", "Abebe", "45"},
+            {"5", "kebede", "18"}
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -157,6 +170,21 @@ public class DashBoardMain extends Fragment {
                 NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
             }
         },3500);
+
+        final TableView<String[]> tableView =(TableView<String[]>)view. findViewById(R.id.table_data_view);
+        tableView.setColumnCount(3);
+
+
+        SimpleTableHeaderAdapter simpleTableHeaderAdapter=new SimpleTableHeaderAdapter(getContext(), tableHeaders);
+        simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
+
+        // set header
+        tableView.setHeaderAdapter(simpleTableHeaderAdapter);
+        tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
+
+        // set the data
+        tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
+        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), tableValues));
 
         return view;
     }

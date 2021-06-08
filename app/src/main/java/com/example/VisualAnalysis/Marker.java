@@ -1,5 +1,6 @@
 package com.example.VisualAnalysis;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,6 +12,11 @@ import java.util.ArrayList;
 
 
 public class Marker extends AsyncTask<GoogleMap,Void,String> {
+    Context context;
+    public Marker(Context contxt){
+        this.context=contxt;
+    }
+
 
     @Override
     protected String doInBackground(GoogleMap... googleMaps) {
@@ -30,6 +36,7 @@ public class Marker extends AsyncTask<GoogleMap,Void,String> {
         locations.add(loc5);
 
         for(int i=0; i<locations.size();i++){
+
             googleMap.addMarker(new MarkerOptions().position(locations.get(i)).title("location " + locations.indexOf(i)));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(locations.get(i)));
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locations.get(i).latitude, locations.get(i).longitude), 14.0f));
