@@ -50,5 +50,6 @@ dependencies {
     implementation 'com.github.mohammadatif:Animatoo:master'
     implementation 'com.github.hajiyevelnur92:intentanimation:1.0'
     implementation 'de.codecrafters.tableview:tableview:2.2.0'
+    implementation 'com.android.volley:volley:1.2.0'
 
 }

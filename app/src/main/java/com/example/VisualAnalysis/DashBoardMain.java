@@ -1,18 +1,28 @@
 package com.example.VisualAnalysis;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JsResult;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.anastr.speedviewlib.SpeedView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -25,11 +35,15 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import data.TableData;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
@@ -39,20 +53,23 @@ public class DashBoardMain extends Fragment {
 
     public static Handler handler;
 
-    public static ArrayList<Float> speedviewData = new ArrayList<>(Arrays.asList(12.0f, 56.5f, 23.7f, 49.9f, 75.0f));
+    public static ArrayList<Float> speedviewData = new ArrayList<>(Arrays.asList(12.0f, 56.5f, 23.7f, 49.9f, 75.0f, 10f));
 
-    static String[] tableHeaders = {"Rank", "Subcity", "Sales"};
-    static String[][] tableValues = {
-            {"1", "Kirkos", "22K"},
-            {"2", "Nifas Silk", "20K"},
-            {"3", "Bole", "35K"},
-            {"4", "Lideta", "45K"},
-    };
+   public static ArrayList<PieEntry> piedatas = new ArrayList<>();
+   public TableView<String[]> tableView;
 
+//    static String[] tableHeaders = {"Rank", "Subcity", "Sales"};
+//    static String[][] tableValues = {
+//            {"1", "Kirkos", "22K"},
+//            {"2", "Nifas Silk", "20K"},
+//            {"3", "Bole", "35K"},
+//            {"4", "Lideta", "45K"},
+//    };
+    PieChart pieChart;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dash_board_main, container, false);
+        View view = inflater.inflate(R.layout.dashboardmain, container, false);
         // Inflate the layout for this fragment
         ArrayList<String> xAxisVals = new ArrayList<>(Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"));
 
@@ -117,32 +134,9 @@ public class DashBoardMain extends Fragment {
         barChart.getDescription().setEnabled(false);
 
 
-        PieChart pieChart = (PieChart) view.findViewById(R.id.piechart);
-
-        ArrayList<PieEntry> piedatas = new ArrayList<>();
-        piedatas.add(new PieEntry((float) 690.8, "Poland"));
-        piedatas.add(new PieEntry((float) 84.4, "United States"));
-        piedatas.add(new PieEntry((float) 71.2, "India"));
-        piedatas.add(new PieEntry((float) 437.7, "Others"));
-
-        PieDataSet pieDataSet = new PieDataSet(piedatas, "Piedata label");
-        pieDataSet.setColors(
-                Color.parseColor("#e73a55"),
-                Color.parseColor("#110f49"),
-                Color.parseColor("#f8f8fa"),
-                Color.parseColor("#d9f5ff")
-        );
-        pieDataSet.setDrawValues(false);
+        pieChart = (PieChart) view.findViewById(R.id.piechart);
 
 
-        PieData pieData = new PieData(pieDataSet);
-        pieChart.setData(pieData);
-        pieChart.setDrawSliceText(false);
-        //pieChart.setHoleRadius(0);
-        pieChart.setDrawHoleEnabled(false);
-        //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
-        pieChart.spin(5000, 90f, 360f, Easing.EaseInOutQuad);
-        pieChart.getDescription().setEnabled(false);
         // pieChart.getRadius();
         //Toast.makeText(this, (int) pieChart.getRadius(),Toast.LENGTH_LONG).show();
 
@@ -181,19 +175,58 @@ public class DashBoardMain extends Fragment {
 
         Handler h = new Handler();
 
-        h.postDelayed(new Runnable() {
+        /*h.postDelayed(new Runnable() {
             @Override
             public void run() {
                 NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
             }
-        }, 3500);
+        }, 10000);
 
-        final TableView<String[]> tableView = (TableView<String[]>) view.findViewById(R.id.table_data_view);
+         */
+
+        tableView = (TableView<String []>) view.findViewById(R.id.table_data_view);
+        makeRequests(getContext(),"http://192.168.1.234:8001/api/OnlineData/GetDataToDisplayOnTables","1");
+        makeRequests(getContext(),"http://192.168.1.234:8001/api/OnlineData/GetDataToDisplayOnPieChart","2");
+
+        return view;
+    }
+
+
+    public void updateTableWithData(JSONObject jsonObject) throws JSONException {
+        TableData tableData = new TableData();
+
+        JSONArray tableHeadersJson = jsonObject.getJSONArray("tableHeaders");
+        JSONArray tableValuesJson = jsonObject.getJSONArray("tableValues");
+
+        ArrayList<String> tableHeaders = new ArrayList<>();
+        ArrayList<ArrayList<String>> tableValues = new ArrayList<>();
+
+        String[][] valuesArray = new String[tableValuesJson.length()][];
+
+        for (int i = 0; i < tableHeadersJson.length(); i++) {
+            tableHeaders.add(tableHeadersJson.getString(i));
+        }
+
+
+        for (int i = 0; i < tableValuesJson.length(); i++) {
+            JSONArray array = new JSONArray(tableValuesJson.get(i).toString());
+            ArrayList<String> tableValue = new ArrayList<>();
+            valuesArray[i] = new String[array.length()];
+
+            for (int j = 0; j < array.length(); j++) {
+//                Log.i(TAG, array.get(j).toString());
+                tableValue.add(array.get(j).toString());
+                valuesArray[i][j] = array.get(j).toString();
+            }
+            tableValues.add(tableValue);
+        }
+
         tableView.setColumnCount(3);
 
-
-        SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeaders);
+//        tableHeaders.toArray(new String[0])
+        SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeaders.toArray(new String[0]) );
         simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
+
 
         // set header
         tableView.setHeaderAdapter(simpleTableHeaderAdapter);
@@ -201,11 +234,133 @@ public class DashBoardMain extends Fragment {
 
         // set the data
         tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
-        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), tableValues));
+        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), valuesArray));
+
+    }
+
+    public void updatePieChartWithData(JSONObject jsonObject) throws JSONException {
+
+        JSONArray jsonLabels = jsonObject.getJSONArray("labels");
+        JSONArray jsonValues = jsonObject.getJSONArray("values");
+
+        ArrayList<String> pieLabel = new ArrayList<>();
+        ArrayList<Float> pieValue = new ArrayList<>();
+
+        Log.i("TAG", jsonObject.get("labels").toString());
+        Log.i("TAG", jsonObject.get("values").toString());
 
 
+        for (int i = 0; i < jsonLabels.length(); i++) {
+            pieLabel.add((String) jsonLabels.get(i));
+            pieValue.add(Float.parseFloat(jsonValues.get(i).toString()));
+        }
 
-        return view;
+        Log.i("TAG", pieLabel.toString());
+        Log.i("TAG", pieValue.toString());
+
+        for (int i = 0; i < pieLabel.size(); i++) {
+            piedatas.add(new PieEntry(pieValue.get(i), pieLabel.get(i)));
+        }
+
+//        piedatas.add(new PieEntry((float) 690.8, "Poland"));
+//        piedatas.add(new PieEntry((float) 84.4, "United States"));
+//        piedatas.add(new PieEntry((float) 71.2, "India"));
+//        piedatas.add(new PieEntry((float) 437.7, "Others"));
+
+        PieDataSet pieDataSet = new PieDataSet(piedatas, "Piedata label");
+        pieDataSet.setColors(
+                Color.parseColor("#e73a55"),
+                Color.parseColor("#110f49"),
+                Color.parseColor("#f8f8fa"),
+                Color.parseColor("#b848fa"),
+                Color.parseColor("#f8dc5a"),
+                Color.parseColor("#d9f5ff"),
+                Color.parseColor("#115849")
+        );
+        pieDataSet.setDrawValues(false);
+
+
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.setDrawSliceText(false);
+        //pieChart.setHoleRadius(0);
+        pieChart.setDrawHoleEnabled(false);
+        //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
+        pieChart.spin(5000, 90f, 360f, Easing.EaseInOutQuad);
+        pieChart.getDescription().setEnabled(false);
+
+
+    }
+
+    public void updateBarChartWithData(JSONObject jsonObject) throws JSONException{
+        JSONArray jsonLabels = jsonObject.getJSONArray("labels");
+        JSONArray jsonValues = jsonObject.getJSONArray("values");
+
+    }
+
+
+    public JSONObject makeRequests(Context context, String URL, String reqNo){
+
+        final JSONObject RealResponse = new JSONObject();
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        JSONObject jsonBody = new JSONObject();
+
+        // making the request object using the Volley library utility methods
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, URL, null , new Response.Listener<JSONObject>(){
+            @Override
+            public void onResponse(JSONObject responsep) {
+                try {
+
+                    // again using the requestNumber to find which parser method to use since every request results in different object result
+                    JSONObject myArray = responsep.getJSONObject("data");
+
+                    switch (reqNo) {
+                        case "1":
+                            updateTableWithData(myArray);
+                            break;
+                        case "2":
+                            updatePieChartWithData(myArray);
+                            break;
+                        case "3":
+                            updateBarChartWithData(myArray);
+                    }
+                }
+                catch(JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("VOLLEY", error.toString());
+            }
+        }) {
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                JSONObject responseArray;
+                JSONObject jsonObject = new JSONObject();
+                if (response != null) {
+                    Log.i("TAG" + "second", response.data.toString());
+                    try {
+                        responseArray = new JSONObject(new String(response.data));
+                        jsonObject.put("data",responseArray);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return Response.success(jsonObject, HttpHeaderParser.parseCacheHeaders(response));
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                1000000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+
+        Log.i("CHECK", RealResponse.toString());
+        return RealResponse;
     }
 }
 
@@ -218,7 +373,7 @@ class GaugeThread extends Thread {
             msg.obj = String.valueOf(i);
             DashBoardMain.handler.sendMessage(msg);
             try {
-                Thread.sleep(200);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

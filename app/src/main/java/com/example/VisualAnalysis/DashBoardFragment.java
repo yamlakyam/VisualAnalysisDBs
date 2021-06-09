@@ -335,15 +335,12 @@ public class DashBoardFragment extends Fragment {
 
         Handler h = new Handler();
 
-        h.postDelayed(new Runnable() {
+       h.postDelayed(new Runnable() {
             @Override
             public void run() {
                 NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
             }
-        },3500);
-
-//        Table view
-
+        },6000);
 
         return rootView;
 
