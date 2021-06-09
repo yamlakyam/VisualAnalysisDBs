@@ -36,6 +36,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     LatLng loc3 = new LatLng(9.016210, 38.770046);
     LatLng loc4 = new LatLng(9.017683, 38.770271);
     LatLng loc5 = new LatLng(9.007278, 38.776499);
+    LatLng loc6 = new LatLng(9.030900,38.848000);
+    LatLng loc7 = new LatLng(9.051921,38.738136);
+    LatLng loc8 = new LatLng(9.005130,38.696251);
     //LatLng loc6 = new LatLng(11.512322,37.402954);
     public static ArrayList<LatLng> locations = new ArrayList<LatLng>();
 
@@ -61,6 +64,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         locations.add(loc3);
         locations.add(loc4);
         locations.add(loc5);
+        locations.add(loc6);
+        locations.add(loc7);
+        locations.add(loc8);
 
 
         Handler h = new Handler();
@@ -70,7 +76,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Intent intent =new Intent(MapActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        },10000);
+        },30000);
 
     }
 

@@ -1,10 +1,13 @@
 package com.example.VisualAnalysis;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Handler;
 import android.os.Message;
@@ -52,6 +55,9 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 public class DashBoardMain extends Fragment {
 
     public static Handler handler;
+    public static Handler piehandler;
+    public static Handler barhandler;
+
 
     public static ArrayList<Float> speedviewData = new ArrayList<>(Arrays.asList(12.0f, 56.5f, 23.7f, 49.9f, 75.0f, 10f));
 
@@ -66,74 +72,14 @@ public class DashBoardMain extends Fragment {
 //            {"4", "Lideta", "45K"},
 //    };
     PieChart pieChart;
+    BarChart barChart;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dashboardmain, container, false);
         // Inflate the layout for this fragment
-        ArrayList<String> xAxisVals = new ArrayList<>(Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"));
 
-
-        ArrayList<BarEntry> dataVals = new ArrayList<BarEntry>();
-        dataVals.add(new BarEntry(0, 3));
-        dataVals.add(new BarEntry(1, 4));
-        dataVals.add(new BarEntry(2, 9));
-        dataVals.add(new BarEntry(3, 6));
-        dataVals.add(new BarEntry(4, 10));
-        dataVals.add(new BarEntry(5, 12));
-        dataVals.add(new BarEntry(6, 15));
-        dataVals.add(new BarEntry(7, 8));
-        dataVals.add(new BarEntry(8, 10));
-        dataVals.add(new BarEntry(9, 9));
-        dataVals.add(new BarEntry(10, 12));
-        dataVals.add(new BarEntry(11, 7));
-        //dataVals.add(new BarEntry(5, -5));
-
-
-        BarChart barChart = (BarChart) view.findViewById(R.id.barchart);
-        BarDataSett barDataSet = new BarDataSett(dataVals, "dataset1");
-
-        barDataSet.setDrawValues(false);
-        for (int i = 0; i < dataVals.size(); i++) {
-            if (dataVals.get(i).getY() < 0) {
-                barDataSet.setColors(Color.parseColor("#d9f5ff"));
-            } else if (dataVals.get(i).getY() > 0) {
-                barDataSet.setColors(Color.parseColor("#212c5d"));
-            }
-
-        }//this code sets all the dataset color based on the last condition.//has to be fixed
-
-        //barChart.getAxisLeft().setDrawGridLines(false);
-        barChart.setDrawGridBackground(false);
-        barChart.getAxisLeft().setDrawGridLines(false);
-        barChart.getAxisRight().setDrawGridLines(false);
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setDrawGridLines(false);
-        xAxis.setDrawAxisLine(false);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelCount(dataVals.size());//if it doesn't show all the labels, use this
-
-        barChart.getAxisLeft().setDrawGridLines(false);
-        barChart.getAxisLeft().setDrawAxisLine(false);
-        barChart.getAxisRight().setDrawGridLines(false);
-        barChart.getAxisRight().setDrawAxisLine(false);
-
-
-        //baChart.setDrawGridBackground(false);
-        barDataSet.setBarBorderWidth(1f);
-
-
-        BarData barData = new BarData();
-        barData.addDataSet(barDataSet);
-        barChart.setData(barData);
-        barChart.invalidate();
-        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisVals));
-        barChart.getXAxis().setLabelRotationAngle(-15);
-        barChart.animateXY(1000, 1000);
-        barChart.getAxisRight().setDrawLabels(false);
-        barChart.getDescription().setEnabled(false);
-
-
+        barChart = (BarChart) view.findViewById(R.id.barchart);
         pieChart = (PieChart) view.findViewById(R.id.piechart);
 
 
@@ -175,18 +121,19 @@ public class DashBoardMain extends Fragment {
 
         Handler h = new Handler();
 
-        /*h.postDelayed(new Runnable() {
+        h.postDelayed(new Runnable() {
             @Override
             public void run() {
                 NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
             }
-        }, 10000);
+        }, 30000);
 
-         */
+
 
         tableView = (TableView<String []>) view.findViewById(R.id.table_data_view);
         makeRequests(getContext(),"http://192.168.1.234:8001/api/OnlineData/GetDataToDisplayOnTables","1");
         makeRequests(getContext(),"http://192.168.1.234:8001/api/OnlineData/GetDataToDisplayOnPieChart","2");
+        makeRequests(getContext(),"http://192.168.1.234:8001/api/OnlineData/GetDataToDisplayOnBarChart","3");
 
         return view;
     }
@@ -292,12 +239,100 @@ public class DashBoardMain extends Fragment {
 
     }
 
-    public void updateBarChartWithData(JSONObject jsonObject) throws JSONException{
-        JSONArray jsonLabels = jsonObject.getJSONArray("labels");
-        JSONArray jsonValues = jsonObject.getJSONArray("values");
+    public void updateBarChartWithData(JSONObject jsonObjectp) throws JSONException{
+
+
+        JSONArray jsonArray = jsonObjectp.getJSONArray("values");
+        JSONObject jsonObject = jsonArray.getJSONObject(0);
+        initBarChart(jsonObject);
+
+        barhandler = new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                String message = (String) msg.obj;
+                int index = Integer.parseInt(message);
+                try {
+                    JSONObject jsonObject = jsonArray.getJSONObject(index);
+                    initBarChart(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+
+
+
+        BarThread barThread = new BarThread(jsonArray.length());
+        barThread.start();
 
     }
 
+    public void initBarChart(JSONObject jsonObject) throws JSONException{
+        JSONArray labels = jsonObject.getJSONArray("labels");
+        JSONArray xValues = jsonObject.getJSONArray("xValues");
+        JSONArray yValues = jsonObject.getJSONArray("yValues");
+
+        Log.i("TAG",labels.toString());
+        Log.i("TAG",xValues.toString());
+        Log.i("TAG",yValues.toString());
+
+
+        ArrayList<String> xAxisLabels = new ArrayList<>();
+        for (int i = 0; i < labels.length(); i++) {
+            xAxisLabels.add(labels.get(i).toString());
+        }
+
+        ArrayList<BarEntry> dataVals = new ArrayList<>();
+
+        for (int i = 0; i < xValues.length(); i++) {
+            dataVals.add(new BarEntry((int)(Double.parseDouble(xValues.get(i).toString()))-1, (int)Double.parseDouble(yValues.get(i).toString())));
+        }
+
+        BarDataSett barDataSet = new BarDataSett(dataVals, "dataset1");
+
+        barDataSet.setDrawValues(false);
+        for (int i = 0; i < dataVals.size(); i++) {
+            if (dataVals.get(i).getY() < 0) {
+                barDataSet.setColors(Color.parseColor("#d9f5ff"));
+            } else if (dataVals.get(i).getY() > 0) {
+                barDataSet.setColors(Color.parseColor("#212c5d"));
+            }
+
+        }//this code sets all the dataset color based on the last condition.//has to be fixed
+
+        //barChart.getAxisLeft().setDrawGridLines(false);
+        barChart.setDrawGridBackground(false);
+        barChart.getAxisLeft().setDrawGridLines(false);
+        barChart.getAxisRight().setDrawGridLines(false);
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelCount(dataVals.size());//if it doesn't show all the labels, use this
+
+        barChart.getAxisLeft().setDrawGridLines(false);
+        barChart.getAxisLeft().setDrawAxisLine(false);
+        barChart.getAxisRight().setDrawGridLines(false);
+        barChart.getAxisRight().setDrawAxisLine(false);
+
+
+        //baChart.setDrawGridBackground(false);
+        barDataSet.setBarBorderWidth(1f);
+
+
+        BarData barData = new BarData();
+        barData.addDataSet(barDataSet);
+        barChart.setData(barData);
+        barChart.invalidate();
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xAxisLabels));
+        barChart.getXAxis().setLabelRotationAngle(-15);
+        barChart.animateXY(1000, 1000);
+        barChart.getAxisRight().setDrawLabels(false);
+        barChart.getDescription().setEnabled(false);
+
+
+    }
 
     public JSONObject makeRequests(Context context, String URL, String reqNo){
 
@@ -312,17 +347,17 @@ public class DashBoardMain extends Fragment {
                 try {
 
                     // again using the requestNumber to find which parser method to use since every request results in different object result
-                    JSONObject myArray = responsep.getJSONObject("data");
 
+                    JSONObject myObject = responsep.getJSONObject("data");
                     switch (reqNo) {
                         case "1":
-                            updateTableWithData(myArray);
+                            updateTableWithData(myObject);
                             break;
                         case "2":
-                            updatePieChartWithData(myArray);
+                            updatePieChartWithData(myObject);
                             break;
                         case "3":
-                            updateBarChartWithData(myArray);
+                            updateBarChartWithData(myObject);
                     }
                 }
                 catch(JSONException e) {
@@ -382,3 +417,79 @@ class GaugeThread extends Thread {
 
     }
 }
+
+class PieThread extends Thread {
+    int piedatas;
+    public PieThread(int piedatas) {
+        this.piedatas = piedatas;
+    }
+
+    @Override
+    public void run() {
+
+        for (int i = 0; i < piedatas; i++) {
+            Message msg = DashBoardMain.piehandler.obtainMessage();
+            msg.obj = String.valueOf(i);
+            DashBoardMain.piehandler.sendMessage(msg);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+}
+
+class BarThread extends Thread {
+    int bardatas;
+
+    public BarThread(int bardatas) {
+        this.bardatas = bardatas;
+    }
+
+    @Override
+    public void run() {
+
+        for (int i = 0; i < bardatas; i++) {
+            Message msg = DashBoardMain.barhandler.obtainMessage();
+            msg.obj = String.valueOf(i);
+            DashBoardMain.barhandler.sendMessage(msg);
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+}
+//class TableThread extends Thread {
+//    int tabledatas;
+//
+//    public TableThread(int tabledatas) {
+//        this.tabledatas = tabledatas;
+//    }
+//
+//    @Override
+//    public void run() {
+//
+//        for (int i = 0; i < tabledatas; i++) {
+//            Message msg = DashBoardMain.piehandler.obtainMessage();
+//            msg.obj = String.valueOf(i);
+//            DashBoardMain.piehandler.sendMessage(msg);
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//
+//    }
+//}
+
+
+

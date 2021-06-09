@@ -340,7 +340,7 @@ public class DashBoardFragment extends Fragment {
             public void run() {
                 NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
             }
-        },6000);
+        },10000);
 
         return rootView;
 

@@ -14,9 +14,6 @@
             android:id="@+id/action_dashBoardMain_to_dashBoardFragment2"
             app:destination="@id/dashBoardFragment"
             app:enterAnim="@anim/push_left_in" />
-        <action
-            android:id="@+id/action_dashBoardMain_to_test2"
-            app:destination="@id/test2" />
     </fragment>
     <fragment
         android:id="@+id/dashBoardFragment"
