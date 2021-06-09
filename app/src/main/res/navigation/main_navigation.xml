@@ -20,16 +20,12 @@
         android:label="DashBoardFragment" >
         <action
             android:id="@+id/action_dashBoardFragment_to_mapActivity3"
-            app:destination="@id/mapActivity" />
+            app:destination="@id/mapActivity"
+            app:enterAnim="@anim/push_left_in" />
     </fragment>
     <activity
         android:id="@+id/mapActivity"
         android:name="com.example.VisualAnalysis.MapActivity"
         android:label="activity_map"
         tools:layout="@layout/activity_map" />
-    <fragment
-        android:id="@+id/mapsFragment"
-        android:name="com.example.VisualAnalysis.MapsFragment"
-        android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
 </navigation>

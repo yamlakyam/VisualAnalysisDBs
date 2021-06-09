@@ -3,6 +3,7 @@ package com.example.VisualAnalysis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -61,6 +62,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         locations.add(loc4);
         locations.add(loc5);
 
+
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent =new Intent(MapActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        },10000);
+
     }
 
     @Override
@@ -90,6 +101,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
+
 };
 
 class MarkerThread extends Thread {
@@ -101,9 +113,6 @@ class MarkerThread extends Thread {
     @Override
     public void run() {
         for (int i=0; i<MapActivity.locations.size();i++) {
-//            mapActivity.googleMap.addMarker(new MarkerOptions().position(i).title("location " + mapActivity.locations.indexOf(i)));
-//            mapActivity.googleMap.moveCamera(CameraUpdateFactory.newLatLng(i));
-//            mapActivity.googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(i.latitude, i.longitude), 14.0f));
             Log.v("MapIndex",""+i);
             Message msg = MapActivity.handler.obtainMessage();
             msg.obj = ""+i;

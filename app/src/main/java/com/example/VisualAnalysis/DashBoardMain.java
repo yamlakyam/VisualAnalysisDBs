@@ -3,10 +3,12 @@ package com.example.VisualAnalysis;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +37,11 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class DashBoardMain extends Fragment {
 
-    static String[] tableHeaders = {"Rank","Subcity","Sales"};
+    public static Handler handler;
+
+    public static ArrayList<Float> speedviewData = new ArrayList<>(Arrays.asList(12.0f, 56.5f, 23.7f, 49.9f, 75.0f));
+
+    static String[] tableHeaders = {"Rank", "Subcity", "Sales"};
     static String[][] tableValues = {
             {"1", "Kirkos", "22K"},
             {"2", "Nifas Silk", "20K"},
@@ -45,7 +52,7 @@ public class DashBoardMain extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_dash_board_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_dash_board_main, container, false);
         // Inflate the layout for this fragment
         ArrayList<String> xAxisVals = new ArrayList<>(Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"));
 
@@ -153,9 +160,20 @@ public class DashBoardMain extends Fragment {
         circleDisplay.setTouchEnabled(true);
 
 
+        GaugeThread gaugeThread = new GaugeThread();
+        gaugeThread.start();
 
         SpeedView speedView = (SpeedView) view.findViewById(R.id.gauge);
-        speedView.speedTo(50);
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                String message = (String) msg.obj;
+                int index = Integer.parseInt(message);
+                Float ptr = speedviewData.get(index);
+                speedView.speedTo(ptr);
+
+            }
+        };
         speedView.speedTo(50, 4000);
         //speedView.setTrembleData(5,2);
         speedView.setWithTremble(false);
@@ -168,13 +186,13 @@ public class DashBoardMain extends Fragment {
             public void run() {
                 NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
             }
-        },3500);
+        }, 3500);
 
-        final TableView<String[]> tableView =(TableView<String[]>)view. findViewById(R.id.table_data_view);
+        final TableView<String[]> tableView = (TableView<String[]>) view.findViewById(R.id.table_data_view);
         tableView.setColumnCount(3);
 
 
-        SimpleTableHeaderAdapter simpleTableHeaderAdapter=new SimpleTableHeaderAdapter(getContext(), tableHeaders);
+        SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeaders);
         simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
 
         // set header
@@ -185,6 +203,27 @@ public class DashBoardMain extends Fragment {
         tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
         tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), tableValues));
 
+
+
         return view;
+    }
+}
+
+class GaugeThread extends Thread {
+    @Override
+    public void run() {
+
+        for (int i = 0; i < DashBoardMain.speedviewData.size(); i++) {
+            Message msg = DashBoardMain.handler.obtainMessage();
+            msg.obj = String.valueOf(i);
+            DashBoardMain.handler.sendMessage(msg);
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 }
