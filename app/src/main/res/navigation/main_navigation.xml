@@ -29,9 +29,4 @@
         android:name="com.example.VisualAnalysis.MapActivity"
         android:label="activity_map"
         tools:layout="@layout/activity_map" />
-    <fragment
-        android:id="@+id/test2"
-        android:name="com.example.VisualAnalysis.test"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
 </navigation>

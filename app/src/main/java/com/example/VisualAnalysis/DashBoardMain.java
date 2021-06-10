@@ -33,6 +33,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -54,14 +55,17 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class DashBoardMain extends Fragment {
 
+    public static Handler chartHandler;
+
     public static Handler handler;
     public static Handler piehandler;
     public static Handler barhandler;
+    public static Handler tableHandler;
 
 
     public static ArrayList<Float> speedviewData = new ArrayList<>(Arrays.asList(12.0f, 56.5f, 23.7f, 49.9f, 75.0f, 10f));
 
-   public static ArrayList<PieEntry> piedatas = new ArrayList<>();
+
    public TableView<String[]> tableView;
 
 //    static String[] tableHeaders = {"Rank", "Subcity", "Sales"};
@@ -73,6 +77,7 @@ public class DashBoardMain extends Fragment {
 //    };
     PieChart pieChart;
     BarChart barChart;
+    SpeedView speedView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,11 +92,6 @@ public class DashBoardMain extends Fragment {
         //Toast.makeText(this, (int) pieChart.getRadius(),Toast.LENGTH_LONG).show();
 
 
-        Legend legend = pieChart.getLegend();
-        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
-
         CircleDisplay circleDisplay = (CircleDisplay) view.findViewById(R.id.circleDisplay);
         circleDisplay.setColor(Color.parseColor("#d68894"));
         circleDisplay.setAnimDuration(3000);
@@ -103,7 +103,7 @@ public class DashBoardMain extends Fragment {
         GaugeThread gaugeThread = new GaugeThread();
         gaugeThread.start();
 
-        SpeedView speedView = (SpeedView) view.findViewById(R.id.gauge);
+        speedView = (SpeedView) view.findViewById(R.id.gauge);
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -126,24 +126,48 @@ public class DashBoardMain extends Fragment {
             public void run() {
                 NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
             }
-        }, 30000);
+        }, 40000);
 
 
 
         tableView = (TableView<String []>) view.findViewById(R.id.table_data_view);
-        makeRequests(getContext(),"http://192.168.1.234:8001/api/OnlineData/GetDataToDisplayOnTables","1");
-        makeRequests(getContext(),"http://192.168.1.234:8001/api/OnlineData/GetDataToDisplayOnPieChart","2");
-        makeRequests(getContext(),"http://192.168.1.234:8001/api/OnlineData/GetDataToDisplayOnBarChart","3");
+        makeRequests(getContext(),"http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnTables","1");
+        makeRequests(getContext(),"http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnPieChart","2");
+        makeRequests(getContext(),"http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnSingleBarChart","3");
 
         return view;
     }
+    @SuppressLint("HandlerLeak")
+    public void updateTableWithData(JSONObject jsonObjectp) throws JSONException {
+
+        JSONArray jsonArray = jsonObjectp.getJSONArray("tables");
+        JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+        initTableData(jsonObject);
+        tableHandler = new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                String message = (String) msg.obj;
+                int index = Integer.parseInt(message);
+                try {
+                    JSONObject jsonObject = jsonArray.getJSONObject(index);
+                    initTableData(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        TableThread tableThread = new TableThread(jsonArray.length());
+        tableThread.start();
 
 
-    public void updateTableWithData(JSONObject jsonObject) throws JSONException {
-        TableData tableData = new TableData();
+    }
 
+    public void initTableData(JSONObject jsonObject) throws JSONException{
         JSONArray tableHeadersJson = jsonObject.getJSONArray("tableHeaders");
         JSONArray tableValuesJson = jsonObject.getJSONArray("tableValues");
+
 
         ArrayList<String> tableHeaders = new ArrayList<>();
         ArrayList<ArrayList<String>> tableValues = new ArrayList<>();
@@ -168,28 +192,85 @@ public class DashBoardMain extends Fragment {
             tableValues.add(tableValue);
         }
 
-        tableView.setColumnCount(3);
 
 //        tableHeaders.toArray(new String[0])
         SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeaders.toArray(new String[0]) );
         simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
 
 
+
         // set header
-        tableView.setHeaderAdapter(simpleTableHeaderAdapter);
-        tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
+
+        if(tableView != null){
+            tableView.setColumnCount(tableHeaders.size());
+            tableView.setHeaderAdapter(simpleTableHeaderAdapter);
+            tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
+            tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
+            tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), valuesArray));
+
+        }
+        else{
+            String[] tableHeadersDef = {"No","Name","Age"};
+            String[][] tableValuesDef = {
+                    {"1", "Nahom", "22"},
+                    {"2", "Dagem", "20"},
+                    {"3", "Dawit", "35"},
+                    {"4", "Abebe", "45"},
+                    {"5", "kebede", "18"}
+            };
+            tableView.setColumnCount(tableHeadersDef.length);
+
+            simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(),tableHeadersDef);
+            tableView.setHeaderAdapter(simpleTableHeaderAdapter);
+            tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
+            tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
+            tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), tableValuesDef));
+
+
+
+        }
+
+
 
         // set the data
-        tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
-        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), valuesArray));
+
+
+
 
     }
 
-    public void updatePieChartWithData(JSONObject jsonObject) throws JSONException {
+    @SuppressLint("HandlerLeak")
+    public void updatePieChartWithData(JSONObject jsonObjectp) throws JSONException {
 
+        JSONArray jsonArray = jsonObjectp.getJSONArray("values");
+        JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+        initPieChartData(jsonObject);
+
+        piehandler = new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                String message = (String) msg.obj;
+                int index = Integer.parseInt(message);
+                try {
+                    JSONObject jsonObject = jsonArray.getJSONObject(index);
+                    initPieChartData(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        PieThread pieThread = new PieThread(jsonArray.length());
+        pieThread.start();
+
+    }
+
+    public void initPieChartData(JSONObject jsonObject) throws JSONException{
         JSONArray jsonLabels = jsonObject.getJSONArray("labels");
         JSONArray jsonValues = jsonObject.getJSONArray("values");
 
+        ArrayList<PieEntry> piedatas = new ArrayList<>();
         ArrayList<String> pieLabel = new ArrayList<>();
         ArrayList<Float> pieValue = new ArrayList<>();
 
@@ -228,17 +309,48 @@ public class DashBoardMain extends Fragment {
 
 
         PieData pieData = new PieData(pieDataSet);
-        pieChart.setData(pieData);
-        pieChart.setDrawSliceText(false);
-        //pieChart.setHoleRadius(0);
-        pieChart.setDrawHoleEnabled(false);
-        //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
-        pieChart.spin(5000, 90f, 360f, Easing.EaseInOutQuad);
-        pieChart.getDescription().setEnabled(false);
+
+
+
+        if(pieChart!=null){
+            pieChart.setData(pieData);
+            pieChart.setDrawSliceText(false);
+            //pieChart.setHoleRadius(0);
+            pieChart.setDrawHoleEnabled(false);
+            //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
+            pieChart.spin(5000, 90f, 360f, Easing.EaseInOutQuad);
+            pieChart.getDescription().setEnabled(false);
+            Legend legend = pieChart.getLegend();
+            legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+            legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+        }
+
+        else{
+            piedatas.add(new PieEntry((float) 690.8, "Poland"));
+            piedatas.add(new PieEntry((float) 84.4, "United States"));
+            piedatas.add(new PieEntry((float) 71.2, "India"));
+            piedatas.add(new PieEntry((float) 437.7, "Others"));
+            PieDataSet pieDataSetDefault =  new PieDataSet(piedatas, "Piedata label");
+            PieData pieDataDef = new PieData(pieDataSetDefault);
+            pieChart.setData(pieDataDef);
+            pieChart.setDrawSliceText(false);
+            //pieChart.setHoleRadius(0);
+            pieChart.setDrawHoleEnabled(false);
+            //pieChart.setOutlineSpotShadowColor(Color.parseColor(""));
+            pieChart.spin(5000, 90f, 360f, Easing.EaseInOutQuad);
+            pieChart.getDescription().setEnabled(false);
+            Legend legend = pieChart.getLegend();
+            legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+            legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+
+        }
 
 
     }
 
+    @SuppressLint("HandlerLeak")
     public void updateBarChartWithData(JSONObject jsonObjectp) throws JSONException{
 
 
@@ -261,11 +373,8 @@ public class DashBoardMain extends Fragment {
             }
         };
 
-
-
         BarThread barThread = new BarThread(jsonArray.length());
         barThread.start();
-
     }
 
     public void initBarChart(JSONObject jsonObject) throws JSONException{
@@ -289,7 +398,7 @@ public class DashBoardMain extends Fragment {
             dataVals.add(new BarEntry((int)(Double.parseDouble(xValues.get(i).toString()))-1, (int)Double.parseDouble(yValues.get(i).toString())));
         }
 
-        BarDataSett barDataSet = new BarDataSett(dataVals, "dataset1");
+        BarDataSet barDataSet = new BarDataSet(dataVals, "dataset1");
 
         barDataSet.setDrawValues(false);
         for (int i = 0; i < dataVals.size(); i++) {
@@ -333,6 +442,7 @@ public class DashBoardMain extends Fragment {
 
 
     }
+
 
     public JSONObject makeRequests(Context context, String URL, String reqNo){
 
@@ -432,13 +542,36 @@ class PieThread extends Thread {
             msg.obj = String.valueOf(i);
             DashBoardMain.piehandler.sendMessage(msg);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+}
+
+
+class TableThread extends Thread {
+    int tableIndex;
+
+    public TableThread(int tableIndex) {
+        this.tableIndex = tableIndex;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < tableIndex; i++) {
+            Message msg = DashBoardMain.tableHandler.obtainMessage();
+            msg.obj = String.valueOf(i);
+            DashBoardMain.tableHandler.sendMessage(msg);
+            try {
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
         }
-
     }
 }
 
@@ -448,6 +581,7 @@ class BarThread extends Thread {
     public BarThread(int bardatas) {
         this.bardatas = bardatas;
     }
+
 
     @Override
     public void run() {
@@ -466,6 +600,23 @@ class BarThread extends Thread {
 
     }
 }
+
+
+//class ChartThread extends Thread{
+//    int datasize;
+//    public ChartThread(int datasize, String chartType) {
+//        this.datasize = datasize;
+//    }
+//
+//    @Override
+//    public void run() {
+//        for(int i=0; i<datasize;i++){
+//            Message msg = DashBoardMain.chartHandler.obtainMessage();
+//            msg.obj=i+"";
+//            DashBoardMain.chartHandler.sendMessage(msg);
+//        }
+//    }
+//}
 //class TableThread extends Thread {
 //    int tabledatas;
 //

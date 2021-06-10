@@ -19,6 +19,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -36,14 +37,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     LatLng loc3 = new LatLng(9.016210, 38.770046);
     LatLng loc4 = new LatLng(9.017683, 38.770271);
     LatLng loc5 = new LatLng(9.007278, 38.776499);
-    LatLng loc6 = new LatLng(9.030900,38.848000);
-    LatLng loc7 = new LatLng(9.051921,38.738136);
-    LatLng loc8 = new LatLng(9.005130,38.696251);
+    LatLng loc6 = new LatLng(9.030900, 38.848000);
+    LatLng loc7 = new LatLng(9.051921, 38.738136);
+    LatLng loc8 = new LatLng(9.005130, 38.696251);
     //LatLng loc6 = new LatLng(11.512322,37.402954);
     public static ArrayList<LatLng> locations = new ArrayList<LatLng>();
 
     public static Handler handler;
-
 
 
     @Override
@@ -73,12 +73,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent =new Intent(MapActivity.this, MainActivity.class);
+                Intent intent = new Intent(MapActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        },30000);
+        }, 30000);
 
     }
+    @SuppressLint("HandlerLeak")
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -91,15 +92,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         MarkerThread markerThread = new MarkerThread();
         markerThread.start();
 
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 String message = (String) msg.obj;
                 int index = Integer.parseInt(message);
                 LatLng loc1 = locations.get(index);
-                googleMap.addMarker(new MarkerOptions().position((loc1)));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(loc1));
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc1.latitude, loc1.longitude), 14.0f));
+
+                //googleMap.addMarker(new MarkerOptions().position((loc1)));
+                //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc1.latitude, loc1.longitude), 14.0f));
+
+                MarkerOptions marker = new MarkerOptions().position(loc1);
+                Marker mMarker= googleMap.addMarker(marker);
+                builder.include(marker.getPosition());
+                LatLngBounds bounds = builder.build();
+
+                int width = getResources().getDisplayMetrics().widthPixels;
+                int height = getResources().getDisplayMetrics().heightPixels;
+                int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
+
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                googleMap.moveCamera(cu);
+                googleMap.animateCamera(cu,1000,null);
+
+
+
+
+
 
             }
         };
@@ -107,21 +127,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-
 };
 
 class MarkerThread extends Thread {
 
-//    MapActivity mapActivity = new MapActivity();
-    public MarkerThread(){
+    //    MapActivity mapActivity = new MapActivity();
+    public MarkerThread() {
 
     }
+
     @Override
     public void run() {
-        for (int i=0; i<MapActivity.locations.size();i++) {
-            Log.v("MapIndex",""+i);
+        for (int i = 0; i < MapActivity.locations.size(); i++) {
+            Log.v("MapIndex", "" + i);
             Message msg = MapActivity.handler.obtainMessage();
-            msg.obj = ""+i;
+            msg.obj = "" + i;
             MapActivity.handler.sendMessage(msg);
             try {
                 Thread.sleep(3000);
