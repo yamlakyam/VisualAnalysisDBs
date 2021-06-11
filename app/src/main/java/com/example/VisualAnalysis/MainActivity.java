@@ -53,9 +53,7 @@ public class MainActivity extends FragmentActivity {
 
 
     public View handleTestClick(View v) {
-//        FragmentManager fragmentManager=getSupportFragmentManager();
-//        DashBoardFragment dashBoardFragment=new DashBoardFragment();
-//        fragmentManager.beginTransaction().replace(R.id.container,dashBoardFragment).commit();
+
         Log.i("TAg", "hello ");
         return v;
     }
@@ -71,20 +69,6 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
 
-       /* UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
-        if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
-            Log.d(TAG, "Running on a TV Device");
-        } else if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK)) {
-            Log.d(TAG, "has leanback features");
-
-        } else if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
-            Log.d(TAG, "has hardware type tv");
-
-        } else {
-            Log.d(TAG, "Running on a non-TV Device");
-        }
-
-        */
 
     }
 

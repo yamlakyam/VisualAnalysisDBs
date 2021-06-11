@@ -31,6 +31,8 @@ import java.util.concurrent.TimeUnit;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     public GoogleMap googleMap;
+    int width;
+    int height;
 
     LatLng loc1 = new LatLng(9.016947, 38.764635);
     LatLng loc2 = new LatLng(9.016677, 38.766920);
@@ -108,12 +110,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 builder.include(marker.getPosition());
                 LatLngBounds bounds = builder.build();
 
-                int width = getResources().getDisplayMetrics().widthPixels;
-                int height = getResources().getDisplayMetrics().heightPixels;
-                int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
+               width = getResources().getDisplayMetrics().widthPixels;
+               height = getResources().getDisplayMetrics().heightPixels;
+               int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
 
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-                googleMap.moveCamera(cu);
+                //googleMap.moveCamera(cu);
                 googleMap.animateCamera(cu,1000,null);
 
 
