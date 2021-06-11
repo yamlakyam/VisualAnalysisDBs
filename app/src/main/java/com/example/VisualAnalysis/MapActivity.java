@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -101,10 +102,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc1.latitude, loc1.longitude), 14.0f));
 
                 MarkerOptions marker = new MarkerOptions().position(loc);
-                Marker mMarker = googleMap.addMarker(marker.title("location " + index).snippet(loc.toString()));
+               // Marker mMarker = googleMap.addMarker(marker.title("location " + index).snippet(loc.toString()));
+                Marker mMarker = googleMap.addMarker(marker);
                 builder.include(marker.getPosition());
                 LatLngBounds bounds = builder.build();
-                mMarker.showInfoWindow();
                 width = getResources().getDisplayMetrics().widthPixels;
                 //height = getResources().getDisplayMetrics().heightPixels;
                 int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
@@ -117,6 +118,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     @Override
                     public View getInfoWindow(Marker marker) {
 
+                        return null;
+                    }
+
+                    @Override
+                    public View getInfoContents(Marker marker) {
+
                         View view = getLayoutInflater().inflate(R.layout.custom_pop_up,null);
                         TextView nameTextView = (TextView)view.findViewById(R.id.nameTextView);
                         nameTextView.setText("Location "+index);
@@ -125,15 +132,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                         return view;
                     }
-
-                    @Override
-                    public View getInfoContents(Marker marker) {
-                        return null;
-                    }
                 });
 
-
-
+                mMarker.showInfoWindow();
 
             }
         };
