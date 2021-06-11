@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -66,9 +68,9 @@ public class DashBoardMain extends Fragment {
     public static ArrayList<Float> speedviewData = new ArrayList<>(Arrays.asList(12.0f, 56.5f, 23.7f, 49.9f, 75.0f, 10f));
 
 
-   public TableView<String[]> tableView;
+    public TableView<String[]> tableView;
 
-//    static String[] tableHeaders = {"Rank", "Subcity", "Sales"};
+    //    static String[] tableHeaders = {"Rank", "Subcity", "Sales"};
 //    static String[][] tableValues = {
 //            {"1", "Kirkos", "22K"},
 //            {"2", "Nifas Silk", "20K"},
@@ -78,9 +80,19 @@ public class DashBoardMain extends Fragment {
     PieChart pieChart;
     BarChart barChart;
     SpeedView speedView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+        //getContext().getTheme().applyStyle(R.style.darkTheme, true);
+
+//        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.darkTheme);
+//        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        inflater.getContext().setTheme(R.style.darkThemeCustom);
+
         View view = inflater.inflate(R.layout.dashboardmain, container, false);
         // Inflate the layout for this fragment
 
@@ -121,22 +133,22 @@ public class DashBoardMain extends Fragment {
 
         Handler h = new Handler();
 
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
-            }
-        }, 40000);
+//        h.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
+//            }
+//        }, 40000);
 
 
-
-        tableView = (TableView<String []>) view.findViewById(R.id.table_data_view);
-        makeRequests(getContext(),"http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnTables","1");
-        makeRequests(getContext(),"http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnPieChart","2");
-        makeRequests(getContext(),"http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnSingleBarChart","3");
+        tableView = (TableView<String[]>) view.findViewById(R.id.table_data_view);
+        makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnTables", "1");
+        makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnPieChart", "2");
+        makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnSingleBarChart", "3");
 
         return view;
     }
+
     @SuppressLint("HandlerLeak")
     public void updateTableWithData(JSONObject jsonObjectp) throws JSONException {
 
@@ -144,7 +156,7 @@ public class DashBoardMain extends Fragment {
         JSONObject jsonObject = jsonArray.getJSONObject(0);
 
         initTableData(jsonObject);
-        tableHandler = new Handler(){
+        tableHandler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 String message = (String) msg.obj;
@@ -164,7 +176,7 @@ public class DashBoardMain extends Fragment {
 
     }
 
-    public void initTableData(JSONObject jsonObject) throws JSONException{
+    public void initTableData(JSONObject jsonObject) throws JSONException {
         JSONArray tableHeadersJson = jsonObject.getJSONArray("tableHeaders");
         JSONArray tableValuesJson = jsonObject.getJSONArray("tableValues");
 
@@ -194,23 +206,21 @@ public class DashBoardMain extends Fragment {
 
 
 //        tableHeaders.toArray(new String[0])
-        SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeaders.toArray(new String[0]) );
+        SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeaders.toArray(new String[0]));
         simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
-
 
 
         // set header
 
-        if(tableView != null){
+        if (tableView != null) {
             tableView.setColumnCount(tableHeaders.size());
             tableView.setHeaderAdapter(simpleTableHeaderAdapter);
             tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
             tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
             tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), valuesArray));
 
-        }
-        else{
-            String[] tableHeadersDef = {"No","Name","Age"};
+        } else {
+            String[] tableHeadersDef = {"No", "Name", "Age"};
             String[][] tableValuesDef = {
                     {"1", "Nahom", "22"},
                     {"2", "Dagem", "20"},
@@ -220,21 +230,13 @@ public class DashBoardMain extends Fragment {
             };
             tableView.setColumnCount(tableHeadersDef.length);
 
-            simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(),tableHeadersDef);
+            simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeadersDef);
             tableView.setHeaderAdapter(simpleTableHeaderAdapter);
             tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
             tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
             tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), tableValuesDef));
 
-
-
         }
-
-
-
-        // set the data
-
-
 
 
     }
@@ -247,7 +249,7 @@ public class DashBoardMain extends Fragment {
 
         initPieChartData(jsonObject);
 
-        piehandler = new Handler(){
+        piehandler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 String message = (String) msg.obj;
@@ -266,7 +268,7 @@ public class DashBoardMain extends Fragment {
 
     }
 
-    public void initPieChartData(JSONObject jsonObject) throws JSONException{
+    public void initPieChartData(JSONObject jsonObject) throws JSONException {
         JSONArray jsonLabels = jsonObject.getJSONArray("labels");
         JSONArray jsonValues = jsonObject.getJSONArray("values");
 
@@ -311,8 +313,7 @@ public class DashBoardMain extends Fragment {
         PieData pieData = new PieData(pieDataSet);
 
 
-
-        if(pieChart!=null){
+        if (pieChart != null) {
             pieChart.setData(pieData);
             pieChart.setDrawSliceText(false);
             //pieChart.setHoleRadius(0);
@@ -324,14 +325,12 @@ public class DashBoardMain extends Fragment {
             legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
             legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
             legend.setOrientation(Legend.LegendOrientation.VERTICAL);
-        }
-
-        else{
+        } else {
             piedatas.add(new PieEntry((float) 690.8, "Poland"));
             piedatas.add(new PieEntry((float) 84.4, "United States"));
             piedatas.add(new PieEntry((float) 71.2, "India"));
             piedatas.add(new PieEntry((float) 437.7, "Others"));
-            PieDataSet pieDataSetDefault =  new PieDataSet(piedatas, "Piedata label");
+            PieDataSet pieDataSetDefault = new PieDataSet(piedatas, "Piedata label");
             PieData pieDataDef = new PieData(pieDataSetDefault);
             pieChart.setData(pieDataDef);
             pieChart.setDrawSliceText(false);
@@ -351,14 +350,14 @@ public class DashBoardMain extends Fragment {
     }
 
     @SuppressLint("HandlerLeak")
-    public void updateBarChartWithData(JSONObject jsonObjectp) throws JSONException{
+    public void updateBarChartWithData(JSONObject jsonObjectp) throws JSONException {
 
 
         JSONArray jsonArray = jsonObjectp.getJSONArray("values");
         JSONObject jsonObject = jsonArray.getJSONObject(0);
         initBarChart(jsonObject);
 
-        barhandler = new Handler(){
+        barhandler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 String message = (String) msg.obj;
@@ -377,14 +376,14 @@ public class DashBoardMain extends Fragment {
         barThread.start();
     }
 
-    public void initBarChart(JSONObject jsonObject) throws JSONException{
+    public void initBarChart(JSONObject jsonObject) throws JSONException {
         JSONArray labels = jsonObject.getJSONArray("labels");
         JSONArray xValues = jsonObject.getJSONArray("xValues");
         JSONArray yValues = jsonObject.getJSONArray("yValues");
 
-        Log.i("TAG",labels.toString());
-        Log.i("TAG",xValues.toString());
-        Log.i("TAG",yValues.toString());
+        Log.i("TAG", labels.toString());
+        Log.i("TAG", xValues.toString());
+        Log.i("TAG", yValues.toString());
 
 
         ArrayList<String> xAxisLabels = new ArrayList<>();
@@ -395,7 +394,7 @@ public class DashBoardMain extends Fragment {
         ArrayList<BarEntry> dataVals = new ArrayList<>();
 
         for (int i = 0; i < xValues.length(); i++) {
-            dataVals.add(new BarEntry((int)(Double.parseDouble(xValues.get(i).toString()))-1, (int)Double.parseDouble(yValues.get(i).toString())));
+            dataVals.add(new BarEntry((int) (Double.parseDouble(xValues.get(i).toString())) - 1, (int) Double.parseDouble(yValues.get(i).toString())));
         }
 
         BarDataSet barDataSet = new BarDataSet(dataVals, "dataset1");
@@ -425,7 +424,6 @@ public class DashBoardMain extends Fragment {
         barChart.getAxisRight().setDrawGridLines(false);
         barChart.getAxisRight().setDrawAxisLine(false);
 
-
         //baChart.setDrawGridBackground(false);
         barDataSet.setBarBorderWidth(1f);
 
@@ -444,14 +442,14 @@ public class DashBoardMain extends Fragment {
     }
 
 
-    public JSONObject makeRequests(Context context, String URL, String reqNo){
+    public JSONObject makeRequests(Context context, String URL, String reqNo) {
 
         final JSONObject RealResponse = new JSONObject();
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         JSONObject jsonBody = new JSONObject();
 
         // making the request object using the Volley library utility methods
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, URL, null , new Response.Listener<JSONObject>(){
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject responsep) {
                 try {
@@ -469,8 +467,7 @@ public class DashBoardMain extends Fragment {
                         case "3":
                             updateBarChartWithData(myObject);
                     }
-                }
-                catch(JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -490,7 +487,7 @@ public class DashBoardMain extends Fragment {
                     Log.i("TAG" + "second", response.data.toString());
                     try {
                         responseArray = new JSONObject(new String(response.data));
-                        jsonObject.put("data",responseArray);
+                        jsonObject.put("data", responseArray);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -518,7 +515,7 @@ class GaugeThread extends Thread {
             msg.obj = String.valueOf(i);
             DashBoardMain.handler.sendMessage(msg);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -530,6 +527,7 @@ class GaugeThread extends Thread {
 
 class PieThread extends Thread {
     int piedatas;
+
     public PieThread(int piedatas) {
         this.piedatas = piedatas;
     }
@@ -600,47 +598,3 @@ class BarThread extends Thread {
 
     }
 }
-
-
-//class ChartThread extends Thread{
-//    int datasize;
-//    public ChartThread(int datasize, String chartType) {
-//        this.datasize = datasize;
-//    }
-//
-//    @Override
-//    public void run() {
-//        for(int i=0; i<datasize;i++){
-//            Message msg = DashBoardMain.chartHandler.obtainMessage();
-//            msg.obj=i+"";
-//            DashBoardMain.chartHandler.sendMessage(msg);
-//        }
-//    }
-//}
-//class TableThread extends Thread {
-//    int tabledatas;
-//
-//    public TableThread(int tabledatas) {
-//        this.tabledatas = tabledatas;
-//    }
-//
-//    @Override
-//    public void run() {
-//
-//        for (int i = 0; i < tabledatas; i++) {
-//            Message msg = DashBoardMain.piehandler.obtainMessage();
-//            msg.obj = String.valueOf(i);
-//            DashBoardMain.piehandler.sendMessage(msg);
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//
-//    }
-//}
-
-
-

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/barchartCV"
@@ -29,6 +30,7 @@
         android:layout_height="200dp"
         android:layout_marginStart="16dp"
 
+        app:cardBackgroundColor="#ffffff"
         app:layout_constraintStart_toEndOf="@+id/barchartCV"
         app:layout_constraintTop_toTopOf="@id/barchartCV">
 

@@ -51,6 +51,8 @@ public class MainActivity extends FragmentActivity {
 
     public static final String TAG = "DeviceTypeRuntimeCheck";
 
+    String lastIndex;
+
 
     public View handleTestClick(View v) {
 
@@ -62,13 +64,17 @@ public class MainActivity extends FragmentActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
+        //setTheme(R.style.darkTheme);
         //overridePendingTransition(R.anim.slide_out_bottom,R.anim.slide_in_bottom);
 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-
+        if(getIntent().getExtras()!=null){
+           lastIndex = getIntent().getStringExtra("Last Index");
+            Log.i("TAG-mainactivity", lastIndex.toString());
+        }
 
     }
 

@@ -3,6 +3,7 @@ package com.example.VisualAnalysis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,6 +30,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     int width;
     int height;
 
+
+    int lastIndex;
+
     LatLng loc1 = new LatLng(9.016947, 38.764635);
     LatLng loc2 = new LatLng(9.016677, 38.766920);
     LatLng loc3 = new LatLng(9.016210, 38.770046);
@@ -41,6 +45,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public static ArrayList<LatLng> locations = new ArrayList<LatLng>();
 
     public static Handler handler;
+
+    public static ArrayList<String> place_names = new ArrayList<>();
 
 
     @Override
@@ -65,15 +71,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         locations.add(loc7);
         locations.add(loc8);
 
+        place_names.add("Branch 1");
+        place_names.add("Branch 2");
+        place_names.add("Branch 3");
+        place_names.add("Branch 4");
+        place_names.add("Branch 5");
+        place_names.add("Branch 6");
+        place_names.add("Branch 7");
+        place_names.add("Branch 8");
+
 
         Handler h = new Handler();
 //        h.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
 //                Intent intent = new Intent(MapActivity.this, MainActivity.class);
+//                intent.putExtra("Last Index",lastIndex+"");
+//                Log.i("TAG-mapctivity",""+lastIndex);
 //                startActivity(intent);
 //            }
-//        }, 30000);
+//        }, 40000);
 
     }
 
@@ -87,6 +104,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //        locations.add(loc3);
 //        locations.add(loc4);
 //        locations.add(loc5);
+
         MarkerThread markerThread = new MarkerThread();
         markerThread.start();
 
@@ -101,14 +119,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 //googleMap.addMarker(new MarkerOptions().position((loc1)));
                 //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc1.latitude, loc1.longitude), 14.0f));
 
+
+
                 MarkerOptions marker = new MarkerOptions().position(loc);
-               // Marker mMarker = googleMap.addMarker(marker.title("location " + index).snippet(loc.toString()));
+                // Marker mMarker = googleMap.addMarker(marker.title("location " + index).snippet(loc.toString()));
                 Marker mMarker = googleMap.addMarker(marker);
                 builder.include(marker.getPosition());
                 LatLngBounds bounds = builder.build();
                 width = getResources().getDisplayMetrics().widthPixels;
                 //height = getResources().getDisplayMetrics().heightPixels;
-                int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
+                int padding = (int) (width * 0.15); // offset from edges of the map 10% of screen
 
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
                 //googleMap.moveCamera(cu);
@@ -117,30 +137,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                     @Override
                     public View getInfoWindow(Marker marker) {
-
                         return null;
                     }
 
                     @Override
                     public View getInfoContents(Marker marker) {
 
-                        View view = getLayoutInflater().inflate(R.layout.custom_pop_up,null);
-                        TextView nameTextView = (TextView)view.findViewById(R.id.nameTextView);
-                        nameTextView.setText("Location "+index);
-                        TextView descTextView = (TextView)view.findViewById(R.id.descTextView);
+                        View view = getLayoutInflater().inflate(R.layout.custom_pop_up, null);
+                        TextView nameTextView = (TextView) view.findViewById(R.id.nameTextView);
+                        nameTextView.setText(place_names.get(index));
+                        TextView descTextView = (TextView) view.findViewById(R.id.descTextView);
                         descTextView.setText(loc.toString());
 
                         return view;
                     }
                 });
-
                 mMarker.showInfoWindow();
+                lastIndex=index;
 
             }
         };
-
     }
-
 
 };
 

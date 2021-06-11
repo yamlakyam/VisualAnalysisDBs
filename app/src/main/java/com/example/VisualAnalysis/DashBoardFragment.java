@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -57,6 +58,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class DashBoardFragment extends Fragment {
@@ -79,7 +81,7 @@ public class DashBoardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(groupBarChartHandler == null) {
+        if (groupBarChartHandler == null) {
             makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnDoublyBarChart", "4");
         }
     }
@@ -88,7 +90,11 @@ public class DashBoardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+//        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.darkThemeCustom);
+//        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+
         View rootView = inflater.inflate(R.layout.activity_dash_board2, container, false);
+
         lineChart = (LineChart) rootView.findViewById(R.id.linechart);
         lineChart2 = (LineChart) rootView.findViewById(R.id.linechart2);
         groupBarChart = (BarChart) rootView.findViewById(R.id.barchart2);
@@ -108,15 +114,16 @@ public class DashBoardFragment extends Fragment {
         makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnHorizontalBarChart", "3");
         makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnDoublyBarChart", "4");
 
+        String last=((MainActivity) requireActivity()).lastIndex;
+        Log.i("TAG-dashboard", ""+last);
 
         Handler h = new Handler();
-
-       h.postDelayed(new Runnable() {
+        h.postDelayed(new Runnable() {
             @Override
             public void run() {
                 NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
             }
-        },40000);
+        }, 40000);
 
         return rootView;
 
@@ -174,7 +181,7 @@ public class DashBoardFragment extends Fragment {
                 try {
                     JSONObject jsonObject = jsonArray1.getJSONObject(index);
                     JSONObject jsonObject2 = jsonArray2.getJSONObject(index);
-                    initLineChart2(jsonObject,jsonObject2);
+                    initLineChart2(jsonObject, jsonObject2);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -724,6 +731,7 @@ class HorizontalBarThread extends Thread {
 class GroupLineThread extends Thread {
     int bardatas;
 
+
     public GroupLineThread(int bardatas) {
         this.bardatas = bardatas;
     }
@@ -759,19 +767,18 @@ class GroupBarChartThread extends Thread {
     public void run() {
 
         for (int i = 0; i < bardatas; i++) {
-            if(DashBoardFragment.groupLineChartHandler != null){
+            if (DashBoardFragment.groupLineChartHandler != null) {
                 Message msg = DashBoardFragment.groupBarChartHandler.obtainMessage();
                 msg.obj = String.valueOf(i);
                 DashBoardFragment.groupBarChartHandler.sendMessage(msg);
-            }
-            else {
+            } else {
                 Message msg = new Message();
                 msg.obj = "0";
                 DashBoardFragment.groupBarChartHandler.sendMessage(msg);
             }
 
             try {
-                Thread.sleep(10000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
