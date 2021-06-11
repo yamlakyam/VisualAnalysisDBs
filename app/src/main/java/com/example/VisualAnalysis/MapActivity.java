@@ -3,14 +3,12 @@ package com.example.VisualAnalysis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,10 +21,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -101,13 +95,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             public void handleMessage(Message msg) {
                 String message = (String) msg.obj;
                 int index = Integer.parseInt(message);
-                LatLng loc1 = locations.get(index);
+                LatLng loc = locations.get(index);
 
                 //googleMap.addMarker(new MarkerOptions().position((loc1)));
                 //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc1.latitude, loc1.longitude), 14.0f));
 
-                MarkerOptions marker = new MarkerOptions().position(loc1);
-                Marker mMarker = googleMap.addMarker(marker.title("location " + index).snippet(loc1.toString()));
+                MarkerOptions marker = new MarkerOptions().position(loc);
+                Marker mMarker = googleMap.addMarker(marker.title("location " + index).snippet(loc.toString()));
                 builder.include(marker.getPosition());
                 LatLngBounds bounds = builder.build();
                 mMarker.showInfoWindow();
@@ -118,6 +112,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
                 //googleMap.moveCamera(cu);
                 googleMap.animateCamera(cu, 1000, null);
+
+                googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                    @Override
+                    public View getInfoWindow(Marker marker) {
+
+                        View view = getLayoutInflater().inflate(R.layout.custom_pop_up,null);
+                        TextView nameTextView = (TextView)view.findViewById(R.id.nameTextView);
+                        nameTextView.setText("Location "+index);
+                        TextView descTextView = (TextView)view.findViewById(R.id.descTextView);
+                        descTextView.setText(loc.toString());
+
+                        return view;
+                    }
+
+                    @Override
+                    public View getInfoContents(Marker marker) {
+                        return null;
+                    }
+                });
+
 
 
 
