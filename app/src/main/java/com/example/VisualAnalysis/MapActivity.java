@@ -72,15 +72,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MapActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        }, 30000);
+//        h.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(MapActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        }, 30000);
 
     }
+
     @SuppressLint("HandlerLeak")
 
     @Override
@@ -106,20 +107,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc1.latitude, loc1.longitude), 14.0f));
 
                 MarkerOptions marker = new MarkerOptions().position(loc1);
-                Marker mMarker= googleMap.addMarker(marker);
+                Marker mMarker = googleMap.addMarker(marker.title("location " + index).snippet(loc1.toString()));
                 builder.include(marker.getPosition());
                 LatLngBounds bounds = builder.build();
-
-               width = getResources().getDisplayMetrics().widthPixels;
-               height = getResources().getDisplayMetrics().heightPixels;
-               int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
+                mMarker.showInfoWindow();
+                width = getResources().getDisplayMetrics().widthPixels;
+                //height = getResources().getDisplayMetrics().heightPixels;
+                int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
 
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
                 //googleMap.moveCamera(cu);
-                googleMap.animateCamera(cu,1000,null);
-
-
-
+                googleMap.animateCamera(cu, 1000, null);
 
 
 
@@ -145,6 +143,7 @@ class MarkerThread extends Thread {
             Message msg = MapActivity.handler.obtainMessage();
             msg.obj = "" + i;
             MapActivity.handler.sendMessage(msg);
+
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
