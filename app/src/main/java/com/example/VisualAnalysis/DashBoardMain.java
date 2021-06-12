@@ -1,7 +1,11 @@
 package com.example.VisualAnalysis;
 
 import android.annotation.SuppressLint;
+import android.app.UiModeManager;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -57,16 +61,18 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class DashBoardMain extends Fragment {
 
-    public static Handler chartHandler;
+//    static {
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//
+//    }
 
+    public static Handler chartHandler;
     public static Handler handler;
     public static Handler piehandler;
     public static Handler barhandler;
     public static Handler tableHandler;
 
-
     public static ArrayList<Float> speedviewData = new ArrayList<>(Arrays.asList(12.0f, 56.5f, 23.7f, 49.9f, 75.0f, 10f));
-
 
     public TableView<String[]> tableView;
 
@@ -81,17 +87,51 @@ public class DashBoardMain extends Fragment {
     BarChart barChart;
     SpeedView speedView;
 
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-        //getContext().getTheme().applyStyle(R.style.darkTheme, true);
+
+//        UiModeManager uiManager = (UiModeManager) getContext().getSystemService(Context.UI_MODE_SERVICE);
+//        uiManager.setNightMode(UiModeManager.MODE_NIGHT_YES);
+
+
+
+        //getContext().getTheme().applyStyle(R.style.darkThemeCustom1, true);
 
 //        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.darkTheme);
 //        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
-        inflater.getContext().setTheme(R.style.darkThemeCustom);
+
+        inflater.getContext().setTheme(R.style.darkThemeCustom3);
+
+        /*
+
+        PackageManager packageManager = getContext().getPackageManager();
+
+        ActivityInfo activityInfo = null;
+        try {
+            activityInfo = packageManager.getActivityInfo(getActivity().getComponentName(), PackageManager.GET_META_DATA);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        int themeResId = activityInfo.theme;
+
+        if(themeResId == R.style.darkThemeCustom){
+            Log.i("LOG", themeResId + "");
+            Log.i("LOGSS", R.style.darkThemeCustom + "");
+        }
+        else {
+            Log.i("LOG", themeResId + "");
+            Log.i("LOGSS", R.style.darkThemeCustom + "");
+        }
+
+
+         */
+
+
 
         View view = inflater.inflate(R.layout.dashboardmain, container, false);
         // Inflate the layout for this fragment
@@ -185,6 +225,7 @@ public class DashBoardMain extends Fragment {
         ArrayList<ArrayList<String>> tableValues = new ArrayList<>();
 
         String[][] valuesArray = new String[tableValuesJson.length()][];
+
 
         for (int i = 0; i < tableHeadersJson.length(); i++) {
             tableHeaders.add(tableHeadersJson.getString(i));
@@ -511,9 +552,16 @@ class GaugeThread extends Thread {
     public void run() {
 
         for (int i = 0; i < DashBoardMain.speedviewData.size(); i++) {
-            Message msg = DashBoardMain.handler.obtainMessage();
-            msg.obj = String.valueOf(i);
-            DashBoardMain.handler.sendMessage(msg);
+            if (DashBoardMain.handler != null) {
+                Message msg = DashBoardMain.handler.obtainMessage();
+                msg.obj = String.valueOf(i);
+                DashBoardMain.handler.sendMessage(msg);
+            } else {
+                Message msg = new Message();
+                msg.obj = "0";
+                DashBoardMain.handler.sendMessage(msg);
+            }
+
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {

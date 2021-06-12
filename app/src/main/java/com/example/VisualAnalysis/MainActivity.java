@@ -1,6 +1,7 @@
 package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -60,6 +61,7 @@ public class MainActivity extends FragmentActivity {
         return v;
     }
 
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class MainActivity extends FragmentActivity {
            lastIndex = getIntent().getStringExtra("Last Index");
             Log.i("TAG-mainactivity", lastIndex.toString());
         }
+
 
     }
 

@@ -9,4 +9,18 @@
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundColor">#f7f6f9</color>
     <color name="textColor">#000000</color>
+
+
+
+    <color name = "mainText1">#262550</color>
+    <color name="mainBackground1">#f7f6f9</color>
+    <color name="cardBackground1">#ffffff</color>
+
+<!--    <color name="mainBackground2">#0c111f</color>-->
+<!--    <color name="mainBackground3">#141b2d</color>-->
+<!--    <color name="cardBackground2">#121729</color>-->
+<!--    <color name="cardBackground3">#1f2940</color>-->
+<!--    <color name="mainText2">#f1f0ef</color>-->
+<!--    <color name="mainText3">#f7f7f7</color>-->
+
 </resources>
