@@ -13,7 +13,7 @@
         <action
             android:id="@+id/action_dashBoardMain_to_dashBoardFragment2"
             app:destination="@id/dashBoardFragment"
-            app:enterAnim="@anim/push_left_in" />
+         />
     </fragment>
     <fragment
         android:id="@+id/dashBoardFragment"
@@ -22,7 +22,7 @@
         <action
             android:id="@+id/action_dashBoardFragment_to_mapActivity3"
             app:destination="@id/mapActivity"
-            app:enterAnim="@anim/push_left_in" />
+ />
     </fragment>
     <activity
         android:id="@+id/mapActivity"

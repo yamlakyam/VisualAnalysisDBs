@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">visual analysis</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Visual Analysis</string>
+<!--    <string name="google_maps_key"></string>-->
 </resources>

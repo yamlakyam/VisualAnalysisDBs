@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+//import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.BubbleChart;
@@ -325,7 +325,7 @@ public class DashBoard2 extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(DashBoard2.this, MapActivity.class);
                 startActivity(intent);
-                Animatoo.animateInAndOut(DashBoard2.this);
+//                Animatoo.animateInAndOut(DashBoard2.this);
             }
         }, 3500);
 
@@ -334,6 +334,6 @@ public class DashBoard2 extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Animatoo.animateFade(this);
+//        Animatoo.animateFade(this);
     }
 }

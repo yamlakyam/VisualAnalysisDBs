@@ -23,7 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+//import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.anastr.speedviewlib.SpeedView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -45,39 +45,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Future;
 
-import maes.tech.intentanim.CustomIntent;
+//import maes.tech.intentanim.CustomIntent;
 
-public class MainActivity extends FragmentActivity {
-
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "DeviceTypeRuntimeCheck";
-
     String lastIndex;
-
-
-    public View handleTestClick(View v) {
-
+    public void handleTestClick(View v) {
         Log.i("TAg", "hello ");
-        return v;
     }
-
-
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
 
-        //setTheme(R.style.darkTheme);
-        //overridePendingTransition(R.anim.slide_out_bottom,R.anim.slide_in_bottom);
+        setTheme(R.style.darkTheme);
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-        if(getIntent().getExtras()!=null){
-           lastIndex = getIntent().getStringExtra("Last Index");
-            Log.i("TAG-mainactivity", lastIndex.toString());
-        }
-
 
     }
 
