@@ -88,6 +88,10 @@ public class DashBoardMain extends Fragment {
     SimpleTableHeaderAdapter simpleTableHeaderAdapter;
     SimpleTableDataAdapter simpleTableDataAdapter;
 
+
+    ArrayList<String> lastTableHeader = new ArrayList<>();
+    ArrayList<ArrayList<String>> lastTableValue = new ArrayList<>();
+
     @SuppressLint({"ResourceType", "HandlerLeak"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -204,6 +208,8 @@ public class DashBoardMain extends Fragment {
         for (int i = 0; i < tableHeadersJson.length(); i++) {
             tableHeaders.add(tableHeadersJson.getString(i));
         }
+        int last=tableHeaders.size()-1;
+        lastTableHeader.add(tableHeaders.get(last));
 
 
         for (int i = 0; i < tableValuesJson.length(); i++) {

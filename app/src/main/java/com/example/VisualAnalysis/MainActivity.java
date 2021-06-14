@@ -50,10 +50,7 @@ import java.util.concurrent.Future;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "DeviceTypeRuntimeCheck";
-    String lastIndex;
-    public void handleTestClick(View v) {
-        Log.i("TAg", "hello ");
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
