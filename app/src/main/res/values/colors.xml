@@ -27,4 +27,25 @@
     <color name="cardBackgroundDark2">#1f2940</color>
 
 
+
+<!--    Second Dashboard-->
+
+    <color name="mainTextDark3">#ffffff</color>
+    <color name="subTextDark3">#cbd3c6</color>
+    <color name="pvalueTextDark3">#00cdb7</color>
+    <color name="nvalueTextDark3">#ea6f6a</color>
+    <color name="mainBackgroundDark3">#1c1c1f</color>
+    <color name="cardBackgroundDark3">#252529</color>
+
+
+    <color name="mainTextLight3">#374e6e</color>
+    <color name="subTextLight3">#b6c3d7</color>
+    <color name="pvalueTextLight3">#27adb9</color>
+    <color name="nvalueTextLight3">#ea6f6a</color>
+    <color name="mainBackgroundLight3">#f8f8f8</color>
+    <color name="cardBackgroundLight3">#ffffff</color>
+
+
+
+
 </resources>

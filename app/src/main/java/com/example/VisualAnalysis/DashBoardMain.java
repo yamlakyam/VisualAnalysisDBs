@@ -62,8 +62,8 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class DashBoardMain extends Fragment {
 
-    final int darkTheme =1;
-    final int lightTheme =2;
+    final static int darkTheme =1;
+    final static int lightTheme =2;
 
 
     public static int themeValue;
@@ -94,9 +94,9 @@ public class DashBoardMain extends Fragment {
                              Bundle savedInstanceState) {
 
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        themeValue = 1;
+        themeValue = darkTheme;
 
-        if(themeValue==1){
+        if(themeValue==darkTheme){
             inflater.getContext().setTheme(R.style.darkTheme);
         }
         else{

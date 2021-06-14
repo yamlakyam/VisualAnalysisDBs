@@ -11,6 +11,10 @@
         <item name="cardBackgroundColor">@color/cardBackgroundLight</item>
         <item name="mainText">@color/mainTextLight</item>
         <item name="tintcolor">@color/white</item>
+        <item name="subText">@color/subTextLight3</item>
+        <item name="pValueText">@color/pvalueTextLight3</item>
+        <item name="nValueText">@color/nvalueTextLight3</item>
+
 <!--        <item name="buttoncolor">#ffaa22</item>-->
     </style>
 
@@ -25,6 +29,10 @@
         <item name="cardBackgroundColor">@color/cardBackgroundDark</item>
         <item name="mainText">@color/mainTextDark1</item>
         <item name="tintcolor">@android:color/darker_gray</item>
+        <item name="subText">@color/subTextDark3</item>
+        <item name="pValueText">@color/pvalueTextDark3</item>
+        <item name="nValueText">@color/nvalueTextDark3</item>
+
 <!--        <item name="buttoncolor">#ddff22</item>-->
     </style>
 </resources>

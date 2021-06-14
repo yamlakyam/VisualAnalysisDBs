@@ -5,12 +5,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -19,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -26,7 +23,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.animation.Easing;
@@ -51,17 +47,21 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 
 public class DashBoardFragment extends Fragment {
+
+    final static int darkTheme = 1;
+    final static int lightTheme = 2;
+
+
+    public static int themeValue;
 
     LineChart lineChart;
     LineChart lineChart2;
@@ -72,19 +72,14 @@ public class DashBoardFragment extends Fragment {
     ProgressBar progressBar2;
     PieChart donutPieChart;
 
+    BarDataSet hbarDataSet;
+
 
     public static Handler lineChartHandler;
     public static Handler horizontalBarchartHandler;
     public static Handler groupLineChartHandler;
     public static Handler groupBarChartHandler;
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (groupBarChartHandler == null) {
-            makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnDoublyBarChart", "4");
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +87,17 @@ public class DashBoardFragment extends Fragment {
 
 //        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.darkThemeCustom);
 //        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        themeValue = darkTheme;
+
+        if(themeValue==darkTheme){
+            inflater.getContext().setTheme(R.style.darkTheme);
+
+        }
+        else{
+            inflater.getContext().setTheme(R.style.lightTheme);
+
+        }
+
 
         View rootView = inflater.inflate(R.layout.activity_dash_board2, container, false);
 
@@ -114,16 +120,16 @@ public class DashBoardFragment extends Fragment {
         makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnHorizontalBarChart", "3");
         makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnDoublyBarChart", "4");
 
-        String last=((MainActivity) requireActivity()).lastIndex;
-        Log.i("TAG-dashboard", ""+last);
+        String last = ((MainActivity) requireActivity()).lastIndex;
+        Log.i("TAG-dashboard", "" + last);
 
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
-            }
-        }, 40000);
+//        Handler h = new Handler();
+//        h.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
+//            }
+//        }, 40000);
 
         return rootView;
 
@@ -282,6 +288,7 @@ public class DashBoardFragment extends Fragment {
 //        dataVals.add(new Entry(4, 3.5f));
 //        dataVals.add(new Entry(5, 1.5f));
 //        dataVals.add(new Entry(6, 3.4f));
+        changeTheme(themeValue, "lineChart");
 
         LineDataSet lineDataSet = new LineDataSet(dataVals, "active users");
         LineData lineData = new LineData();
@@ -365,6 +372,9 @@ public class DashBoardFragment extends Fragment {
 //        dataVal2.add(new Entry(5, 16f));
 //        dataVal2.add(new Entry(6, 18f));
 
+        changeTheme(themeValue, "lineChart");
+
+
         LineDataSet lineDataSet1 = new LineDataSet(dataVal1, "Customers");
         LineDataSet lineDataSet2 = new LineDataSet(dataVal2, "Visitors");
 
@@ -443,6 +453,7 @@ public class DashBoardFragment extends Fragment {
 //        dataVal4.add(new BarEntry(3, 5));
 //        dataVal4.add(new BarEntry(4, 2));
 //        dataVal4.add(new BarEntry(5, 3.5f));
+        changeTheme(themeValue, "barChart");
 
         groupBarChart.getDescription().setEnabled(false);
         groupBarChart.setDrawGridBackground(false);
@@ -546,7 +557,7 @@ public class DashBoardFragment extends Fragment {
 //        hbardatavals.add(new BarEntry(4, 50f));
 //        hbardatavals.add(new BarEntry(5, 60f));
 
-        BarDataSet hbarDataSet = new BarDataSet(hbardatavals, "sample horizontal bar graph");
+        hbarDataSet = new BarDataSet(hbardatavals, "sample horizontal bar graph");
 
         hbarDataSet.setColors(Color.parseColor("#5b79e7"),
                 Color.parseColor("#317892"),
@@ -556,6 +567,8 @@ public class DashBoardFragment extends Fragment {
                 Color.parseColor("#abdbe3"));
         BarData hbarData = new BarData(hbarDataSet);
         hbarData.setBarWidth(0.5f);
+
+        changeTheme(themeValue, "barChart");
 
         horizontalBarChart.setData(hbarData);
         horizontalBarChart.getXAxis().setDrawAxisLine(false);
@@ -591,6 +604,8 @@ public class DashBoardFragment extends Fragment {
         donutPieChart.setDrawSliceText(false);
         donutPieChart.setHoleRadius(80);
         donutPieChart.animateX(3000, Easing.EaseInOutCirc);
+
+        changeTheme(themeValue, "donutPieChart");
 
         ArrayList<PieEntry> piedatas = new ArrayList<>();
         piedatas.add(new PieEntry(58, "Cash Sales Adjustment"));
@@ -674,7 +689,58 @@ public class DashBoardFragment extends Fragment {
 
     }
 
+    public void changeTheme(int themeValue, String chartType) {
+        switch (chartType) {
+            case "donutPieChart":
+                if (themeValue == 1) {
+                    donutPieChart.setHoleColor(Color.parseColor("#2b3942"));
+                    donutPieChart.getLegend().setTextColor(Color.parseColor("#b6c3d7"));
+                    donutPieChart.getDescription().setTextColor(Color.parseColor("#b6c3d7"));
+
+                } else {
+                    donutPieChart.setHoleColor(Color.parseColor("#ffffff"));
+                    donutPieChart.getLegend().setTextColor(Color.parseColor("#b6c3d7"));
+                    donutPieChart.getDescription().setTextColor(Color.parseColor("#b6c3d7"));
+                }
+                break;
+
+            case "lineChart":
+                if (themeValue == 1) {
+                    lineChart.getXAxis().setTextColor(Color.parseColor("#b6c3d7"));
+                    lineChart2.getXAxis().setTextColor(Color.parseColor("#b6c3d7"));
+                    lineChart.getAxisLeft().setTextColor(Color.parseColor("#b6c3d7"));
+                    lineChart2.getAxisLeft().setTextColor(Color.parseColor("#b6c3d7"));
+                    lineChart.getLegend().setTextColor(Color.parseColor("#b6c3d7"));
+                    lineChart2.getLegend().setTextColor(Color.parseColor("#b6c3d7"));
+                }
+
+                break;
+
+            case "barChart":
+                if (themeValue == 1) {
+                    horizontalBarChart.getXAxis().setTextColor(Color.parseColor("#b6c3d7"));
+                    horizontalBarChart.getAxisLeft().setTextColor(Color.parseColor("#b6c3d7"));
+                    horizontalBarChart.getAxisRight().setTextColor(Color.parseColor("#b6c3d7"));
+                    horizontalBarChart.getDescription().setTextColor(Color.parseColor("#b6c3d7"));
+                    horizontalBarChart.getLegend().setTextColor(Color.parseColor("#b6c3d7"));
+                    hbarDataSet.setValueTextColor(Color.parseColor("#b6c3d7"));
+
+
+                    groupBarChart.getXAxis().setTextColor(Color.parseColor("#b6c3d7"));
+                    groupBarChart.getAxisLeft().setTextColor(Color.parseColor("#b6c3d7"));
+                    groupBarChart.getDescription().setTextColor(Color.parseColor("#b6c3d7"));
+                    groupBarChart.getLegend().setTextColor(Color.parseColor("#b6c3d7"));
+                }
+
+                break;
+
+
+        }
+
+
+    }
 }
+
 
 class LineChartThread extends Thread {
     int bardatas;
