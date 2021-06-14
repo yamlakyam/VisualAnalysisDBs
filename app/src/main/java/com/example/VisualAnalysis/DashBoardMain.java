@@ -62,6 +62,10 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class DashBoardMain extends Fragment {
 
+    final int darkTheme =1;
+    final int lightTheme =2;
+
+
     public static int themeValue;
 
     public static Handler chartHandler;
@@ -74,19 +78,15 @@ public class DashBoardMain extends Fragment {
 
     public TableView<String[]> tableView;
 
-    //    static String[] tableHeaders = {"Rank", "Subcity", "Sales"};
-//    static String[][] tableValues = {
-//            {"1", "Kirkos", "22K"},
-//            {"2", "Nifas Silk", "20K"},
-//            {"3", "Bole", "35K"},
-//            {"4", "Lideta", "45K"},
-//    };
     PieChart pieChart;
     BarChart barChart;
     SpeedView speedView;
 
     BarDataSet barDataSet;
     PieDataSet pieDataSet;
+
+    SimpleTableHeaderAdapter simpleTableHeaderAdapter;
+    SimpleTableDataAdapter simpleTableDataAdapter;
 
     @SuppressLint({"ResourceType", "HandlerLeak"})
     @Override
@@ -95,6 +95,15 @@ public class DashBoardMain extends Fragment {
 
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         themeValue = 1;
+
+        if(themeValue==1){
+            inflater.getContext().setTheme(R.style.darkTheme);
+        }
+        else{
+            inflater.getContext().setTheme(R.style.lightTheme);
+
+        }
+
 
         View view = inflater.inflate(R.layout.dashboardmain, container, false);
         // Inflate the layout for this fragment
@@ -129,6 +138,8 @@ public class DashBoardMain extends Fragment {
 
             }
         };
+
+        changeTheme(themeValue, "speedView");
         speedView.speedTo(50, 4000);
         //speedView.setTrembleData(5,2);
         speedView.setWithTremble(false);
@@ -210,8 +221,8 @@ public class DashBoardMain extends Fragment {
 
 
 //        tableHeaders.toArray(new String[0])
-        SimpleTableHeaderAdapter simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeaders.toArray(new String[0]));
-        simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
+        simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeaders.toArray(new String[0]));
+//        simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
 
 
         // set header
@@ -219,8 +230,10 @@ public class DashBoardMain extends Fragment {
         if (tableView != null) {
             tableView.setColumnCount(tableHeaders.size());
             tableView.setHeaderAdapter(simpleTableHeaderAdapter);
-            tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
-            tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
+//            tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
+//            tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
+            changeTheme(themeValue, "tableView");
+
             tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), valuesArray));
 
         } else {
@@ -236,9 +249,12 @@ public class DashBoardMain extends Fragment {
 
             simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), tableHeadersDef);
             tableView.setHeaderAdapter(simpleTableHeaderAdapter);
-            tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
-            tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
-            tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), tableValuesDef));
+
+            changeTheme(themeValue, "tableView");
+//            tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
+//            tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
+            simpleTableDataAdapter = new SimpleTableDataAdapter(getContext(), tableValuesDef);
+            tableView.setDataAdapter(simpleTableDataAdapter);
 
         }
 
@@ -412,7 +428,7 @@ public class DashBoardMain extends Fragment {
 
         changeTheme(themeValue, "barChart");
 
-       //barDataSet.setColors(Color.parseColor("#212c5d"));
+        //barDataSet.setColors(Color.parseColor("#212c5d"));
 
         //barChart.getAxisLeft().setDrawGridLines(false);
         barChart.setDrawGridBackground(false);
@@ -549,6 +565,47 @@ public class DashBoardMain extends Fragment {
                     );
                 }
                 break;
+
+            case "tableView":
+                if (themeValue == 1) {
+                    tableView.setHeaderBackgroundColor(Color.parseColor("#784574"));
+                    tableView.setBackgroundColor(Color.parseColor("#f79276"));
+                    simpleTableHeaderAdapter.setTextColor(Color.parseColor("#f79276"));
+
+                    try {
+                        simpleTableDataAdapter.setTextColor(Color.parseColor("#784574"));
+                    } catch (Exception e) {
+                        Log.i("TAG-TABLEVIEW", e + "");
+                    }
+
+                } else {
+                    tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
+                    tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
+                    simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
+
+                    try {
+                        simpleTableDataAdapter.setTextColor(Color.parseColor("#212c5d"));
+
+                    } catch (Exception e) {
+                        Log.i("TAG-TABLEVIEW", e + "");
+                    }
+
+                }
+                break;
+
+            case "speedView":
+                if (themeValue == 1) {
+                    speedView.setSpeedTextColor(Color.parseColor("#b492fe"));
+                    speedView.setUnitTextColor(Color.parseColor("#b492fe"));
+                    speedView.setTextColor(Color.parseColor("#b492fe"));
+                    speedView.setLowSpeedColor(Color.parseColor("#2b87fe"));
+                    speedView.setMediumSpeedColor(Color.parseColor("#73b7ff"));
+                    speedView.setHighSpeedColor(Color.parseColor("#8e49ff"));
+                } else {
+                    speedView.setSpeedTextColor(Color.parseColor("#000000"));
+                    speedView.setUnitTextColor(Color.parseColor("#000000"));
+                    speedView.setTextColor(Color.parseColor("#000000"));
+                }
 
         }
     }
