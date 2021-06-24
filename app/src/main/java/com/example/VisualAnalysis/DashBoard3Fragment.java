@@ -99,13 +99,25 @@ public class DashBoard3Fragment extends Fragment {
                             Log.i("TAG", tables.get(finalI).branchName);
                         }
                     });
-                    scrollView.fullScroll(View.FOCUS_DOWN);
+
+
+
+//                    View child = tableLayout.getChildAt(1);
+//                    scrollView.scrollTo(child.getTop(),View.FOCUS_DOWN);
+
 
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.fullScroll(View.FOCUS_DOWN);
+
+                        }
+                    });
 
 
                 }
