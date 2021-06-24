@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -120,20 +122,20 @@ public class DashBoardFragment extends Fragment {
         makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnHorizontalBarChart", "3");
         makeRequests(getContext(), "http://192.168.1.248:8001/api/OnlineData/GetDataToDisplayOnDoublyBarChart", "4");
 
-        String last = ((MainActivity) requireActivity()).lastIndex;
-        Log.i("TAG-dashboard", "" + last);
 
-//        Handler h = new Handler();
-//        h.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
-//            }
-//        }, 40000);
+
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
+            }
+        }, 40000);
 
         return rootView;
 
     }
+
 
     @SuppressLint("HandlerLeak")
     private void updateLineChartOneWithData(JSONObject jsonObjectp) throws JSONException {
@@ -273,6 +275,8 @@ public class DashBoardFragment extends Fragment {
     private void initLineChart1(JSONObject jsonObject) throws JSONException {
         ArrayList<Entry> dataVals = new ArrayList<Entry>();
 
+        ArrayList<Entry> lastLineDataVal1 = new ArrayList<Entry>();
+
         JSONArray xValues = jsonObject.getJSONArray("xValues");
         JSONArray yValues = jsonObject.getJSONArray("yValues");
         JSONArray labels = jsonObject.getJSONArray("labels");
@@ -280,6 +284,8 @@ public class DashBoardFragment extends Fragment {
         for (int i = 0; i < xValues.length(); i++) {
             dataVals.add(new Entry(Float.parseFloat(xValues.get(i).toString()), Float.parseFloat(yValues.get(i).toString())));
         }
+
+        lastLineDataVal1.add(new Entry(Float.parseFloat(xValues.get(xValues.length()-1).toString()),Float.parseFloat(yValues.get(xValues.length()-1).toString())));
 
 //        dataVals.add(new Entry(0, 2));
 //        dataVals.add(new Entry(1, 3));
@@ -723,7 +729,11 @@ public class DashBoardFragment extends Fragment {
                     horizontalBarChart.getAxisRight().setTextColor(Color.parseColor("#b6c3d7"));
                     horizontalBarChart.getDescription().setTextColor(Color.parseColor("#b6c3d7"));
                     horizontalBarChart.getLegend().setTextColor(Color.parseColor("#b6c3d7"));
-                    hbarDataSet.setValueTextColor(Color.parseColor("#b6c3d7"));
+                    try {
+                        hbarDataSet.setValueTextColor(Color.parseColor("#b6c3d7"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
 
                     groupBarChart.getXAxis().setTextColor(Color.parseColor("#b6c3d7"));

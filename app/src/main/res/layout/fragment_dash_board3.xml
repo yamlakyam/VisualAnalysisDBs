@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DashBoard3Fragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        app:cardBackgroundColor="#6c7c7c">
+
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="?android:listDivider"
+            android:showDividers="middle">
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:background="#353e49">
+
+                <TextView
+                    android:id="@+id/tHeader1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="10dp"
+                    android:text="Branch Name"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tHeader2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="Percentage"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tHeader3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:text="Total"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#49515c">
+
+                <TextView
+                    android:id="@+id/t1value1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="10dp"
+                    android:text="Administrative Officer"
+                    android:textColor="#d2b566"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/t1value2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="56%"
+                    android:textColor="#c3c5c9"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/t1value3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:text="2566"
+                    android:textColor="#c3c5c9"
+                    android:textSize="20sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#49515c">
+
+                <TextView
+                    android:id="@+id/t2value1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="10dp"
+                    android:text="Sales and Cashier"
+                    android:textColor="#d2b566"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/t2value2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="74%"
+                    android:textColor="#c3c5c9"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/t2value3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:text="7450"
+                    android:textColor="#c3c5c9"
+                    android:textSize="20sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#49515c">
+
+                <TextView
+                    android:id="@+id/t3value1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="10dp"
+                    android:text="waiter"
+                    android:textColor="#d2b566"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/t3value2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="2%"
+                    android:textColor="#c3c5c9"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/t3value3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:paddingEnd="10dp"
+                    android:text="20"
+                    android:textColor="#c3c5c9"
+                    android:textSize="20sp" />
+            </TableRow>
+        </TableLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

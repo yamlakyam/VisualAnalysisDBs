@@ -5,7 +5,9 @@
     android:id="@+id/dashBoard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="?attr/backgroundcolor"
+    android:paddingStart="55dp"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
@@ -14,9 +16,9 @@
         android:layout_height="200dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="?attr/cardBackgroundColor">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barchart"
@@ -219,14 +221,14 @@
             <com.example.VisualAnalysis.CircleDisplay
                 android:id="@+id/circleDisplay"
                 android:layout_width="500dp"
-                android:layout_height="125dp"
+                android:layout_height="160dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/piechart"
                 android:layout_width="500dp"
-                android:layout_height="125dp"
+                android:layout_height="190dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1">
 

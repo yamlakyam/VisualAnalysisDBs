@@ -105,6 +105,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //        locations.add(loc4);
 //        locations.add(loc5);
 
+
         MarkerThread markerThread = new MarkerThread();
         markerThread.start();
 
@@ -120,7 +121,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc1.latitude, loc1.longitude), 14.0f));
 
 
-
                 MarkerOptions marker = new MarkerOptions().position(loc);
                 // Marker mMarker = googleMap.addMarker(marker.title("location " + index).snippet(loc.toString()));
                 Marker mMarker = googleMap.addMarker(marker);
@@ -133,6 +133,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
                 //googleMap.moveCamera(cu);
                 googleMap.animateCamera(cu, 1000, null);
+//                googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(),R.raw.style_json));
+
+//                googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+//                googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+//                googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+//                googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+
+
 
                 googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                     @Override
@@ -153,7 +162,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     }
                 });
                 mMarker.showInfoWindow();
-                lastIndex=index;
+                lastIndex = index;
 
             }
         };

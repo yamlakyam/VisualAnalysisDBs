@@ -62,8 +62,8 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class DashBoardMain extends Fragment {
 
-    final static int darkTheme =1;
-    final static int lightTheme =2;
+    final static int darkTheme = 1;
+    final static int lightTheme = 2;
 
 
     public static int themeValue;
@@ -100,10 +100,9 @@ public class DashBoardMain extends Fragment {
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         themeValue = darkTheme;
 
-        if(themeValue==darkTheme){
+        if (themeValue == darkTheme) {
             inflater.getContext().setTheme(R.style.darkTheme);
-        }
-        else{
+        } else {
             inflater.getContext().setTheme(R.style.lightTheme);
 
         }
@@ -118,7 +117,6 @@ public class DashBoardMain extends Fragment {
 
         // pieChart.getRadius();
         //Toast.makeText(this, (int) pieChart.getRadius(),Toast.LENGTH_LONG).show();
-
 
         CircleDisplay circleDisplay = (CircleDisplay) view.findViewById(R.id.circleDisplay);
         circleDisplay.setColor(Color.parseColor("#d68894"));
@@ -151,12 +149,12 @@ public class DashBoardMain extends Fragment {
 
         Handler h = new Handler();
 
-//        h.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
-//            }
-//        }, 40000);
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                NavHostFragment.findNavController(DashBoardMain.this).navigate(R.id.action_dashBoardMain_to_dashBoardFragment2);
+            }
+        }, 40000);
 
 
         tableView = (TableView<String[]>) view.findViewById(R.id.table_data_view);
@@ -208,7 +206,7 @@ public class DashBoardMain extends Fragment {
         for (int i = 0; i < tableHeadersJson.length(); i++) {
             tableHeaders.add(tableHeadersJson.getString(i));
         }
-        int last=tableHeaders.size()-1;
+        int last = tableHeaders.size() - 1;
         lastTableHeader.add(tableHeaders.get(last));
 
 
@@ -235,7 +233,11 @@ public class DashBoardMain extends Fragment {
 
         if (tableView != null) {
             tableView.setColumnCount(tableHeaders.size());
-            tableView.setHeaderAdapter(simpleTableHeaderAdapter);
+            try {
+                tableView.setHeaderAdapter(simpleTableHeaderAdapter);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 //            tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
 //            tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
             changeTheme(themeValue, "tableView");
@@ -323,7 +325,7 @@ public class DashBoardMain extends Fragment {
 //        piedatas.add(new PieEntry((float) 71.2, "India"));
 //        piedatas.add(new PieEntry((float) 437.7, "Others"));
 
-        pieDataSet = new PieDataSet(piedatas, "Piedata label");
+        pieDataSet = new PieDataSet(piedatas, "  ");
 
         /*
         pieDataSet.setColors(
@@ -356,6 +358,8 @@ public class DashBoardMain extends Fragment {
             legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
             legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
             legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+            legend.setTextSize(13);
+
         } else {
             piedatas.add(new PieEntry((float) 690.8, "Poland"));
             piedatas.add(new PieEntry((float) 84.4, "United States"));
@@ -574,18 +578,23 @@ public class DashBoardMain extends Fragment {
 
             case "tableView":
                 if (themeValue == 1) {
-                    tableView.setHeaderBackgroundColor(Color.parseColor("#784574"));
-                    tableView.setBackgroundColor(Color.parseColor("#f79276"));
-                    simpleTableHeaderAdapter.setTextColor(Color.parseColor("#f79276"));
+                    tableView.setHeaderBackgroundColor(Color.parseColor("#292f45"));
+                    tableView.setBackgroundColor(Color.parseColor("#6c7287"));
+                    simpleTableHeaderAdapter.setTextColor(Color.parseColor("#ffffff"));
 
                     try {
-                        simpleTableDataAdapter.setTextColor(Color.parseColor("#784574"));
+                        simpleTableDataAdapter.setTextColor(Color.parseColor("#23E643"));
                     } catch (Exception e) {
-                        Log.i("TAG-TABLEVIEW", e + "");
+                        e.printStackTrace();
                     }
 
+
                 } else {
-                    tableView.setHeaderBackgroundColor(Color.parseColor("#212c5d"));
+                    try {
+                        tableView.setHeaderBackgroundColor(Color.parseColor("#161415"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     tableView.setBackgroundColor(Color.parseColor("#d9f5ff"));
                     simpleTableHeaderAdapter.setTextColor(Color.parseColor("#d9f5ff"));
 
@@ -629,7 +638,11 @@ class GaugeThread extends Thread {
             } else {
                 Message msg = new Message();
                 msg.obj = "0";
-                DashBoardMain.handler.sendMessage(msg);
+                try {
+                    DashBoardMain.handler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             try {

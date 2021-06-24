@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/dashBoardFragment">
+    app:startDestination="@id/dashBoard3Fragment">
 
     <fragment
         android:id="@+id/dashBoardMain"
@@ -29,4 +29,9 @@
         android:name="com.example.VisualAnalysis.MapActivity"
         android:label="activity_map"
         tools:layout="@layout/activity_map" />
+    <fragment
+        android:id="@+id/dashBoard3Fragment"
+        android:name="com.example.VisualAnalysis.DashBoard3Fragment"
+        android:label="fragment_dash_board3"
+        tools:layout="@layout/fragment_dash_board3" />
 </navigation>
