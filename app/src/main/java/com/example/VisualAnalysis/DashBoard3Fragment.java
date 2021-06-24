@@ -92,10 +92,10 @@ public class DashBoard3Fragment extends Fragment {
         tV3.setPadding(0, 0, paddingPixel, 0);
         tV1.setPadding(paddingPixel,0,0,0);
         tV1.setTextColor(Color.parseColor("#d2b566"));
-//        if(Double.parseDouble((tV2.getText().toString()).substring(0, tV2.getText().toString().length()-1)) < 50){
-//            tV2.setTextColor(Color.parseColor("#EA6F6A"));
-//        }
-//        else
+        if(Double.parseDouble((tV2.getText().toString()).substring(0, tV2.getText().toString().length()-1)) < 50){
+            tV2.setTextColor(Color.parseColor("#EA6F6A"));
+        }
+        else
             tV2.setTextColor(Color.parseColor("#78FA5A"));
 
 //        Log.i("TAG",tV2.getText().toString());
