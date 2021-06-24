@@ -91,15 +91,28 @@
                         android:layout_height="match_parent"
                         android:background="#49515c">
 
-                        <TextView
-                            android:id="@+id/t1value1"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:paddingStart="10dp"
-                            android:text="Administrative Officer"
-                            android:textColor="#d2b566"
-                            android:textSize="20sp" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_heineken" />
+
+                            <TextView
+                                android:id="@+id/t1value1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="10dp"
+                                android:text="Administrative Officer"
+                                android:textColor="#d2b566"
+                                android:textSize="20sp" />
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/t1value2"
@@ -130,15 +143,30 @@
                         android:layout_height="match_parent"
                         android:background="#49515c">
 
-                        <TextView
-                            android:id="@+id/t2value1"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:paddingStart="10dp"
-                            android:text="Sales and Cashier"
-                            android:textColor="#d2b566"
-                            android:textSize="20sp" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="70dp"
+                                android:layout_height="49dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_heineken" />
+
+                            <TextView
+                                android:id="@+id/t2value1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingStart="10dp"
+                                android:text="Sales and Cashier"
+                                android:textColor="#d2b566"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/t2value2"
@@ -169,15 +197,30 @@
                         android:layout_height="match_parent"
                         android:background="#49515c">
 
-                        <TextView
-                            android:id="@+id/t3value1"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:paddingStart="10dp"
-                            android:text="waiter"
-                            android:textColor="#d2b566"
-                            android:textSize="20sp" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="70dp"
+                                android:layout_height="49dp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_heineken" />
+
+                            <TextView
+                                android:id="@+id/t3value1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingStart="10dp"
+                                android:text="waiter"
+                                android:textColor="#d2b566"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/t3value2"

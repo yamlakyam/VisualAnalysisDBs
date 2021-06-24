@@ -1,10 +1,14 @@
 package com.example.VisualAnalysis;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -30,6 +36,8 @@ public class DashBoard3Fragment extends Fragment {
 
     static ScrollView scrollView;
 
+    static int widthDp;
+    static int heightDp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,10 +51,16 @@ public class DashBoard3Fragment extends Fragment {
         tableLayout = view.findViewById(R.id.table);
         scrollView = view.findViewById(R.id.scrollView);
 
+
         //conversion to dp
         int paddingDp = 10;
+        widthDp = 70;
+        heightDp = 50;
         float density = getResources().getDisplayMetrics().density;
         paddingPixel = (int) (paddingDp * density);
+        widthDp = (int) (widthDp * density);
+        heightDp = (int) (heightDp * density);
+
 
         tables = new ArrayList<>();
         tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
@@ -95,11 +109,10 @@ public class DashBoard3Fragment extends Fragment {
                             txtv2.setText(DashBoard3Fragment.tables.get(finalI).percentage);
                             txtv3.setText(DashBoard3Fragment.tables.get(finalI).total);
                             //            initTable(tables.get(i).tableRow, new TextView(this).setText(tables.get(i).branchName),new TextView(this).setText(tables.get(i).percentage),new TextView(this).setText(tables.get(i).total));
-                            DashBoard3Fragment.initTable(DashBoard3Fragment.tables.get(finalI).tableRow, txtv1, txtv2, txtv3);
+                            DashBoard3Fragment.initTable(DashBoard3Fragment.tables.get(finalI).tableRow, txtv1, txtv2, txtv3, getContext());
                             Log.i("TAG", tables.get(finalI).branchName);
                         }
                     });
-
 
 
 //                    View child = tableLayout.getChildAt(1);
@@ -133,7 +146,8 @@ public class DashBoard3Fragment extends Fragment {
         return view;
     }
 
-    static void initTable(TableRow tr, TextView tV1, TextView tV2, TextView tV3) {
+    @SuppressLint("UseCompatLoadingForDrawables")
+    static void initTable(TableRow tr, TextView tV1, TextView tV2, TextView tV3, Context context) {
         tr.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         tr.setBackgroundColor(Color.parseColor("#49515c"));
         tV1.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
@@ -158,8 +172,23 @@ public class DashBoard3Fragment extends Fragment {
         tV2.setTextSize(20);
         tV3.setTextSize(20);
 
-//        tV3.getPaddingEnd()
-        tr.addView(tV1);
+        ImageView imageView = new ImageView(tV1.getContext());
+        Drawable drawable = context.getResources().getDrawable(R.drawable.ic_heineken);
+        imageView.setImageDrawable(drawable);
+
+        LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(widthDp, heightDp);
+        imageView.setLayoutParams(ll);
+
+
+        LinearLayout linearLayout = new LinearLayout(tV1.getContext());
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout.addView(imageView);
+        linearLayout.addView(tV1);
+        linearLayout.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
+        linearLayout.setVerticalGravity(Gravity.CENTER_VERTICAL);
+
+        tr.addView(linearLayout);
+//        tr.addView(tV1);
         tr.addView(tV2);
         tr.addView(tV3);
 
