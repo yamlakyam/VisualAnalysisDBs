@@ -142,7 +142,6 @@ public class DashBoard3Fragment extends Fragment {
 //        View child =tableLayout.getChildAt(5);
 //        scrollView.scrollTo(0,child.getTop());
 
-
         return view;
     }
 
@@ -153,8 +152,8 @@ public class DashBoard3Fragment extends Fragment {
         tV1.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV2.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV3.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-        tV2.setGravity(Gravity.END);
-        tV3.setGravity(Gravity.END);
+        tV2.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        tV3.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         tV3.setPadding(0, 0, paddingPixel, 0);
         tV1.setPadding(paddingPixel, 0, 0, 0);
         tV1.setTextColor(Color.parseColor("#d2b566"));
@@ -178,6 +177,7 @@ public class DashBoard3Fragment extends Fragment {
 
         LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(widthDp, heightDp);
         imageView.setLayoutParams(ll);
+        tV1.setGravity(Gravity.CENTER_VERTICAL);
 
 
         LinearLayout linearLayout = new LinearLayout(tV1.getContext());
@@ -185,7 +185,7 @@ public class DashBoard3Fragment extends Fragment {
         linearLayout.addView(imageView);
         linearLayout.addView(tV1);
         linearLayout.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-        linearLayout.setVerticalGravity(Gravity.CENTER_VERTICAL);
+//        linearLayout.setGravity(Gravity.CENTER|Gravity.CENTER_VERTICAL);
 
         tr.addView(linearLayout);
 //        tr.addView(tV1);
