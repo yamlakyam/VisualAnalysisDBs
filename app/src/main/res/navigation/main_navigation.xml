@@ -34,4 +34,9 @@
         android:name="com.example.VisualAnalysis.DashBoard3Fragment"
         android:label="fragment_dash_board3"
         tools:layout="@layout/fragment_dash_board3" />
+    <fragment
+        android:id="@+id/dashBoard4Fragment"
+        android:name="com.example.VisualAnalysis.DashBoard4Fragment"
+        android:label="fragment_dash_board4"
+        tools:layout="@layout/fragment_dash_board4" />
 </navigation>

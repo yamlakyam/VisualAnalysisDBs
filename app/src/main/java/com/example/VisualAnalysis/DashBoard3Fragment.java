@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,14 +28,20 @@ public class DashBoard3Fragment extends Fragment {
     public static ArrayList<Table> tables;
     private static int paddingPixel;
 
+    static ScrollView scrollView;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_dash_board3, container, false);
+        inflater.getContext().setTheme(R.style.darkTheme);
+
+
+        View view = inflater.inflate(R.layout.fragment_dash_board3, container, false);
+
 
         tableLayout = view.findViewById(R.id.table);
+        scrollView = view.findViewById(R.id.scrollView);
 
         //conversion to dp
         int paddingDp = 10;
@@ -46,6 +53,31 @@ public class DashBoard3Fragment extends Fragment {
         tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
         tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
         tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
+
 
         Thread tThread = new Thread(new Runnable() {
             @Override
@@ -67,35 +99,42 @@ public class DashBoard3Fragment extends Fragment {
                             Log.i("TAG", tables.get(finalI).branchName);
                         }
                     });
+                    scrollView.fullScroll(View.FOCUS_DOWN);
 
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+
+
                 }
 
             }
         });
         tThread.start();
 
+//        View child =tableLayout.getChildAt(5);
+//        scrollView.scrollTo(0,child.getTop());
+
+
         return view;
     }
+
     static void initTable(TableRow tr, TextView tV1, TextView tV2, TextView tV3) {
         tr.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         tr.setBackgroundColor(Color.parseColor("#49515c"));
-        tV1.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-        tV2.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-        tV3.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        tV1.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
+        tV2.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
+        tV3.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV2.setGravity(Gravity.END);
         tV3.setGravity(Gravity.END);
         tV3.setPadding(0, 0, paddingPixel, 0);
-        tV1.setPadding(paddingPixel,0,0,0);
+        tV1.setPadding(paddingPixel, 0, 0, 0);
         tV1.setTextColor(Color.parseColor("#d2b566"));
-        if(Double.parseDouble((tV2.getText().toString()).substring(0, tV2.getText().toString().length()-1)) < 50){
+        if (Double.parseDouble((tV2.getText().toString()).substring(0, tV2.getText().toString().length() - 1)) < 50) {
             tV2.setTextColor(Color.parseColor("#EA6F6A"));
-        }
-        else
+        } else
             tV2.setTextColor(Color.parseColor("#78FA5A"));
 
 //        Log.i("TAG",tV2.getText().toString());
@@ -111,6 +150,7 @@ public class DashBoard3Fragment extends Fragment {
         tr.addView(tV1);
         tr.addView(tV2);
         tr.addView(tV3);
+
         tableLayout.addView(tr);
         Animation animation1 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_in_bottom);
         Animation animation2 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_out_bottom);
