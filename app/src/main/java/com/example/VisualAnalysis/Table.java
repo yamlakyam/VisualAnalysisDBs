@@ -25,14 +25,14 @@ public class Table {
     String val8;
     String val9;
 
-    public Table(String branchName, String percentage, String total, TableRow tableRow, Date date, String day) {
+    public Table(String branchName, String percentage, String total, TableRow tableRow, Date date, String day, String lastSeen) {
         this.branchName = branchName;
         this.percentage = percentage;
         this.total = total;
         this.tableRow = tableRow;
         this.date = date;
         this.day = day;
-//        this.lastSeen=lastSeen;
+        this.lastSeen=lastSeen;
     }
 
     public Table(String branchName, String percentage, String total, TableRow tableRow, String val1) {

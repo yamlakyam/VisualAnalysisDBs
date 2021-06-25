@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -63,36 +64,38 @@ public class DashBoard3Fragment extends Fragment {
         widthDp = (int) (widthDp * density);
         heightDp = (int) (heightDp * density);
 
+        Date now = new Date();
+
 
         tables = new ArrayList<>();
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 6-1, 1), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 5-1, 2), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 4-1, 9), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 6-1, 3), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 5-1, 1), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 3-1, 13), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 2-1, 11), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 2-1, 12), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 1-1, 30), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 4-1, 29), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 8-1, 28), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 6-1, 27), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 7-1, 26), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 6-1, 25), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 5-1, 24), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 7-1, 23), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 3-1, 22), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 4-1, 20), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 6-1, 21), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 2-1, 19), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 3-1, 18), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 7-1, 17), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 9-1, 16), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 10-1, 15), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 7-1, 14), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 9-1, 13), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 11-1, 12), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 12-1, 11), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 1, 9, 10), now)));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 5 - 1, 2, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 5 - 1, 2, 10, 4), now)));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 4 - 1, 9, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 4 - 1, 9, 10, 4), now)));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 3, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 3, 10, 4), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 5 - 1, 1, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 5 - 1, 1, 10, 4), now)));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 3 - 1, 13, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 3 - 1, 13, 10, 4), now)));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 2 - 1, 11, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 2 - 1, 11, 10, 4), now)));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 2 - 1, 12, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 2 - 1, 12, 10, 4), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 1 - 1, 30, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 1 - 1, 30, 10, 4), now)));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 4 - 1, 29, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 4 - 1, 29, 10, 4), now)));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 8 - 1, 28, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 8 - 1, 28, 10, 4), now)));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 27, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 27, 10, 4), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 7 - 1, 26, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 7 - 1, 26, 10, 4), now)));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 25, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 25, 10, 4), now)));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 5 - 1, 24, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 5 - 1, 24, 10, 4), now)));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 7 - 1, 23, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 7 - 1, 23, 10, 4), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 3 - 1, 22, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 3 - 1, 22, 10, 4), now)));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 4 - 1, 20, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 4 - 1, 20, 10, 4), now)));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 21, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 21, 10, 4), now)));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 2 - 1, 19, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 2 - 1, 19, 10, 4), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 3 - 1, 18, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 3 - 1, 18, 10, 4), now)));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 7 - 1, 17, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 7 - 1, 17, 10, 4), now)));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 9 - 1, 16, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 9 - 1, 16, 10, 4), now)));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 10 - 1, 15, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 10 - 1, 15, 10, 4), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 7 - 1, 14, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 7 - 1, 14, 10, 4), now)));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 9 - 1, 13, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 9 - 1, 13, 10, 4), now)));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 11 - 1, 12, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 11 - 1, 12, 10, 4), now)));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 12 - 1, 11, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 12 - 1, 11, 10, 4), now)));
 
 
         Thread tThread = new Thread(new Runnable() {
@@ -109,17 +112,19 @@ public class DashBoard3Fragment extends Fragment {
                             TextView txtv3 = new TextView(getContext());
                             TextView txtv4 = new TextView(getContext());
                             TextView txtv5 = new TextView(getContext());
+                            TextView txtv6 = new TextView(getContext());
                             txtv1.setText(DashBoard3Fragment.tables.get(finalI).branchName);
                             txtv2.setText(DashBoard3Fragment.tables.get(finalI).percentage);
                             txtv3.setText(DashBoard3Fragment.tables.get(finalI).total);
 
-                            String date= java.text.DateFormat.getDateInstance().format(DashBoard3Fragment.tables.get(finalI).date);
+                            String date = java.text.DateFormat.getDateInstance().format(DashBoard3Fragment.tables.get(finalI).date);
 //                            String date = new SimpleDateFormat("yyyy-mm-dd").format(DashBoard3Fragment.tables.get(finalI).date);
 
                             txtv4.setText(date);
                             txtv5.setText(DashBoard3Fragment.tables.get(finalI).day);
+                            txtv6.setText(DashBoard3Fragment.tables.get(finalI).lastSeen);
                             //            initTable(tables.get(i).tableRow, new TextView(this).setText(tables.get(i).branchName),new TextView(this).setText(tables.get(i).percentage),new TextView(this).setText(tables.get(i).total));
-                            DashBoard3Fragment.initTable(DashBoard3Fragment.tables.get(finalI).tableRow, txtv1, txtv2, txtv3, txtv4, txtv5, getContext());
+                            DashBoard3Fragment.initTable(DashBoard3Fragment.tables.get(finalI).tableRow, txtv1, txtv2, txtv3, txtv4, txtv5, txtv6, getContext());
                             Log.i("TAG", tables.get(finalI).branchName);
                         }
                     });
@@ -151,8 +156,52 @@ public class DashBoard3Fragment extends Fragment {
         return view;
     }
 
+    private String timeElapsed(Date startDate, Date endDate) {
+
+        long difference = endDate.getTime() - startDate.getTime();
+
+        long secondsInMilli = 1000;
+        long minutesInMilli = secondsInMilli * 60;
+        long hoursInMilli = minutesInMilli * 60;
+        long daysInMilli = hoursInMilli * 24;
+//        long monthsInMilli = daysInMilli * 30;
+//
+//        long elapsedMonths = difference / monthsInMilli;
+//        difference = difference % monthsInMilli;
+
+        long elapsedDays = difference / daysInMilli;
+        difference = difference % daysInMilli;
+
+        long elapsedHours = difference / hoursInMilli;
+        difference = difference % hoursInMilli;
+
+        long elapsedMinutes = difference / minutesInMilli;
+        difference = difference % minutesInMilli;
+
+        long elapsedSeconds = difference / secondsInMilli;
+
+        if (elapsedDays > 365) {
+            return " years ago";
+        } else if (elapsedDays == 365) {
+            return "a year ago";
+        } else if (elapsedDays > 0 && elapsedDays < 365) {
+            return elapsedDays + " days ago";
+        } else if (elapsedDays == 0 && elapsedHours > 0) {
+            return elapsedHours + " hours ago";
+        } else if (elapsedDays == 0 && elapsedHours == 0 & elapsedMinutes > 0) {
+            return elapsedMinutes + " minutes ago";
+        } else if (elapsedDays == 0 && elapsedHours == 0 & elapsedMinutes == 0 && elapsedSeconds > 0) {
+            return elapsedSeconds + " seconds ago";
+        } else
+//            return elapsedDays + " days, " + elapsedHours + " hours, " + elapsedMinutes + " minutes, " + elapsedSeconds + " seconds ago";
+
+            return elapsedSeconds + "";
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
-    static void initTable(TableRow tr, TextView tV1, TextView tV2, TextView tV3, TextView tV4, TextView tV5, Context context) {
+    static void initTable(TableRow tr, TextView tV1, TextView tV2, TextView tV3, TextView tV4, TextView tV5, TextView tV6, Context context) {
+
+
         tr.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         tr.setBackgroundColor(Color.parseColor("#49515c"));
         tV1.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
@@ -160,10 +209,12 @@ public class DashBoard3Fragment extends Fragment {
         tV3.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV4.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV5.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
+        tV6.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV2.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         tV3.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         tV4.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         tV5.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        tV6.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
 //        tV3.setPadding(0, 0, paddingPixel, 0);
         tV5.setPadding(0, 0, paddingPixel, 0);
         tV1.setPadding(paddingPixel, 0, 0, 0);
@@ -179,12 +230,15 @@ public class DashBoard3Fragment extends Fragment {
         tV3.setTextColor(Color.parseColor("#78FA5A"));
         tV4.setTextColor(Color.parseColor("#78FA5A"));
         tV5.setTextColor(Color.parseColor("#78FA5A"));
+        tV5.setTextColor(Color.parseColor("#78FA5A"));
+        tV6.setTextColor(Color.parseColor("#78FA5A"));
 
         tV1.setTextSize(20);
         tV2.setTextSize(20);
         tV3.setTextSize(20);
         tV4.setTextSize(20);
         tV5.setTextSize(20);
+        tV6.setTextSize(20);
 
         ImageView imageView = new ImageView(tV1.getContext());
         Drawable drawable = context.getResources().getDrawable(R.drawable.ic_heineken);
@@ -208,6 +262,7 @@ public class DashBoard3Fragment extends Fragment {
         tr.addView(tV3);
         tr.addView(tV4);
         tr.addView(tV5);
+        tr.addView(tV6);
 
         tableLayout.addView(tr);
         Animation animation1 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_in_bottom);
