@@ -65,34 +65,34 @@ public class DashBoard3Fragment extends Fragment {
 
 
         tables = new ArrayList<>();
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 6, 1), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 5, 2), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 4, 9), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 6, 3), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 5, 1), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 3, 13), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 2, 11), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 2, 12), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 1, 30), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 4, 29), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 8, 28), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 6, 27), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 7, 26), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 6, 25), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 5, 24), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 7, 23), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 3, 22), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 4, 20), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 6, 21), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 2, 19), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 3, 18), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 7, 17), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 9, 16), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 10, 15), "Monday"));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 7, 14), "Monday"));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 9, 13), "Monday"));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 11, 12), "Monday"));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 12, 11), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 6-1, 1), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 5-1, 2), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 4-1, 9), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 6-1, 3), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 5-1, 1), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 3-1, 13), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 2-1, 11), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 2-1, 12), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 1-1, 30), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 4-1, 29), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 8-1, 28), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 6-1, 27), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 7-1, 26), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 6-1, 25), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 5-1, 24), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 7-1, 23), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 3-1, 22), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 4-1, 20), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 6-1, 21), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 2-1, 19), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 3-1, 18), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 7-1, 17), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 9-1, 16), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 10-1, 15), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 7-1, 14), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 9-1, 13), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 11-1, 12), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 12-1, 11), "Monday"));
 
 
         Thread tThread = new Thread(new Runnable() {
