@@ -38,6 +38,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
     compile 'com.google.android.gms:play-services:8.+'
 //    compile 'com.google.android.gms:play-services:9.6.1'
 

@@ -15,7 +15,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="?attr/cardBackgroundColor">
+        android:background="@color/cardBackgroundDark1">
 
         <TextView
             android:id="@+id/tHeader1"
@@ -47,10 +47,43 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="end"
-            android:paddingEnd="10dp"
             android:text="Total"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tHeader4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Date"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tHeader5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Day"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tHeader6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:paddingEnd="10dp"
+            android:text="Last Seen"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
 
     </TableRow>
 
@@ -130,10 +163,37 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:paddingEnd="10dp"
                             android:text="2566"
                             android:textColor="#c3c5c9"
                             android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/t1value4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
+
+                        <TextView
+                            android:id="@+id/t1value5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
+
+                        <TextView
+                            android:id="@+id/t1value6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:paddingEnd="10dp"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
 
 
                     </TableRow>
@@ -184,10 +244,37 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:paddingEnd="10dp"
                             android:text="7450"
                             android:textColor="#c3c5c9"
                             android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/t2value4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
+
+                        <TextView
+                            android:id="@+id/t2value5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
+
+                        <TextView
+                            android:id="@+id/textView56"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:paddingEnd="10dp"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
 
 
                     </TableRow>
@@ -238,10 +325,37 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:paddingEnd="10dp"
                             android:text="20"
                             android:textColor="#c3c5c9"
                             android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/textView27"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
+
+                        <TextView
+                            android:id="@+id/textView28"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
+
+                        <TextView
+                            android:id="@+id/textView57"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:paddingEnd="10dp"
+                            android:text="TextView"
+                            android:textColor="#c3c5c9" />
                     </TableRow>
 
                 </TableLayout>

@@ -23,7 +23,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -63,34 +65,34 @@ public class DashBoard3Fragment extends Fragment {
 
 
         tables = new ArrayList<>();
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext())));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext())));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext())));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext())));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 6, 1), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 5, 2), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 4, 9), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 6, 3), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 5, 1), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 3, 13), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 2, 11), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 2, 12), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 1, 30), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 4, 29), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 8, 28), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 6, 27), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 7, 26), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 6, 25), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 5, 24), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 7, 23), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 3, 22), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 4, 20), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 6, 21), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 2, 19), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 3, 18), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 7, 17), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 9, 16), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 10, 15), "Monday"));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020-1900, 7, 14), "Monday"));
+        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020-1900, 9, 13), "Monday"));
+        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020-1900, 11, 12), "Monday"));
+        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020-1900, 12, 11), "Monday"));
 
 
         Thread tThread = new Thread(new Runnable() {
@@ -105,22 +107,26 @@ public class DashBoard3Fragment extends Fragment {
                             TextView txtv1 = new TextView(getContext());
                             TextView txtv2 = new TextView(getContext());
                             TextView txtv3 = new TextView(getContext());
+                            TextView txtv4 = new TextView(getContext());
+                            TextView txtv5 = new TextView(getContext());
                             txtv1.setText(DashBoard3Fragment.tables.get(finalI).branchName);
                             txtv2.setText(DashBoard3Fragment.tables.get(finalI).percentage);
                             txtv3.setText(DashBoard3Fragment.tables.get(finalI).total);
+
+                            String date= java.text.DateFormat.getDateInstance().format(DashBoard3Fragment.tables.get(finalI).date);
+//                            String date = new SimpleDateFormat("yyyy-mm-dd").format(DashBoard3Fragment.tables.get(finalI).date);
+
+                            txtv4.setText(date);
+                            txtv5.setText(DashBoard3Fragment.tables.get(finalI).day);
                             //            initTable(tables.get(i).tableRow, new TextView(this).setText(tables.get(i).branchName),new TextView(this).setText(tables.get(i).percentage),new TextView(this).setText(tables.get(i).total));
-                            DashBoard3Fragment.initTable(DashBoard3Fragment.tables.get(finalI).tableRow, txtv1, txtv2, txtv3, getContext());
+                            DashBoard3Fragment.initTable(DashBoard3Fragment.tables.get(finalI).tableRow, txtv1, txtv2, txtv3, txtv4, txtv5, getContext());
                             Log.i("TAG", tables.get(finalI).branchName);
                         }
                     });
 
 
-//                    View child = tableLayout.getChildAt(1);
-//                    scrollView.scrollTo(child.getTop(),View.FOCUS_DOWN);
-
-
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -146,15 +152,20 @@ public class DashBoard3Fragment extends Fragment {
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    static void initTable(TableRow tr, TextView tV1, TextView tV2, TextView tV3, Context context) {
+    static void initTable(TableRow tr, TextView tV1, TextView tV2, TextView tV3, TextView tV4, TextView tV5, Context context) {
         tr.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         tr.setBackgroundColor(Color.parseColor("#49515c"));
         tV1.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV2.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV3.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
+        tV4.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
+        tV5.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
         tV2.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         tV3.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-        tV3.setPadding(0, 0, paddingPixel, 0);
+        tV4.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        tV5.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+//        tV3.setPadding(0, 0, paddingPixel, 0);
+        tV5.setPadding(0, 0, paddingPixel, 0);
         tV1.setPadding(paddingPixel, 0, 0, 0);
         tV1.setTextColor(Color.parseColor("#d2b566"));
         if (Double.parseDouble((tV2.getText().toString()).substring(0, tV2.getText().toString().length() - 1)) < 50) {
@@ -166,10 +177,14 @@ public class DashBoard3Fragment extends Fragment {
 //            tV2.setTextColor(Color.parseColor("#78FA5A"));
 
         tV3.setTextColor(Color.parseColor("#78FA5A"));
+        tV4.setTextColor(Color.parseColor("#78FA5A"));
+        tV5.setTextColor(Color.parseColor("#78FA5A"));
 
         tV1.setTextSize(20);
         tV2.setTextSize(20);
         tV3.setTextSize(20);
+        tV4.setTextSize(20);
+        tV5.setTextSize(20);
 
         ImageView imageView = new ImageView(tV1.getContext());
         Drawable drawable = context.getResources().getDrawable(R.drawable.ic_heineken);
@@ -191,6 +206,8 @@ public class DashBoard3Fragment extends Fragment {
 //        tr.addView(tV1);
         tr.addView(tV2);
         tr.addView(tV3);
+        tr.addView(tV4);
+        tr.addView(tV5);
 
         tableLayout.addView(tr);
         Animation animation1 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_in_bottom);

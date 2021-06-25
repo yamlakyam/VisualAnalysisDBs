@@ -2,11 +2,18 @@ package com.example.VisualAnalysis;
 
 import android.widget.TableRow;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class Table {
     String branchName;
     String percentage;
     String total;
     TableRow tableRow;
+    Date date;
+    String day;
+    String lastSeen;
+
 
     String val1;
     String val2;
@@ -18,11 +25,14 @@ public class Table {
     String val8;
     String val9;
 
-    public Table(String branchName, String percentage, String total, TableRow tableRow) {
+    public Table(String branchName, String percentage, String total, TableRow tableRow, Date date, String day) {
         this.branchName = branchName;
         this.percentage = percentage;
         this.total = total;
         this.tableRow = tableRow;
+        this.date = date;
+        this.day = day;
+//        this.lastSeen=lastSeen;
     }
 
     public Table(String branchName, String percentage, String total, TableRow tableRow, String val1) {
