@@ -69,6 +69,10 @@ public class DashBoard3Fragment extends Fragment {
 
         tables = new ArrayList<>();
         tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 1, 9, 10), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2021 - 1900, 5 - 1, 1, 9, 10), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2021 - 1900, 6 - 1, 1, 9, 10), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2021 - 1900, 6 - 1, 25, 9, 10), now)));
+        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2021 - 1900, 6 - 1, 25, 12, 10), now)));
         tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 5 - 1, 2, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 5 - 1, 2, 10, 4), now)));
         tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 4 - 1, 9, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 4 - 1, 9, 10, 4), now)));
         tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 3, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 3, 10, 4), now)));
@@ -164,10 +168,10 @@ public class DashBoard3Fragment extends Fragment {
         long minutesInMilli = secondsInMilli * 60;
         long hoursInMilli = minutesInMilli * 60;
         long daysInMilli = hoursInMilli * 24;
-//        long monthsInMilli = daysInMilli * 30;
-//
-//        long elapsedMonths = difference / monthsInMilli;
-//        difference = difference % monthsInMilli;
+        long monthsInMilli = daysInMilli * 30;
+
+        long elapsedMonths = difference / monthsInMilli;
+        difference = difference % monthsInMilli;
 
         long elapsedDays = difference / daysInMilli;
         difference = difference % daysInMilli;
@@ -180,11 +184,11 @@ public class DashBoard3Fragment extends Fragment {
 
         long elapsedSeconds = difference / secondsInMilli;
 
-        if (elapsedDays > 365) {
+        if (elapsedMonths > 12) {
             return " years ago";
-        } else if (elapsedDays == 365) {
-            return "a year ago";
-        } else if (elapsedDays > 0 && elapsedDays < 365) {
+        } else if (elapsedMonths <= 12 && elapsedMonths > 0) {
+            return elapsedMonths + " months ago";
+        } else if (elapsedMonths == 0 && elapsedDays > 0) {
             return elapsedDays + " days ago";
         } else if (elapsedDays == 0 && elapsedHours > 0) {
             return elapsedHours + " hours ago";
