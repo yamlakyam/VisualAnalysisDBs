@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.AttributeSet;
@@ -32,8 +34,8 @@ import java.util.Objects;
 
 public class DashBoard3Fragment extends Fragment {
 
-    private static TableLayout tableLayout;
-    //    TableLayout tableLayout;
+    private TableLayout tableLayout;
+
     public static ArrayList<Table> tables;
     private static int paddingPixel;
 
@@ -42,15 +44,7 @@ public class DashBoard3Fragment extends Fragment {
     static int widthDp;
     static int heightDp;
 
-    private static ImageView imageView;
-    private static TextView textView1;
-    private static TextView textView2;
-    private static TextView textView3;
-    private static TextView textView4;
-    private static TextView textView5;
-    private static TextView textView6;
-    private static TableRow tableRow;
-    private static LinearLayout linearLayout;
+    private ImageView imageView;
 
 
 
@@ -60,30 +54,10 @@ public class DashBoard3Fragment extends Fragment {
         inflater.getContext().setTheme(R.style.darkTheme);
 
 
-        View view = inflater.inflate(R.layout.fragment_dash_board3, container, false);
-
-        LinearLayout tableElements =(LinearLayout) getLayoutInflater().inflate(R.layout.table_elements,null,false);
-
+        View view = getLayoutInflater().inflate(R.layout.fragment_dash_board3, container, false);
         tableLayout = view.findViewById(R.id.tableLayout);
-//        textView1 = view.findViewById(R.id.tvalue1);
-//        textView1=(TextView)getLayoutInflater().inflate(R.id.tvalue1,null);
-       textView1=tableElements.findViewById(R.id.tvalue1);
-       textView2=tableElements.findViewById(R.id.tvalue2);
-       textView3=tableElements.findViewById(R.id.tvalue3);
-       textView4=tableElements.findViewById(R.id.tvalue4);
-       textView5=tableElements.findViewById(R.id.tvalue5);
-       textView6=tableElements.findViewById(R.id.tvalue6);
-       tableRow=tableElements.findViewById(R.id.tableRow);
-       scrollView=view.findViewById(R.id.scrolll);
-       linearLayout=tableElements.findViewById(R.id.tableElementLayout);
 
-
-//        linearLayout = view.findViewById(R.id.linearLayout1);
-
-
-
-
-
+        scrollView = view.findViewById(R.id.scrolll);
 
         //conversion to dp
         int paddingDp = 10;
@@ -96,9 +70,8 @@ public class DashBoard3Fragment extends Fragment {
 
         Date now = new Date();
 
-
         tables = new ArrayList<>();
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 1, 9, 10), now)));
+        tables.add(new Table("Credit", "32%", "100", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 1, 9, 10), now)));
         tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2021 - 1900, 5 - 1, 1, 9, 10), now)));
         tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2021 - 1900, 6 - 1, 1, 9, 10), now)));
         tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 1, 9, 10), "Monday", timeElapsed(new Date(2021 - 1900, 6 - 1, 25, 9, 10), now)));
@@ -120,76 +93,75 @@ public class DashBoard3Fragment extends Fragment {
         tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 7 - 1, 23, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 7 - 1, 23, 10, 4), now)));
         tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 3 - 1, 22, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 3 - 1, 22, 10, 4), now)));
         tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 4 - 1, 20, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 4 - 1, 20, 10, 4), now)));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 6 - 1, 21, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 6 - 1, 21, 10, 4), now)));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 2 - 1, 19, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 2 - 1, 19, 10, 4), now)));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 3 - 1, 18, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 3 - 1, 18, 10, 4), now)));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 7 - 1, 17, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 7 - 1, 17, 10, 4), now)));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 9 - 1, 16, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 9 - 1, 16, 10, 4), now)));
-        tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 10 - 1, 15, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 10 - 1, 15, 10, 4), now)));
-        tables.add(new Table("Credit", "0%", "0", new TableRow(getContext()), new Date(2020 - 1900, 7 - 1, 14, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 7 - 1, 14, 10, 4), now)));
-        tables.add(new Table("Admin ", "56%", "2566", new TableRow(getContext()), new Date(2020 - 1900, 9 - 1, 13, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 9 - 1, 13, 10, 4), now)));
-        tables.add(new Table("Sales ", "24%", "1940", new TableRow(getContext()), new Date(2020 - 1900, 11 - 1, 12, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 11 - 1, 12, 10, 4), now)));
         tables.add(new Table("Sthg", "5%", "250", new TableRow(getContext()), new Date(2020 - 1900, 12 - 1, 11, 10, 4), "Monday", timeElapsed(new Date(2020 - 1900, 12 - 1, 11, 10, 4), now)));
 
 
-        Thread tThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
+        Thread tThread = new Thread(() -> {
 
-                for (int i = 0; i < DashBoard3Fragment.tables.size(); i++) {
-                    int finalI = i;
-                    requireActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-//                            TextView txtv1 = new TextView(getContext());
-//                            TextView txtv2 = new TextView(getContext());
-//                            TextView txtv3 = new TextView(getContext());
-//                            TextView txtv4 = new TextView(getContext());
-//                            TextView txtv5 = new TextView(getContext());
-//                            TextView txtv6 = new TextView(getContext());
+            for (int i = 0; i < DashBoard3Fragment.tables.size(); i++) {
+                int finalI = i;
+                requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
-                            textView1.setText(DashBoard3Fragment.tables.get(finalI).branchName);
-                            textView2.setText(DashBoard3Fragment.tables.get(finalI).percentage);
-                            textView3.setText(DashBoard3Fragment.tables.get(finalI).total);
+                        View tableElements= LayoutInflater.from(getContext()).inflate(R.layout.table_elements, null , false);
 
-                            String date = java.text.DateFormat.getDateInstance().format(DashBoard3Fragment.tables.get(finalI).date);
+                        TextView textView1 = tableElements.findViewById(R.id.tvalue1);
+                        TextView textView2 = tableElements.findViewById(R.id.tvalue2);
+                        TextView textView3 = tableElements.findViewById(R.id.tvalue3);
+                        TextView textView4 = tableElements.findViewById(R.id.tvalue4);
+                        TextView textView5 = tableElements.findViewById(R.id.tvalue5);
+                        TextView textView6 = tableElements.findViewById(R.id.tvalue6);
+
+                        textView1.setText(DashBoard3Fragment.tables.get(finalI).branchName);
+                        textView2.setText(DashBoard3Fragment.tables.get(finalI).percentage);
+                        textView3.setText(DashBoard3Fragment.tables.get(finalI).total);
+
+                        String date = java.text.DateFormat.getDateInstance().format(DashBoard3Fragment.tables.get(finalI).date);
 //                            String date = new SimpleDateFormat("yyyy-mm-dd").format(DashBoard3Fragment.tables.get(finalI).date);
 
-                            textView4.setText(date);
-                            textView5.setText(DashBoard3Fragment.tables.get(finalI).day);
-                            textView6.setText(DashBoard3Fragment.tables.get(finalI).lastSeen);
-                            //            initTable(tables.get(i).tableRow, new TextView(this).setText(tables.get(i).branchName),new TextView(this).setText(tables.get(i).percentage),new TextView(this).setText(tables.get(i).total));
-                            DashBoard3Fragment.initTable( getContext());
-                            Log.i("TAG", tables.get(finalI).branchName);
-                        }
-                    });
+                        textView4.setText(date);
+                        textView5.setText(DashBoard3Fragment.tables.get(finalI).day);
+                        textView6.setText(DashBoard3Fragment.tables.get(finalI).lastSeen);
 
+                        if (Double.parseDouble((textView2.getText().toString()).substring(0, textView2.getText().toString().length() - 1)) < 50) {
+                            textView2.setTextColor(Color.parseColor("#EA6F6A"));
+                        } else
+                            textView2.setTextColor(Color.parseColor("#78FA5A"));
 
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        TableRow tableRow = tableElements.findViewById(R.id.tableRow);
+                        tableLayout.addView(tableElements);
+
+                        Animation animation1 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_in_bottom);
+                        Animation animation2 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_out_bottom);
+                        tableRow.startAnimation(animation2);
+
+//                            DashBoard3Fragment.initTable(getContext());
+                        Log.i("TAG", tables.get(finalI).branchName);
+//                            requireActivity().setContentView(R.layout.fragment_dash_board3);
                     }
-                    scrollView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            scrollView.fullScroll(View.FOCUS_DOWN);
 
-                        }
-                    });
+                });
 
-
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-
+                scrollView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollView.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
             }
+
         });
         tThread.start();
 
-//        View child =tableLayout.getChildAt(5);
-//        scrollView.scrollTo(0,child.getTop());
-
         return view;
     }
+
 
     private String timeElapsed(Date startDate, Date endDate) {
 
@@ -232,94 +204,4 @@ public class DashBoard3Fragment extends Fragment {
             return elapsedSeconds + "";
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    static void initTable( Context context) {
-
-//        tableRow.addView(linearLayout);
-
-//        tableRow.addView(textView1);
-//        tableRow.addView(textView2);
-//        tableRow.addView(textView3);
-//        tableRow.addView(textView4);
-//        tableRow.addView(textView5);
-//        tableRow.addView(textView6);
-//        tableRow.removeAllViews();
-//        tableRow.addView(tableLayout);
-
-
-//        tr.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//        tr.setBackgroundColor(Color.parseColor("#49515c"));
-//        tV1.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-//        tV2.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-//        tV3.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-//        tV4.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-//        tV5.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-//        tV6.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-//        tV2.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-//        tV3.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-//        tV4.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-//        tV5.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-//        tV6.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-//        tV3.setPadding(0, 0, paddingPixel, 0);
-//        tV5.setPadding(0, 0, paddingPixel, 0);
-//        tV6.setPadding(0, 0, paddingPixel, 0);
-//        tV1.setPadding(paddingPixel, 0, 0, 0);
-//        tV1.setTextColor(Color.parseColor("#d2b566"));
-
-        if (Double.parseDouble((textView2.getText().toString()).substring(0, textView2.getText().toString().length() - 1)) < 50) {
-            textView2.setTextColor(Color.parseColor("#EA6F6A"));
-        } else
-            textView2.setTextColor(Color.parseColor("#78FA5A"));
-
-//        Log.i("TAG",tV2.getText().toString());
-//            tV2.setTextColor(Color.parseColor("#78FA5A"));
-
-//        tV3.setTextColor(Color.parseColor("#78FA5A"));
-//        tV4.setTextColor(Color.parseColor("#78FA5A"));
-//        tV5.setTextColor(Color.parseColor("#78FA5A"));
-//        tV5.setTextColor(Color.parseColor("#78FA5A"));
-//        tV6.setTextColor(Color.parseColor("#78FA5A"));
-//
-//        tV1.setTextSize(20);
-//        tV2.setTextSize(20);
-//        tV3.setTextSize(20);
-//        tV4.setTextSize(20);
-//        tV5.setTextSize(20);
-//        tV6.setTextSize(20);
-
-        ImageView imageView = new ImageView(textView1.getContext());
-        Drawable drawable = context.getResources().getDrawable(R.drawable.ic_heineken);
-        imageView.setImageDrawable(drawable);
-
-        LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(widthDp, heightDp);
-        imageView.setLayoutParams(ll);
-//        tV1.setGravity(Gravity.CENTER_VERTICAL);
-
-//
-//        LinearLayout linearLayout = new LinearLayout(tV1.getContext());
-//        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-//        linearLayout.addView(imageView);
-//        linearLayout.addView(tV1);
-//        linearLayout.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f));
-//        linearLayout.setGravity(Gravity.CENTER|Gravity.CENTER_VERTICAL);
-
-//        tr.addView(linearLayout);
-////        tr.addView(tV1);
-//        tr.addView(tV2);
-//        tr.addView(tV3);
-//        tr.addView(tV4);
-//        tr.addView(tV5);
-//        tr.addView(tV6);
-
-//        ((ViewGroup)tableRow.getParent()).removeView(tableRow);
-//        ((ViewGroup)linearLayout.getParent()).removeView(linearLayout);
-
-        if(linearLayout.getParent()!=null)
-            ((ViewGroup)linearLayout.getParent()).removeView(linearLayout);
-
-        tableLayout.addView(linearLayout);
-        Animation animation1 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_in_bottom);
-        Animation animation2 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_out_bottom);
-        linearLayout.startAnimation(animation2);
-    }
 }
