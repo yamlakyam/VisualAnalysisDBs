@@ -73,6 +73,7 @@ public class DashBoard3Fragment extends Fragment {
 
         makeRequest(getContext());
 //        initTable(tables);
+        updateTable();
 
 
         return view;
@@ -81,18 +82,20 @@ public class DashBoard3Fragment extends Fragment {
 
     @SuppressLint("HandlerLeak")
     private void updateTable(){
-        tableLayout.removeAllViews();
-//        tableRowHandler = new Handler() {
-//            @Override
-//            public void handleMessage(@NonNull Message msg) {
-//                String message = (String) msg.obj;
-//                int index = Integer.parseInt(message);
-//                initTable(tables);
-//            }
-//        };
-//
-//        TableRowThread tableRowThread = new TableRowThread();
-//        tableRowThread.start();
+//        ((ViewGroup) tableLayout.getParent()).removeView(tableLayout);
+//        tableLayout.removeAllViews();
+        tableRowHandler = new Handler() {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                String message = (String) msg.obj;
+                int index = Integer.parseInt(message);
+                if(index==1)
+                    initTable(tables);
+            }
+        };
+
+        TableRowThread tableRowThread = new TableRowThread();
+        tableRowThread.start();
 
     }
 
@@ -104,7 +107,7 @@ public class DashBoard3Fragment extends Fragment {
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(response);
                     initTable(tablesToDisplay);
-                    updateTable();
+//                    updateTable();
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
