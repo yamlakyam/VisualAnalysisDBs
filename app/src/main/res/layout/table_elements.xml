@@ -8,38 +8,43 @@
         android:layout_height="wrap_content"
         android:background="#49515c">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <LinearLayout
+        android:id="@+id/cvalue1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ic_heineken" />
+
+        <TextView
+            android:id="@+id/tvalue1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/ic_heineken" />
-
-            <TextView
-                android:id="@+id/tvalue1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:text="TextView"
-                android:textColor="#d2b566"
-                android:textSize="20sp" />
+            android:ellipsize="end"
+            android:maxLength="25"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="TextView"
+            android:textColor="#d2b566"
+            android:textSize="20sp" />
 
 
-        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvalue2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_vertical|end"
+        android:gravity="center_horizontal|center_vertical"
         android:text="TextView"
         android:textColor="#78FA5A"
         android:textSize="20sp" />

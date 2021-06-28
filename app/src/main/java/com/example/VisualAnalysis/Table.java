@@ -6,154 +6,69 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Table {
-    String branchName;
-    String percentage;
-    String total;
-    TableRow tableRow;
-    Date date;
-    String day;
-    String lastSeen;
+    String organizationName;
+    int vsiCount;
+    int salesOutLateCount;
+    int skuCount;
+    int quantityCount;
+    double totalSalesAmountAfterTax;
 
 
-    String val1;
-    String val2;
-    String val3;
-    String val4;
-    String val5;
-    String val6;
-    String val7;
-    String val8;
-    String val9;
-
-    public Table(String branchName, String percentage, String total, TableRow tableRow, Date date, String day, String lastSeen) {
-        this.branchName = branchName;
-        this.percentage = percentage;
-        this.total = total;
-        this.tableRow = tableRow;
-        this.date = date;
-        this.day = day;
-        this.lastSeen=lastSeen;
+    public Table(String organizationName, int vsiCount, int salesOutLateCount, int skuCount, int quantityCount, double totalSalesAmountAfterTax) {
+        this.organizationName = organizationName;
+        this.vsiCount = vsiCount;
+        this.salesOutLateCount = salesOutLateCount;
+        this.skuCount = skuCount;
+        this.quantityCount = quantityCount;
+        this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
     }
 
-    public Table(String branchName, String percentage, String total, TableRow tableRow, String val1) {
-        this.branchName = branchName;
-        this.percentage = percentage;
-        this.total = total;
-        this.tableRow = tableRow;
-        this.val1 = val1;
+
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public Table(String branchName, String percentage, String total, TableRow tableRow, String val1, String val2) {
-        this.branchName = branchName;
-        this.percentage = percentage;
-        this.total = total;
-        this.tableRow = tableRow;
-        this.val1 = val1;
-        this.val2 = val2;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
-    public Table(String branchName, String percentage, String total, TableRow tableRow, String val1, String val2, String val3) {
-        this.branchName = branchName;
-        this.percentage = percentage;
-        this.total = total;
-        this.tableRow = tableRow;
-        this.val1 = val1;
-        this.val2 = val2;
-        this.val3 = val3;
+    public int getVsiCount() {
+        return vsiCount;
     }
 
-    public Table(String branchName, String percentage, String total, TableRow tableRow, String val1, String val2, String val3, String val4) {
-        this.branchName = branchName;
-        this.percentage = percentage;
-        this.total = total;
-        this.tableRow = tableRow;
-        this.val1 = val1;
-        this.val2 = val2;
-        this.val3 = val3;
-        this.val4 = val4;
+    public void setVsiCount(int vsiCount) {
+        this.vsiCount = vsiCount;
     }
 
-    public Table(String branchName, String percentage, String total, TableRow tableRow, String val1, String val2, String val3, String val4, String val5) {
-        this.branchName = branchName;
-        this.percentage = percentage;
-        this.total = total;
-        this.tableRow = tableRow;
-        this.val1 = val1;
-        this.val2 = val2;
-        this.val3 = val3;
-        this.val4 = val4;
-        this.val5 = val5;
+    public int getSalesOutLateCount() {
+        return salesOutLateCount;
     }
 
-    public String getBranchName() {
-        return branchName;
+    public void setSalesOutLateCount(int salesOutLateCount) {
+        this.salesOutLateCount = salesOutLateCount;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public int getSkuCount() {
+        return skuCount;
     }
 
-    public String getPercentage() {
-        return percentage;
+    public void setSkuCount(int skuCount) {
+        this.skuCount = skuCount;
     }
 
-    public void setPercentage(String percentage) {
-        this.percentage = percentage;
+    public int getQuantityCount() {
+        return quantityCount;
     }
 
-    public String getTotal() {
-        return total;
+    public void setQuantityCount(int quantityCount) {
+        this.quantityCount = quantityCount;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public double getTotalSalesAmountAfterTax() {
+        return totalSalesAmountAfterTax;
     }
 
-    public TableRow getTableRow() {
-        return tableRow;
-    }
-
-    public void setTableRow(TableRow tableRow) {
-        this.tableRow = tableRow;
-    }
-
-    public String getVal1() {
-        return val1;
-    }
-
-    public void setVal1(String val1) {
-        this.val1 = val1;
-    }
-
-    public String getVal2() {
-        return val2;
-    }
-
-    public void setVal2(String val2) {
-        this.val2 = val2;
-    }
-
-    public String getVal3() {
-        return val3;
-    }
-
-    public void setVal3(String val3) {
-        this.val3 = val3;
-    }
-
-    public String getVal4() {
-        return val4;
-    }
-
-    public void setVal4(String val4) {
-        this.val4 = val4;
-    }
-
-    public String getVal5() {
-        return val5;
-    }
-
-    public void setVal5(String val5) {
-        this.val5 = val5;
+    public void setTotalSalesAmountAfterTax(double totalSalesAmountAfterTax) {
+        this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
     }
 }
