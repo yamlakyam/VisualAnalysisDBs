@@ -76,7 +76,6 @@ public class DashBoardFragment extends Fragment {
 
     BarDataSet hbarDataSet;
 
-
     public static Handler lineChartHandler;
     public static Handler horizontalBarchartHandler;
     public static Handler groupLineChartHandler;

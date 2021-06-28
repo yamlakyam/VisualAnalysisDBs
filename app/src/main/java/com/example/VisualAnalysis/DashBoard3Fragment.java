@@ -17,6 +17,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -30,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import javax.security.auth.login.LoginException;
 
 
 public class DashBoard3Fragment extends Fragment {
@@ -66,9 +69,6 @@ public class DashBoard3Fragment extends Fragment {
         tables.add(tableRow1);
         tables.add(tableRow2);
         tables.add(tableRow2);
-        tables.add(tableRow2);
-        tables.add(tableRow2);
-        tables.add(tableRow2);
 
 
         makeRequest(getContext());
@@ -78,25 +78,36 @@ public class DashBoard3Fragment extends Fragment {
         return view;
     }
 
+
+    @SuppressLint("HandlerLeak")
+    private void updateTable(){
+        tableLayout.removeAllViews();
+//        tableRowHandler = new Handler() {
+//            @Override
+//            public void handleMessage(@NonNull Message msg) {
+//                String message = (String) msg.obj;
+//                int index = Integer.parseInt(message);
+//                initTable(tables);
+//            }
+//        };
+//
+//        TableRowThread tableRowThread = new TableRowThread();
+//        tableRowThread.start();
+
+    }
+
     private void makeRequest(Context context) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-            @Override
-            public void onResponse(JSONArray response) {
-                if (response != null) {
-                    try {
-                        frameLayout.setVisibility(View.GONE);
-                        ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(response);
-
-//                        initTable(tables);
-//                        tables.addAll(tablesToDisplay);
-                        initTable(tablesToDisplay);
-                        Log.i("TAG", response.toString());
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
+            if (response != null) {
+                try {
+                    frameLayout.setVisibility(View.GONE);
+                    ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(response);
+                    initTable(tablesToDisplay);
+                    updateTable();
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         }, error -> Log.i("TAG-error", error + ""));
@@ -122,24 +133,19 @@ public class DashBoard3Fragment extends Fragment {
                         TextView textView5 = tableElements.findViewById(R.id.tvalue5);
                         TextView textView6 = tableElements.findViewById(R.id.tvalue6);
 
+                        String orgName = tables.get(finalI).organizationName;
+                        String preciseOrgName;
+                        if (orgName.length() > 20)
+                            preciseOrgName = orgName.substring(0, 20) + "...";
+                        else
+                            preciseOrgName = orgName;
 
-                        textView1.setText(tables.get(finalI).organizationName);
+                        textView1.setText(preciseOrgName);
                         textView2.setText(String.valueOf(tables.get(finalI).vsiCount));
                         textView3.setText(String.valueOf(tables.get(finalI).salesOutLateCount));
-
                         textView4.setText(String.valueOf(tables.get(finalI).skuCount));
                         textView5.setText(String.valueOf(tables.get(finalI).quantityCount));
                         textView6.setText(String.valueOf(tables.get(finalI).totalSalesAmountAfterTax));
-
-
-//                        tableRowHandler = new Handler(){
-//                            @Override
-//                            public void handleMessage(@NonNull Message msg) {
-//                                String message = (String) msg.obj;
-//                                int index = Integer.parseInt(message);
-//
-//                            }
-//                        };
 
 
                         TableRow tableRow = tableElements.findViewById(R.id.tableRow);
@@ -191,23 +197,22 @@ public class DashBoard3Fragment extends Fragment {
         return parsedTableData;
     }
 
-
 }
 
 
 class TableRowThread extends Thread {
-
     @Override
     public void run() {
-        for (int i = 0; i < DashBoard3Fragment.tables.size(); i++) {
+        for (int i = 0; i < 2; i++) {
             Message msg = DashBoard3Fragment.tableRowHandler.obtainMessage();
             msg.obj = String.valueOf(i);
+            DashBoard3Fragment.tableRowHandler.sendMessage(msg);
+
             try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
+                Thread.sleep(30000);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

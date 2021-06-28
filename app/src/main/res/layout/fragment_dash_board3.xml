@@ -23,10 +23,9 @@
 
         <TextView
             android:id="@+id/tHeader1"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="start|center_vertical"
             android:paddingStart="10dp"
             android:text="Organization Name"
@@ -35,10 +34,9 @@
 
         <TextView
             android:id="@+id/tHeader2"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="end"
             android:text="Total VSI"
             android:textColor="#FFFFFF"
@@ -46,10 +44,9 @@
 
         <TextView
             android:id="@+id/tHeader3"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="end"
             android:text="Total Outlet"
             android:textColor="#FFFFFF"
@@ -57,10 +54,9 @@
 
         <TextView
             android:id="@+id/tHeader4"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="end"
             android:text="Total SKU"
             android:textColor="#FFFFFF"
@@ -68,10 +64,9 @@
 
         <TextView
             android:id="@+id/tHeader5"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="end"
             android:text="Quantity"
             android:textColor="#FFFFFF"
@@ -79,10 +74,9 @@
 
         <TextView
             android:id="@+id/tHeader6"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="end"
             android:paddingEnd="10dp"
             android:text="Grand Total"
