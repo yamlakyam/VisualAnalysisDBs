@@ -135,7 +135,7 @@ public class DashBoard3Fragment extends Fragment {
 
                         String orgName = tables.get(finalI).organizationName;
                         String preciseOrgName;
-                        if (orgName.length() > 20)
+                        if (orgName.length() > 30)
                             preciseOrgName = orgName.substring(0, 20) + "...";
                         else
                             preciseOrgName = orgName;
