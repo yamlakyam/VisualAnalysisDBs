@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -31,19 +30,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import javax.security.auth.login.LoginException;
+import java.util.concurrent.Callable;
 
 
 public class DashBoard3Fragment extends Fragment {
 
     private TableLayout tableLayout;
-    int cellWidth;
 
     FrameLayout frameLayout;
 
     public static ArrayList<Table> tables = new ArrayList<>();
-    public static Handler tableRowHandler;
+    public static ArrayList<Table> updatedTables = new ArrayList<>();
+    public static Handler tableRowsHandler;
+
 
 
     ScrollView scrollView;
@@ -58,45 +57,123 @@ public class DashBoard3Fragment extends Fragment {
         View view = getLayoutInflater().inflate(R.layout.fragment_dash_board3, container, false);
         tableLayout = view.findViewById(R.id.tableLayout);
 
-        cellWidth = (getResources().getDisplayMetrics().widthPixels) / 7;
 
         scrollView = view.findViewById(R.id.scrolll);
         frameLayout = view.findViewById(R.id.progressBarFrame);
 
         Table tableRow1 = new Table("CNET", 10, 455, 15, 100, 500000);
         Table tableRow2 = new Table("CNET", 10, 455, 15, 100, 500000);
+        Table tableRow3 = new Table("Abebe Kebede", 6, 500, 10, 100, 129000.78);
 
+        tables.add(tableRow1);
+        tables.add(tableRow1);
+        tables.add(tableRow1);
+        tables.add(tableRow1);
         tables.add(tableRow1);
         tables.add(tableRow2);
         tables.add(tableRow2);
+        tables.add(tableRow2);
+        tables.add(tableRow2);
+        tables.add(tableRow2);
+
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
+        updatedTables.add(tableRow3);
 
 
         makeRequest(getContext());
-//        initTable(tables);
-        updateTable();
-
+        updateTable(view);
+//        frameLayout.setVisibility(View.INVISIBLE);
 
         return view;
     }
 
 
     @SuppressLint("HandlerLeak")
-    private void updateTable(){
-//        ((ViewGroup) tableLayout.getParent()).removeView(tableLayout);
-//        tableLayout.removeAllViews();
-        tableRowHandler = new Handler() {
+    private void updateTable(View view) {
+        tableRowsHandler = new Handler() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void handleMessage(@NonNull Message msg) {
                 String message = (String) msg.obj;
-                int index = Integer.parseInt(message);
-                if(index==1)
-                    initTable(tables);
+                Integer index = Integer.parseInt(message);
+                if (index != null) {
+                    editTableValues(view,getContext());
+                }
             }
         };
 
         TableRowThread tableRowThread = new TableRowThread();
         tableRowThread.start();
+    }
 
+    private void editTableValues(View view, Context context) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
+            if (response != null) {
+                try {
+                    frameLayout.setVisibility(View.GONE);
+                    ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(response);
+                    setUpdatedTables(tablesToDisplay, view);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, error -> Log.i("TAG-error", error + ""));
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    private void setUpdatedTables(ArrayList<Table> editedTableData, View view){
+        TableLayout tableLayout = view.findViewById(R.id.tableLayout);
+        Thread tThread = new Thread(() -> {
+            for (int i = -1; i < editedTableData.size(); i++) {
+                int finalI = i;
+                requireActivity().runOnUiThread(new Runnable() {
+                    @SuppressLint("HandlerLeak")
+                    @Override
+                    public void run() {
+                        if(finalI >= 0) {
+                            TableRow tableRow = (TableRow) tableLayout.getChildAt(finalI);
+                            TextView textView3 = tableRow.findViewById(R.id.tvalue3);
+                            TextView textView4 = tableRow.findViewById(R.id.tvalue4);
+                            TextView textView5 = tableRow.findViewById(R.id.tvalue5);
+                            TextView textView6 = tableRow.findViewById(R.id.tvalue6);
+
+                            String orgName = "Abebe";
+                            String preciseOrgName;
+                            if (orgName.length() > 30)
+                                preciseOrgName = orgName.substring(0, 20) + "...";
+                            else
+                                preciseOrgName = orgName;
+
+                            textView3.setText(String.valueOf(editedTableData.get(finalI).salesOutLateCount + 5));
+                            textView4.setText(String.valueOf(editedTableData.get(finalI).skuCount + 9));
+                            textView5.setText(String.valueOf(editedTableData.get(finalI).quantityCount + 110));
+                            textView6.setText(String.valueOf(editedTableData.get(finalI).totalSalesAmountAfterTax + 10008254));
+                        }
+                    }
+
+                });
+
+                try {
+                    if(finalI == -1){
+                        Thread.sleep(10000);
+                    }
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+        tThread.start();
     }
 
     private void makeRequest(Context context) {
@@ -107,13 +184,15 @@ public class DashBoard3Fragment extends Fragment {
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(response);
                     initTable(tablesToDisplay);
-//                    updateTable();
-                }
-                catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        }, error -> Log.i("TAG-error", error + ""));
+        }, error -> {
+            Log.i("TAG-error", error + "");
+            frameLayout.setVisibility(View.GONE);
+        });
+
         requestQueue.add(jsonArrayRequest);
     }
 
@@ -206,16 +285,17 @@ public class DashBoard3Fragment extends Fragment {
 class TableRowThread extends Thread {
     @Override
     public void run() {
-        for (int i = 0; i < 2; i++) {
-            Message msg = DashBoard3Fragment.tableRowHandler.obtainMessage();
+        for (int i = 0; i < DashBoard3Fragment.tables.size(); i++) {
+            Message msg = DashBoard3Fragment.tableRowsHandler.obtainMessage();
             msg.obj = String.valueOf(i);
-            DashBoard3Fragment.tableRowHandler.sendMessage(msg);
+            DashBoard3Fragment.tableRowsHandler.sendMessage(msg);
 
             try {
-                Thread.sleep(30000);
+                Thread.sleep(10000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 }
+
