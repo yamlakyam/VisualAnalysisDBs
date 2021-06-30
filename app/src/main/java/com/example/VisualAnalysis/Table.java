@@ -23,6 +23,14 @@ public class Table {
         this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
     }
 
+    public Table(String organizationName, int salesOutLateCount, int skuCount, int quantityCount, double totalSalesAmountAfterTax) {
+        this.organizationName = organizationName;
+        this.salesOutLateCount = salesOutLateCount;
+        this.skuCount = skuCount;
+        this.quantityCount = quantityCount;
+        this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
+    }
+
 
     public String getOrganizationName() {
         return organizationName;

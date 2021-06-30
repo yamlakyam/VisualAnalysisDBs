@@ -33,7 +33,11 @@
         android:id="@+id/dashBoard3Fragment"
         android:name="com.example.VisualAnalysis.DashBoard3Fragment"
         android:label="fragment_dash_board3"
-        tools:layout="@layout/fragment_dash_board3" />
+        tools:layout="@layout/fragment_dash_board3" >
+        <action
+            android:id="@+id/action_dashBoard3Fragment_to_dashBoard4Fragment"
+            app:destination="@id/dashBoard4Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/dashBoard4Fragment"
         android:name="com.example.VisualAnalysis.DashBoard4Fragment"
