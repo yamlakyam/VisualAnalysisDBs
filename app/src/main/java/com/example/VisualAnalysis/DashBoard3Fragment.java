@@ -153,13 +153,6 @@ public class DashBoard3Fragment extends Fragment {
                             TextView textView5 = tableRow.findViewById(R.id.tvalue5);
                             TextView textView6 = tableRow.findViewById(R.id.tvalue6);
 
-                            String orgName = "Abebe";
-                            String preciseOrgName;
-                            if (orgName.length() > 30)
-                                preciseOrgName = orgName.substring(0, 20) + "...";
-                            else
-                                preciseOrgName = orgName;
-
                             numberFormat = NumberFormat.getInstance();
                             numberFormat.setGroupingUsed(true);
 

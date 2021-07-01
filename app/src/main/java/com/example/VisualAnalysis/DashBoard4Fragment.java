@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -34,13 +32,12 @@ import org.json.JSONObject;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import javax.security.auth.login.LoginException;
-
 public class DashBoard4Fragment extends Fragment {
 
     FrameLayout frameLayout;
     TableLayout tableLayout;
     ScrollView scrollView;
+
 
     public static Handler tableRowsHandler;
 
@@ -62,7 +59,6 @@ public class DashBoard4Fragment extends Fragment {
 
         updateTable(view);
 
-
         return view;
     }
 
@@ -72,9 +68,12 @@ public class DashBoard4Fragment extends Fragment {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
             if (response != null) {
                 try {
+                    Log.i("size", response.length() + "");
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<ArrayList<Table>> tablesToDisplay = getTableDataFromRequestBody(response);
                     initTable(tablesToDisplay.get(0));
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -123,7 +122,6 @@ public class DashBoard4Fragment extends Fragment {
                 parsedTableData.add(tableRow);
             }
             parsedTables.add(parsedTableData);
-
         }
         return parsedTables;
     }
@@ -132,44 +130,13 @@ public class DashBoard4Fragment extends Fragment {
         Thread tThread = new Thread(() -> {
             for (int i = 0; i < tables.size(); i++) {
                 int finalI = i;
+
                 requireActivity().runOnUiThread(new Runnable() {
                     @SuppressLint("HandlerLeak")
                     @Override
                     public void run() {
 
-                        View tableElements = LayoutInflater.from(getContext()).inflate(R.layout.table_elements_2, null, false);
-
-                        TextView textView1 = tableElements.findViewById(R.id.t2value1);
-                        TextView textView2 = tableElements.findViewById(R.id.t2value2);
-                        TextView textView3 = tableElements.findViewById(R.id.t2value3);
-                        TextView textView4 = tableElements.findViewById(R.id.t2value4);
-                        TextView textView5 = tableElements.findViewById(R.id.t2value5);
-
-                        String orgName = tables.get(finalI).organizationName;
-                        String preciseOrgName;
-                        if (orgName.length() > 30)
-                            preciseOrgName = orgName.substring(0, 20) + "...";
-                        else
-                            preciseOrgName = orgName;
-
-                        numberFormat = NumberFormat.getInstance();
-                        numberFormat.setGroupingUsed(true);
-
-                        int quantityCount = tables.get(finalI).quantityCount;
-                        double totalSalesAmountAfterTax = tables.get(finalI).totalSalesAmountAfterTax;
-
-                        textView1.setText(preciseOrgName);
-                        textView2.setText(String.valueOf(tables.get(finalI).salesOutLateCount));
-                        textView3.setText(String.valueOf(tables.get(finalI).skuCount));
-                        textView4.setText(numberFormat.format(quantityCount));
-                        textView5.setText(numberFormat.format(totalSalesAmountAfterTax));
-
-                        TableRow tableRow = tableElements.findViewById(R.id.tableRow2);
-                        tableLayout.addView(tableElements);
-
-                        Animation animation1 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_in_bottom);
-                        Animation animation2 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_out_bottom);
-                        tableRow.startAnimation(animation2);
+                        initRow(finalI, tables);
 
                     }
 
@@ -192,6 +159,48 @@ public class DashBoard4Fragment extends Fragment {
         tThread.start();
     }
 
+    private void initRow(int finalI, ArrayList<Table> tableList) {
+        View tableElements = LayoutInflater.from(getContext()).inflate(R.layout.table_elements_2, null, false);
+        TextView textView0 = tableElements.findViewById(R.id.t2Value0);
+        TextView textView1 = tableElements.findViewById(R.id.t2value1);
+        TextView textView2 = tableElements.findViewById(R.id.t2value2);
+        TextView textView3 = tableElements.findViewById(R.id.t2value3);
+        TextView textView4 = tableElements.findViewById(R.id.t2value4);
+        TextView textView5 = tableElements.findViewById(R.id.t2value5);
+        TextView textView6 = tableElements.findViewById(R.id.t2value6);
+        TextView textView7 = tableElements.findViewById(R.id.t2value7);
+        TextView textView8 = tableElements.findViewById(R.id.t2value8);
+        TextView textView9 = tableElements.findViewById(R.id.t2value9);
+        TextView textView10 = tableElements.findViewById(R.id.t2value10);
+
+
+        String orgName = tableList.get(finalI).vsi;
+        String preciseOrgName;
+        if (orgName.length() > 30)
+            preciseOrgName = orgName.substring(0, 20) + "...";
+        else
+            preciseOrgName = orgName;
+
+        numberFormat = NumberFormat.getInstance();
+        numberFormat.setGroupingUsed(true);
+
+        int quantityCount = tableList.get(finalI).quantityCount;
+        double totalSalesAmountAfterTax = tableList.get(finalI).totalSalesAmountAfterTax;
+
+        textView0.setText(String.valueOf(finalI+1));
+        textView1.setText(preciseOrgName);
+        textView6.setText(String.valueOf(tableList.get(finalI).salesOutLateCount));
+
+        textView8.setText(String.valueOf(tableList.get(finalI).skuCount));
+        textView9.setText(numberFormat.format(quantityCount));
+        textView10.setText(numberFormat.format(totalSalesAmountAfterTax));
+
+        TableRow tableRow = tableElements.findViewById(R.id.VSMtableRow);
+        tableLayout.addView(tableElements);
+
+        Util.animate(tableLayout, tableRow);
+    }
+
     @SuppressLint("HandlerLeak")
     private void updateTable(View view) {
         tableRowsHandler = new Handler() {
@@ -206,7 +215,7 @@ public class DashBoard4Fragment extends Fragment {
             }
         };
 
-        Table2Thread tableRowThread = new Table2Thread();
+        Table2Thread tableRowThread = new Table2Thread(3);
         tableRowThread.start();
     }
 
@@ -216,15 +225,18 @@ public class DashBoard4Fragment extends Fragment {
             if (response != null) {
                 try {
                     frameLayout.setVisibility(View.GONE);
-                    ArrayList<ArrayList<Table>> tablesToDisplay = getTableDataFromRequestBody(response);
-                    if(index > 0){
-                        setUpdatedTables(tablesToDisplay.get(index), view);
+                    ArrayList<ArrayList<Table>> tablesToDisplay = DashBoard4Fragment.this.getTableDataFromRequestBody(response);
+                    if (index > 0) {
+                        DashBoard4Fragment.this.setUpdatedTables(tablesToDisplay.get(index), view);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }, error -> Log.i("TAG-error", error + ""));
+
+
         requestQueue.add(jsonArrayRequest);
         jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
             @Override
@@ -256,46 +268,18 @@ public class DashBoard4Fragment extends Fragment {
                     @Override
                     public void run() {
                         if (finalI >= 0) {
-                            View tableElements = LayoutInflater.from(getContext()).inflate(R.layout.table_elements_2, null, false);
+                            initRow(finalI, editedTableData);
 
-                            TextView textView1 = tableElements.findViewById(R.id.t2value1);
-                            TextView textView2 = tableElements.findViewById(R.id.t2value2);
-                            TextView textView3 = tableElements.findViewById(R.id.t2value3);
-                            TextView textView4 = tableElements.findViewById(R.id.t2value4);
-                            TextView textView5 = tableElements.findViewById(R.id.t2value5);
-
-                            String orgName = editedTableData.get(finalI).organizationName;
-                            String preciseOrgName;
-                            if (orgName.length() > 30)
-                                preciseOrgName = orgName.substring(0, 20) + "...";
-                            else
-                                preciseOrgName = orgName;
-
-                            numberFormat = NumberFormat.getInstance();
-                            numberFormat.setGroupingUsed(true);
-
-                            int quantityCount = editedTableData.get(finalI).quantityCount;
-                            double totalSalesAmountAfterTax = editedTableData.get(finalI).totalSalesAmountAfterTax;
-
-                            textView1.setText(preciseOrgName);
-                            textView2.setText(String.valueOf(editedTableData.get(finalI).salesOutLateCount));
-                            textView3.setText(String.valueOf(editedTableData.get(finalI).skuCount));
-                            textView4.setText(numberFormat.format(quantityCount));
-                            textView5.setText(numberFormat.format(totalSalesAmountAfterTax));
-
-                            TableRow tableRow = tableElements.findViewById(R.id.tableRow2);
-                            tableLayout.addView(tableElements);
-
-                            Animation animation1 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_in_bottom);
-                            Animation animation2 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_out_bottom);
-                            tableRow.startAnimation(animation2);
                         }
                     }
 
                 });
 
                 try {
-                    Thread.sleep(700);
+                    if (editedTableData.size() == 0) {
+                        Thread.sleep(10);
+                    } else
+                        Thread.sleep(700);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -307,11 +291,11 @@ public class DashBoard4Fragment extends Fragment {
 }
 
 class Table2Thread extends Thread {
-//    int tableDatas;
-//
-//    public Table2Thread(int tableDatas) {
-//        this.tableDatas = tableDatas;
-//    }
+    int distributordataSize;
+
+    Table2Thread(int distributordataSize) {
+        this.distributordataSize = distributordataSize;
+    }
 
     @Override
     public void run() {

@@ -7,11 +7,38 @@ import java.util.Date;
 
 public class Table {
     String organizationName;
-    int vsiCount;
+    int vsiCount, sN, voucherN, outlet, TIN, itemCount;
     int salesOutLateCount;
     int skuCount;
     int quantityCount;
     double totalSalesAmountAfterTax;
+    String vsi;
+    String dateNtime;
+    double subTotal;
+    double VAT;
+    String license;
+    String contact, lastSeen;
+    int transactionCount,prospect, vCount;
+
+    public Table(String vsi,int outlet, String lastSeen,  int vCount,double totalSalesAmountAfterTax) {
+        this.outlet = outlet;
+        this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
+        this.vsi = vsi;
+        this.lastSeen = lastSeen;
+        this.vCount = vCount;
+    }
+
+    public Table(int sN, int voucherN, int outlet, int TIN, String dateNtime, int itemCount, double subTotal, double VAT, double totalSalesAmountAfterTax) {
+        this.sN = sN;
+        this.voucherN = voucherN;
+        this.outlet = outlet;
+        this.TIN = TIN;
+        this.dateNtime = dateNtime;
+        this.itemCount = itemCount;
+        this.subTotal = subTotal;
+        this.VAT = VAT;
+        this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
+    }
 
 
     public Table(String organizationName, int vsiCount, int salesOutLateCount, int skuCount, int quantityCount, double totalSalesAmountAfterTax) {
@@ -23,13 +50,15 @@ public class Table {
         this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
     }
 
-    public Table(String organizationName, int salesOutLateCount, int skuCount, int quantityCount, double totalSalesAmountAfterTax) {
-        this.organizationName = organizationName;
+    public Table(String vsi, int salesOutLateCount, int skuCount, int quantityCount, double totalSalesAmountAfterTax) {
+        this.vsi = vsi;
         this.salesOutLateCount = salesOutLateCount;
         this.skuCount = skuCount;
         this.quantityCount = quantityCount;
         this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
     }
+
+
 
 
     public String getOrganizationName() {
