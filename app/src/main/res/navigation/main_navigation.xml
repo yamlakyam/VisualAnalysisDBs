@@ -52,5 +52,9 @@
         android:id="@+id/vsmCardFragment"
         android:name="com.example.VisualAnalysis.VsmCardFragment"
         android:label="fragment_vsm_card"
-        tools:layout="@layout/fragment_vsm_card" />
+        tools:layout="@layout/fragment_vsm_card" >
+        <action
+            android:id="@+id/action_vsmCardFragment_to_mapActivity"
+            app:destination="@id/mapActivity" />
+    </fragment>
 </navigation>

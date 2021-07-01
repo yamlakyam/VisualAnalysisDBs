@@ -1,12 +1,14 @@
 package com.example.VisualAnalysis;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 public class VsmCardFragment extends Fragment {
 
     GridView VSMcardGridView;
+    public static Fragment me;
 
 
     @Override
@@ -22,7 +25,7 @@ public class VsmCardFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_vsm_card, container, false);
         VSMcardGridView = view.findViewById(R.id.vsmCardGridLayout);
-
+        me = this;
 
         ArrayList<Table> vsmCardList = new ArrayList<>();
         vsmCardList.add(new Table("VAN1", 20, "20 mins ago", 20, 20098.67));
@@ -47,17 +50,21 @@ public class VsmCardFragment extends Fragment {
                     requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            VSMcardGridView.smoothScrollToPosition(finalI );
+                            VSMcardGridView.smoothScrollToPosition(finalI);
+
+
                         }
                     });
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
+                    if (finalI == vsmCardList.size()-1) {
+                        Log.i("TAG", vsmCardList.size()+"");
+                        NavHostFragment.findNavController(VsmCardFragment.me).navigate(R.id.action_vsmCardFragment_to_mapActivity);
+                    }
                 }
-
             }
         });
 
