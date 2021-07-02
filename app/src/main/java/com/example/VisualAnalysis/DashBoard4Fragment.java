@@ -43,7 +43,7 @@ public class DashBoard4Fragment extends Fragment {
 
     NumberFormat numberFormat;
 
-    String url = "http://192.168.1.248:8001/api/ChartData/GetSalesDataByOrganization";
+    String url = "http://192.168.1.248:8001/api/ChartData/GetSalesDataForSingleOrganization";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -117,7 +117,9 @@ public class DashBoard4Fragment extends Fragment {
                         tableObject.getInt("salesOutLateCount"),
                         tableObject.getInt("skuCount"),
                         tableObject.getInt("quantityCount"),
-                        roundedGrandTotal
+                        roundedGrandTotal,
+                        tableObject.getInt("prospect"),
+                        tableObject.getString("startTimeStamp")
                 );
                 parsedTableData.add(tableRow);
             }
@@ -161,17 +163,14 @@ public class DashBoard4Fragment extends Fragment {
 
     private void initRow(int finalI, ArrayList<Table> tableList) {
         View tableElements = LayoutInflater.from(getContext()).inflate(R.layout.table_elements_2, null, false);
-        TextView textView0 = tableElements.findViewById(R.id.t2Value0);
-        TextView textView1 = tableElements.findViewById(R.id.t2value1);
-        TextView textView2 = tableElements.findViewById(R.id.t2value2);
-        TextView textView3 = tableElements.findViewById(R.id.t2value3);
-        TextView textView4 = tableElements.findViewById(R.id.t2value4);
-        TextView textView5 = tableElements.findViewById(R.id.t2value5);
-        TextView textView6 = tableElements.findViewById(R.id.t2value6);
-        TextView textView7 = tableElements.findViewById(R.id.t2value7);
-        TextView textView8 = tableElements.findViewById(R.id.t2value8);
-        TextView textView9 = tableElements.findViewById(R.id.t2value9);
-        TextView textView10 = tableElements.findViewById(R.id.t2value10);
+        TextView textView0 = tableElements.findViewById(R.id.t2sn);
+        TextView textView1 = tableElements.findViewById(R.id.t2Vsi);
+        TextView textView2 = tableElements.findViewById(R.id.t2vprospect);
+        TextView textView3 = tableElements.findViewById(R.id.t2lastSeen);
+        TextView textView4 = tableElements.findViewById(R.id.t2totalOutlet);
+        TextView textView5 = tableElements.findViewById(R.id.t2totalSKU);
+        TextView textView6 = tableElements.findViewById(R.id.t2totalQty);
+        TextView textView7 = tableElements.findViewById(R.id.t2totalSales);
 
 
         String orgName = tableList.get(finalI).vsi;
@@ -189,11 +188,12 @@ public class DashBoard4Fragment extends Fragment {
 
         textView0.setText(String.valueOf(finalI+1));
         textView1.setText(preciseOrgName);
-        textView6.setText(String.valueOf(tableList.get(finalI).salesOutLateCount));
-
-        textView8.setText(String.valueOf(tableList.get(finalI).skuCount));
-        textView9.setText(numberFormat.format(quantityCount));
-        textView10.setText(numberFormat.format(totalSalesAmountAfterTax));
+        textView2.setText(String.valueOf(tableList.get(finalI).prospect));
+        textView3.setText(tableList.get(finalI).lastSeen);
+        textView4.setText(String.valueOf(tableList.get(finalI).salesOutLateCount));
+        textView5.setText(String.valueOf(tableList.get(finalI).skuCount));
+        textView6.setText(numberFormat.format(quantityCount));
+        textView7.setText(numberFormat.format(totalSalesAmountAfterTax));
 
         TableRow tableRow = tableElements.findViewById(R.id.VSMtableRow);
         tableLayout.addView(tableElements);

@@ -34,7 +34,7 @@ public class VSMcardGVAdapter extends ArrayAdapter<Table> {
         TextView vsmTsale =listedView.findViewById(R.id.vsmCardTotalSale);
 
         vsmName.setText(vsmCard.vsi);
-        vsmOutlet.setText(String.valueOf(vsmCard.outlet));
+        vsmOutlet.setText(String.valueOf(vsmCard.salesOutLateCount));
         vsmLastActive.setText(vsmCard.lastSeen);
         vsmVcount.setText(String.valueOf(vsmCard.vCount));
         vsmTsale.setText(String.valueOf(vsmCard.totalSalesAmountAfterTax));

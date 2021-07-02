@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/t2Header1"
-            android:layout_width="150dp"
+            android:layout_width="175dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="15dp"
@@ -45,27 +45,7 @@
 
         <TextView
             android:id="@+id/t2Header2"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="end"
-            android:text="License"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/t2Header3"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="end"
-            android:text="Contact"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/t2Header4"
-            android:layout_width="125dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
@@ -74,8 +54,8 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/t2Header5"
-            android:layout_width="125dp"
+            android:id="@+id/t2Header3"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
@@ -84,8 +64,8 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/t2Header6"
-            android:layout_width="125dp"
+            android:id="@+id/t2Header4"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
@@ -94,18 +74,8 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/t2Header7"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="end"
-            android:text="Tran Count"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/t2Header8"
-            android:layout_width="125dp"
+            android:id="@+id/t2Header5"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
@@ -114,8 +84,8 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/t2Header9"
-            android:layout_width="125dp"
+            android:id="@+id/t2Header6"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
@@ -124,10 +94,11 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/t2Header10"
+            android:id="@+id/t2Header7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:gravity="end"
             android:paddingEnd="10dp"
             android:text="Grand Total"

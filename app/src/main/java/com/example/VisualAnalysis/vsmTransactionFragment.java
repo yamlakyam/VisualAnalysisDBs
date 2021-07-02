@@ -57,9 +57,9 @@ public class vsmTransactionFragment extends Fragment {
 
         textView1.setText(String.valueOf(tableList.get(finalI).sN));
         textView2.setText(String.valueOf(tableList.get(finalI).voucherN));
-        textView3.setText(String.valueOf(tableList.get(finalI).outlet));
+        textView3.setText(String.valueOf(tableList.get(finalI).salesOutLateCount));
         textView4.setText(String.valueOf(tableList.get(finalI).TIN));
-        textView5.setText(String.valueOf(tableList.get(finalI).dateNtime));
+        textView5.setText(String.valueOf(tableList.get(finalI).startTime));
         textView6.setText(String.valueOf(tableList.get(finalI).itemCount));
         textView7.setText(numberFormat.format(tableList.get(finalI).subTotal));
         textView8.setText(String.valueOf(tableList.get(finalI).VAT));

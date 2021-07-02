@@ -2,11 +2,10 @@ package com.example.VisualAnalysis;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +19,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,7 +34,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.NumberFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class DashBoard3Fragment extends Fragment {
@@ -46,7 +48,6 @@ public class DashBoard3Fragment extends Fragment {
     FrameLayout frameLayout;
     public static Fragment me;
     public static ArrayList<Table> tables = new ArrayList<>();
-    public static ArrayList<Table> updatedTables = new ArrayList<>();
     public static Handler tableRowsHandler;
 
     NumberFormat numberFormat;
@@ -55,6 +56,7 @@ public class DashBoard3Fragment extends Fragment {
     ScrollView scrollView;
     String url = "http://192.168.1.248:8001/api/ChartData/GetSalesDataForAllOrganizations";
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,15 +70,8 @@ public class DashBoard3Fragment extends Fragment {
         scrollView = view.findViewById(R.id.scrolll);
         frameLayout = view.findViewById(R.id.progressBarFrame);
 
-        Table tableRow1 = new Table("CNET", 10, 455, 15, 100, 500000);
-        Table tableRow2 = new Table("CNET", 10, 455, 15, 100, 500000);
-        Table tableRow3 = new Table("Abebe Kebede", 6, 500, 10, 100, 129000.78);
 
-        tables.add(tableRow1);
-        tables.add(tableRow1);
-
-        updatedTables.add(tableRow3);
-        updatedTables.add(tableRow3);
+        String date = "2021-04-02T11:57:04";
 
         makeRequest(getContext());
         updateTable(view);
@@ -85,7 +80,7 @@ public class DashBoard3Fragment extends Fragment {
 
         return view;
     }
-    
+
 
     @SuppressLint("HandlerLeak")
     private void updateTable(View view) {
@@ -122,12 +117,12 @@ public class DashBoard3Fragment extends Fragment {
         jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
             @Override
             public int getCurrentTimeout() {
-                return 50000;
+                return 360000;
             }
 
             @Override
             public int getCurrentRetryCount() {
-                return 50000;
+                return 360000;
             }
 
             @Override
@@ -148,21 +143,24 @@ public class DashBoard3Fragment extends Fragment {
                     public void run() {
                         if (finalI >= 0) {
                             TableRow tableRow = (TableRow) tableLayout.getChildAt(finalI);
-                            TextView textView3 = tableRow.findViewById(R.id.tvalue3);
-                            TextView textView4 = tableRow.findViewById(R.id.tvalue4);
-                            TextView textView5 = tableRow.findViewById(R.id.tvalue5);
-                            TextView textView6 = tableRow.findViewById(R.id.tvalue6);
-
+                            TextView textView2 = tableRow.findViewById(R.id.tVSIcount);
+                            TextView textView3 = tableRow.findViewById(R.id.tactive);
+                            TextView textView4 = tableRow.findViewById(R.id.tProspect);
+                            TextView textView7 = tableRow.findViewById(R.id.tOutlets);
+                            TextView textView8 = tableRow.findViewById(R.id.tSKUcount);
+                            TextView textView9 = tableRow.findViewById(R.id.tQty);
+                            TextView textView10 = tableRow.findViewById(R.id.tTotalSales);
                             numberFormat = NumberFormat.getInstance();
                             numberFormat.setGroupingUsed(true);
-
                             int quantityFormatted = editedTableData.get(finalI).quantityCount + 5;
                             double totalFormatted = editedTableData.get(finalI).totalSalesAmountAfterTax + 108254;
-
-                            textView3.setText(String.valueOf(editedTableData.get(finalI).salesOutLateCount + 5));
-                            textView4.setText(String.valueOf(editedTableData.get(finalI).skuCount + 9));
-                            textView5.setText(numberFormat.format(quantityFormatted));
-                            textView6.setText(numberFormat.format(totalFormatted));
+                            textView2.setText(String.valueOf(editedTableData.get(finalI).vsiCount + 2));
+                            textView3.setText(String.valueOf(editedTableData.get(finalI).active + 2));
+                            textView4.setText(String.valueOf(editedTableData.get(finalI).prospect + 3));
+                            textView7.setText(String.valueOf(editedTableData.get(finalI).salesOutLateCount + 5));
+                            textView8.setText(String.valueOf(editedTableData.get(finalI).skuCount + 9));
+                            textView9.setText(numberFormat.format(quantityFormatted));
+                            textView10.setText(numberFormat.format(totalFormatted));
                         }
                     }
 
@@ -200,6 +198,22 @@ public class DashBoard3Fragment extends Fragment {
         });
 
         requestQueue.add(jsonArrayRequest);
+        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 360000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 360000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
     }
 
     void initTable(ArrayList<Table> tables) {
@@ -214,12 +228,16 @@ public class DashBoard3Fragment extends Fragment {
 
                         View tableElements = LayoutInflater.from(getContext()).inflate(R.layout.table_elements, null, false);
 
-                        TextView textView1 = tableElements.findViewById(R.id.tvalue1);
-                        TextView textView2 = tableElements.findViewById(R.id.tvalue2);
-                        TextView textView3 = tableElements.findViewById(R.id.tvalue3);
-                        TextView textView4 = tableElements.findViewById(R.id.tvalue4);
-                        TextView textView5 = tableElements.findViewById(R.id.tvalue5);
-                        TextView textView6 = tableElements.findViewById(R.id.tvalue6);
+                        TextView textView1 = tableElements.findViewById(R.id.tdistributor);
+                        TextView textView2 = tableElements.findViewById(R.id.tVSIcount);
+                        TextView textView3 = tableElements.findViewById(R.id.tactive);
+                        TextView textView4 = tableElements.findViewById(R.id.tProspect);
+                        TextView textView5 = tableElements.findViewById(R.id.tStartTime);
+                        TextView textView6 = tableElements.findViewById(R.id.tLastSeen);
+                        TextView textView7 = tableElements.findViewById(R.id.tOutlets);
+                        TextView textView8 = tableElements.findViewById(R.id.tSKUcount);
+                        TextView textView9 = tableElements.findViewById(R.id.tQty);
+                        TextView textView10 = tableElements.findViewById(R.id.tTotalSales);
 
                         String orgName = tables.get(finalI).organizationName;
                         String preciseOrgName;
@@ -237,9 +255,13 @@ public class DashBoard3Fragment extends Fragment {
                         textView1.setText(preciseOrgName);
                         textView2.setText(String.valueOf(tables.get(finalI).vsiCount));
                         textView3.setText(String.valueOf(tables.get(finalI).salesOutLateCount));
-                        textView4.setText(String.valueOf(tables.get(finalI).skuCount));
-                        textView5.setText(numberFormat.format(quantityCount));
-                        textView6.setText(numberFormat.format(totalSalesAmountAfterTax));
+                        textView4.setText(String.valueOf(tables.get(finalI).prospect));
+                        textView5.setText(tables.get(finalI).startTime);
+                        textView6.setText(tables.get(finalI).lastSeen);
+                        textView7.setText(tables.get(finalI).salesOutLateCount);
+                        textView8.setText(String.valueOf(tables.get(finalI).skuCount));
+                        textView9.setText(numberFormat.format(quantityCount));
+                        textView10.setText(numberFormat.format(totalSalesAmountAfterTax));
 
 
                         TableRow tableRow = tableElements.findViewById(R.id.tableRow);
@@ -280,11 +302,15 @@ public class DashBoard3Fragment extends Fragment {
 
             Table tableRow = new Table(
                     tableObject.getString("organizationName"),
+                    tableObject.getString("startTimeStamp"),
+                    tableObject.getString("endTimeStamp"),
                     tableObject.getInt("vsiCount"),
                     tableObject.getInt("salesOutLateCount"),
                     tableObject.getInt("skuCount"),
                     tableObject.getInt("quantityCount"),
-                    roundedGrandTotal
+                    roundedGrandTotal,
+                    tableObject.getInt("active"),
+                    tableObject.getInt("prospect")
             );
             parsedTableData.add(tableRow);
         }
@@ -304,13 +330,13 @@ class TableRowThread extends Thread {
 
             try {
 
-                if(i == DashBoard3Fragment.tables.size() - 1){
-                    Thread.sleep(50000);
-                    NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_dashBoard4Fragment);
-                }
-                else {
-                    Thread.sleep(10000);
-                }
+//                if(i == DashBoard3Fragment.tables.size() - 1){
+//                    Thread.sleep(50000);
+//                    NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_dashBoard4Fragment);
+//                }
+//                else {
+                Thread.sleep(10000);
+//                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

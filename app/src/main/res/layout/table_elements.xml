@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:id="@+id/cvalue1"
-        android:layout_width="300dp"
+        android:layout_width="125dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
@@ -22,7 +22,7 @@
             app:srcCompat="@drawable/ic_heineken" />
 
         <TextView
-            android:id="@+id/tvalue1"
+            android:id="@+id/tdistributor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -39,8 +39,8 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvalue2"
-        android:layout_width="175dp"
+        android:id="@+id/tVSIcount"
+        android:layout_width="125dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
         android:paddingEnd="10dp"
@@ -49,8 +49,8 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tvalue3"
-        android:layout_width="175dp"
+        android:id="@+id/tactive"
+        android:layout_width="125dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
         android:paddingEnd="10dp"
@@ -59,8 +59,8 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tvalue4"
-        android:layout_width="175dp"
+        android:id="@+id/tProspect"
+        android:layout_width="125dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
         android:paddingRight="10dp"
@@ -69,8 +69,8 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tvalue5"
-        android:layout_width="175dp"
+        android:id="@+id/tStartTime"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
         android:paddingRight="10dp"
@@ -79,7 +79,43 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tvalue6"
+        android:id="@+id/tLastSeen"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical|end"
+        android:text="TextView"
+        android:textColor="#78FA5A"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tOutlets"
+        android:layout_width="125dp"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical|end"
+        android:text="TextView"
+        android:textColor="#78FA5A"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tSKUcount"
+        android:layout_width="125dp"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical|end"
+        android:text="TextView"
+        android:textColor="#78FA5A"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tQty"
+        android:layout_width="125dp"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical|end"
+        android:text="TextView"
+        android:textColor="#78FA5A"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tTotalSales"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

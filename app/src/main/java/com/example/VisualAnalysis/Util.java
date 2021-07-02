@@ -17,11 +17,11 @@ public class Util {
     public static void initRow(int finalI, ArrayList<Table> tableList, Context context, TableLayout tableLayout) {
         View tableElements = LayoutInflater.from(context).inflate(R.layout.table_elements_2, null, false);
 
-        TextView textView1 = tableElements.findViewById(R.id.t2value1);
-        TextView textView2 = tableElements.findViewById(R.id.t2value2);
-        TextView textView3 = tableElements.findViewById(R.id.t2value3);
-        TextView textView4 = tableElements.findViewById(R.id.t2value4);
-        TextView textView5 = tableElements.findViewById(R.id.t2value5);
+        TextView textView1 = tableElements.findViewById(R.id.t2Vsi);
+        TextView textView2 = tableElements.findViewById(R.id.t2vprospect);
+        TextView textView3 = tableElements.findViewById(R.id.t2lastSeen);
+        TextView textView4 = tableElements.findViewById(R.id.t2totalOutlet);
+        TextView textView5 = tableElements.findViewById(R.id.t2totalSKU);
 
         String orgName = tableList.get(finalI).vsi;
         String preciseOrgName;

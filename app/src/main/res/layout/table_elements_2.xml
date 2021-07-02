@@ -10,7 +10,7 @@
     android:paddingEnd="10dp">
 
     <TextView
-        android:id="@+id/t2Value0"
+        android:id="@+id/t2sn"
         android:layout_width="75dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
@@ -22,7 +22,7 @@
 
     <LinearLayout
         android:id="@+id/cvalue2"
-        android:layout_width="200dp"
+        android:layout_width="175dp"
         android:layout_height="match_parent"
         android:layout_gravity="start|end"
         android:layout_marginStart="15dp"
@@ -35,7 +35,7 @@
             app:srcCompat="@drawable/ic_heineken" />
 
         <TextView
-            android:id="@+id/t2value1"
+            android:id="@+id/t2Vsi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -52,88 +52,53 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/t2value2"
-        android:layout_width="200dp"
+        android:id="@+id/t2vprospect"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
         android:gravity="center_vertical|end"
-        android:paddingEnd="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/t2value3"
-        android:layout_width="200dp"
+        android:id="@+id/t2lastSeen"
+        android:layout_width="220dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
-        android:paddingEnd="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/t2value4"
-        android:layout_width="200dp"
+        android:id="@+id/t2totalOutlet"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
-        android:paddingRight="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/t2value5"
-        android:layout_width="200dp"
+        android:id="@+id/t2totalSKU"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
-        android:paddingRight="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/t2value6"
-        android:layout_width="200dp"
+        android:id="@+id/t2totalQty"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
-        android:paddingRight="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/t2value7"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|end"
-        android:paddingRight="10dp"
-        android:text="TextView"
-        android:textColor="#78FA5A"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/t2value8"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|end"
-        android:paddingRight="10dp"
-        android:text="TextView"
-        android:textColor="#78FA5A"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/t2value9"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|end"
-        android:paddingRight="10dp"
-        android:text="TextView"
-        android:textColor="#78FA5A"
-        android:textSize="20sp" />
-
-
-    <TextView
-        android:id="@+id/t2value10"
+        android:id="@+id/t2totalSales"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
