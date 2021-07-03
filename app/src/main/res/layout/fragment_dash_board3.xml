@@ -13,9 +13,9 @@
         android:id="@+id/headerRow"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="10dp"
         android:background="@color/cardBackgroundDark1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,37 +30,37 @@
             android:paddingStart="10dp"
             android:text="Distributor"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader2"
-            android:layout_width="125dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
             android:text="Total VSI"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader3"
-            android:layout_width="125dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
             android:text="Active"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader4"
-            android:layout_width="125dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="end"
             android:text="Prospect"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader5"
@@ -70,7 +70,7 @@
             android:gravity="end"
             android:text="Start Time"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader6"
@@ -80,7 +80,7 @@
             android:gravity="end"
             android:text="Last Active"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader7"
@@ -90,7 +90,7 @@
             android:gravity="end"
             android:text="Outlets"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader8"
@@ -100,7 +100,7 @@
             android:gravity="end"
             android:text="Total SKU"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader9"
@@ -110,7 +110,7 @@
             android:gravity="end"
             android:text="Total Qty"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tHeader10"
@@ -122,7 +122,7 @@
             android:paddingEnd="10dp"
             android:text="Grand Total"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
 
     </TableRow>
 
@@ -130,8 +130,8 @@
         android:id="@+id/scrolll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="@id/headerRow"
         app:layout_constraintStart_toStartOf="@id/headerRow"

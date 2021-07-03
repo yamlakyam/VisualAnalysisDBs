@@ -1,6 +1,7 @@
 package com.example.VisualAnalysis;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,6 +40,9 @@ public class DashBoard4Fragment extends Fragment {
     TableLayout tableLayout;
     ScrollView scrollView;
 
+    public static Fragment me;
+    public static Activity activity;
+
 
     public static Handler tableRowsHandler;
 
@@ -54,6 +59,8 @@ public class DashBoard4Fragment extends Fragment {
         tableLayout = view.findViewById(R.id.tableLayout2);
         frameLayout = view.findViewById(R.id.progressBarFrame2);
         scrollView = view.findViewById(R.id.scrolll2);
+        me = this;
+        activity = getActivity();
 
         makeRequest(getContext());
 
@@ -186,7 +193,7 @@ public class DashBoard4Fragment extends Fragment {
         int quantityCount = tableList.get(finalI).quantityCount;
         double totalSalesAmountAfterTax = tableList.get(finalI).totalSalesAmountAfterTax;
 
-        textView0.setText(String.valueOf(finalI+1));
+        textView0.setText(String.valueOf(finalI + 1));
         textView1.setText(preciseOrgName);
         textView2.setText(String.valueOf(tableList.get(finalI).prospect));
         textView3.setText(tableList.get(finalI).lastSeen);
@@ -276,10 +283,7 @@ public class DashBoard4Fragment extends Fragment {
                 });
 
                 try {
-                    if (editedTableData.size() == 0) {
-                        Thread.sleep(10);
-                    } else
-                        Thread.sleep(700);
+                        Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -300,12 +304,30 @@ class Table2Thread extends Thread {
     @Override
     public void run() {
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < distributordataSize; i++) {
             Message msg = DashBoard4Fragment.tableRowsHandler.obtainMessage();
             msg.obj = String.valueOf(i);
             DashBoard4Fragment.tableRowsHandler.sendMessage(msg);
+
             try {
-                Thread.sleep(20000);
+                if (i >= 2) {
+                    Thread.sleep(6000);
+                    DashBoard4Fragment.activity.runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (NavHostFragment.findNavController(DashBoard4Fragment.me).getCurrentDestination().getId() == R.id.dashBoard4Fragment) {
+                                        NavHostFragment.findNavController(DashBoard4Fragment.me).navigate(R.id.action_dashBoard4Fragment_to_vsmCardFragment2);
+                                    } else {
+                                        NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_vsmCardFragment);
+                                    }
+                                }
+                            });
+
+
+                } else {
+                    Thread.sleep(10000);
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -82,15 +82,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         Handler h = new Handler();
-//        h.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(MapActivity.this, MainActivity.class);
-//                intent.putExtra("Last Index",lastIndex+"");
-//                Log.i("TAG-mapctivity",""+lastIndex);
-//                startActivity(intent);
-//            }
-//        }, 40000);
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MapActivity.this, MainActivity.class);
+                intent.putExtra("Last Index",lastIndex+"");
+                Log.i("TAG-mapctivity",""+lastIndex);
+                startActivity(intent);
+            }
+        }, 40000);
 
     }
 

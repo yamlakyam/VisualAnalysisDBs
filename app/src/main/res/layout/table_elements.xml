@@ -7,19 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#49515c"
-    android:paddingEnd="10dp">
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
 
     <LinearLayout
         android:id="@+id/cvalue1"
         android:layout_width="125dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_heineken" />
 
         <TextView
             android:id="@+id/tdistributor"
@@ -33,40 +28,40 @@
             android:singleLine="true"
             android:text="TextView"
             android:textColor="#d2b566"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/tVSIcount"
-        android:layout_width="125dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
         android:paddingEnd="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tactive"
-        android:layout_width="125dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
         android:paddingEnd="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tProspect"
-        android:layout_width="125dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
         android:paddingRight="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tStartTime"
@@ -76,7 +71,7 @@
         android:paddingRight="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tLastSeen"
@@ -85,7 +80,7 @@
         android:gravity="right|center_vertical|end"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tOutlets"
@@ -94,7 +89,7 @@
         android:gravity="right|center_vertical|end"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tSKUcount"
@@ -103,7 +98,7 @@
         android:gravity="right|center_vertical|end"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tQty"
@@ -112,17 +107,18 @@
         android:gravity="right|center_vertical|end"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tTotalSales"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginEnd="5dp"
         android:layout_weight="1"
         android:gravity="right|center_vertical|end"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 </TableRow>
 
 

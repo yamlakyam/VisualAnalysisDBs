@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/vsmCardFragment">
+    app:startDestination="@id/dashBoard3Fragment">
 
     <fragment
         android:id="@+id/dashBoardMain"
@@ -37,12 +37,19 @@
         <action
             android:id="@+id/action_dashBoard3Fragment_to_dashBoard4Fragment"
             app:destination="@id/dashBoard4Fragment" />
+        <action
+            android:id="@+id/action_dashBoard3Fragment_to_vsmCardFragment"
+            app:destination="@id/vsmCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/dashBoard4Fragment"
         android:name="com.example.VisualAnalysis.DashBoard4Fragment"
         android:label="fragment_dash_board4"
-        tools:layout="@layout/fragment_dash_board4" />
+        tools:layout="@layout/fragment_dash_board4" >
+        <action
+            android:id="@+id/action_dashBoard4Fragment_to_vsmCardFragment2"
+            app:destination="@id/vsmCardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/vsmTransactionFragment"
         android:name="com.example.VisualAnalysis.vsmTransactionFragment"
