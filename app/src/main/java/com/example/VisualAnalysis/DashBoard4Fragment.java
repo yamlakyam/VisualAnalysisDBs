@@ -22,8 +22,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -33,6 +31,8 @@ import org.json.JSONObject;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class DashBoard4Fragment extends Fragment {
 
@@ -42,7 +42,6 @@ public class DashBoard4Fragment extends Fragment {
 
     public static Fragment me;
     public static Activity activity;
-
 
     public static Handler tableRowsHandler;
 
@@ -63,7 +62,6 @@ public class DashBoard4Fragment extends Fragment {
         activity = getActivity();
 
         makeRequest(getContext());
-
         updateTable(view);
 
         return view;
@@ -78,8 +76,9 @@ public class DashBoard4Fragment extends Fragment {
                     Log.i("size", response.length() + "");
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<ArrayList<Table>> tablesToDisplay = getTableDataFromRequestBody(response);
-                    initTable(tablesToDisplay.get(0));
-
+                    if(tablesToDisplay!=null){
+                        initTable(tablesToDisplay.get(0));
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -91,22 +90,8 @@ public class DashBoard4Fragment extends Fragment {
         });
 
         requestQueue.add(jsonArrayRequest);
-        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 50000;
-            }
+        Util.retryRequest(jsonArrayRequest);
 
-            @Override
-            public int getCurrentRetryCount() {
-                return 50000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
     }
 
     public ArrayList<ArrayList<Table>> getTableDataFromRequestBody(JSONArray tables) throws JSONException {
@@ -136,36 +121,7 @@ public class DashBoard4Fragment extends Fragment {
     }
 
     void initTable(ArrayList<Table> tables) {
-        Thread tThread = new Thread(() -> {
-            for (int i = 0; i < tables.size(); i++) {
-                int finalI = i;
-
-                requireActivity().runOnUiThread(new Runnable() {
-                    @SuppressLint("HandlerLeak")
-                    @Override
-                    public void run() {
-
-                        initRow(finalI, tables);
-
-                    }
-
-                });
-
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                scrollView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        scrollView.fullScroll(View.FOCUS_DOWN);
-                    }
-                });
-            }
-
-        });
-        tThread.start();
+        addRowsSequentially(tables);
     }
 
     private void initRow(int finalI, ArrayList<Table> tableList) {
@@ -193,10 +149,15 @@ public class DashBoard4Fragment extends Fragment {
         int quantityCount = tableList.get(finalI).quantityCount;
         double totalSalesAmountAfterTax = tableList.get(finalI).totalSalesAmountAfterTax;
 
+        Date lastActive = Util.formatTime(tableList.get(finalI).lastSeen);
+        Date currentTime = Calendar.getInstance().getTime();
+
+        String formattedLastSeen = Util.timeElapsed(lastActive, currentTime);
+
         textView0.setText(String.valueOf(finalI + 1));
         textView1.setText(preciseOrgName);
         textView2.setText(String.valueOf(tableList.get(finalI).prospect));
-        textView3.setText(tableList.get(finalI).lastSeen);
+        textView3.setText(formattedLastSeen);
         textView4.setText(String.valueOf(tableList.get(finalI).salesOutLateCount));
         textView5.setText(String.valueOf(tableList.get(finalI).skuCount));
         textView6.setText(numberFormat.format(quantityCount));
@@ -234,7 +195,9 @@ public class DashBoard4Fragment extends Fragment {
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<ArrayList<Table>> tablesToDisplay = DashBoard4Fragment.this.getTableDataFromRequestBody(response);
                     if (index > 0) {
-                        DashBoard4Fragment.this.setUpdatedTables(tablesToDisplay.get(index), view);
+                        if(tablesToDisplay!=null){
+                            DashBoard4Fragment.this.setUpdatedTables(tablesToDisplay.get(index), view);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -243,50 +206,40 @@ public class DashBoard4Fragment extends Fragment {
             }
         }, error -> Log.i("TAG-error", error + ""));
 
-
         requestQueue.add(jsonArrayRequest);
-        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 60000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 60000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
+        Util.retryRequest(jsonArrayRequest);
     }
 
     private void setUpdatedTables(ArrayList<Table> editedTableData, View view) {
         TableLayout tableLayout = view.findViewById(R.id.tableLayout2);
         tableLayout.removeAllViews();
+        addRowsSequentially(editedTableData);
+    }
 
+    private void addRowsSequentially(ArrayList<Table> tables) {
         Thread tThread = new Thread(() -> {
-            for (int i = 0; i < editedTableData.size(); i++) {
+            for (int i = 0; i < tables.size(); i++) {
                 int finalI = i;
+
                 requireActivity().runOnUiThread(new Runnable() {
                     @SuppressLint("HandlerLeak")
                     @Override
                     public void run() {
-                        if (finalI >= 0) {
-                            initRow(finalI, editedTableData);
-
-                        }
+                        initRow(finalI, tables);
                     }
-
                 });
 
                 try {
-                        Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                scrollView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollView.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
             }
 
         });
@@ -311,7 +264,7 @@ class Table2Thread extends Thread {
 
             try {
                 if (i >= 2) {
-                    Thread.sleep(6000);
+                    Thread.sleep(60000);
                     DashBoard4Fragment.activity.runOnUiThread(
                             new Runnable() {
                                 @Override
@@ -324,9 +277,8 @@ class Table2Thread extends Thread {
                                 }
                             });
 
-
                 } else {
-                    Thread.sleep(10000);
+                    Thread.sleep(20000);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

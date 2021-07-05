@@ -25,7 +25,6 @@
         android:layout_width="175dp"
         android:layout_height="match_parent"
         android:layout_gravity="start|end"
-        android:layout_marginStart="15dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -55,7 +54,6 @@
         android:id="@+id/t2vprospect"
         android:layout_width="150dp"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
         android:gravity="center_vertical|end"
         android:text="TextView"
         android:textColor="#78FA5A"
@@ -63,7 +61,7 @@
 
     <TextView
         android:id="@+id/t2lastSeen"
-        android:layout_width="220dp"
+        android:layout_width="175dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
         android:text="TextView"

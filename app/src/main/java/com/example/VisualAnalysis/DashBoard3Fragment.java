@@ -10,8 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -66,8 +64,6 @@ public class DashBoard3Fragment extends Fragment {
             me = this;
         View view = getLayoutInflater().inflate(R.layout.fragment_dash_board3, container, false);
         tableLayout = view.findViewById(R.id.tableLayout);
-
-
         scrollView = view.findViewById(R.id.scrolll);
         frameLayout = view.findViewById(R.id.progressBarFrame);
 
@@ -119,22 +115,7 @@ public class DashBoard3Fragment extends Fragment {
             }
         }, error -> Log.i("TAG-error", error + ""));
         requestQueue.add(jsonArrayRequest);
-        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 360000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 360000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
+        Util.retryRequest(jsonArrayRequest);
     }
 
 
@@ -196,7 +177,8 @@ public class DashBoard3Fragment extends Fragment {
                 try {
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(response);
-                    initTable(tablesToDisplay);
+                    if(tablesToDisplay.size() > 0)
+                        initTable(tablesToDisplay);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -207,22 +189,7 @@ public class DashBoard3Fragment extends Fragment {
         });
 
         requestQueue.add(jsonArrayRequest);
-        jsonArrayRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 360000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 360000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
+        Util.retryRequest(jsonArrayRequest);
     }
 
     void initTable(ArrayList<Table> tables) {
@@ -272,14 +239,10 @@ public class DashBoard3Fragment extends Fragment {
                         textView9.setText(numberFormat.format(quantityCount));
                         textView10.setText(numberFormat.format(totalSalesAmountAfterTax));
 
-
                         TableRow tableRow = tableElements.findViewById(R.id.tableRow);
                         tableLayout.addView(tableElements);
 
-                        Animation animation1 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_in_bottom);
-                        Animation animation2 = AnimationUtils.loadAnimation(tableLayout.getContext(), R.anim.slide_out_bottom);
-                        tableRow.startAnimation(animation2);
-
+                        Util.animate(tableLayout,tableRow);
                     }
 
                 });
@@ -347,6 +310,7 @@ public class DashBoard3Fragment extends Fragment {
 
 
 class TableRowThread extends Thread {
+
     @Override
     public void run() {
         for (int i = 0; i < 2; i++) {
@@ -357,10 +321,11 @@ class TableRowThread extends Thread {
             try {
 
                 if (i == 1) {
-                    Thread.sleep(50000);
+                    Thread.sleep(60000);
+                    Log.i("current_dest", NavHostFragment.findNavController(DashBoard3Fragment.me).getCurrentDestination()+"" );
                     NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_dashBoard4Fragment);
                 } else {
-                    Thread.sleep(10000);
+                    Thread.sleep(20000);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

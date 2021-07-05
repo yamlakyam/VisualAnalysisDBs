@@ -12,6 +12,7 @@ public class Table {
     double subTotal;
     double VAT;
     int prospect, vCount, active;
+    String totalSales;
 
     public Table(String organizationName, String startTime, String lastSeen, int vsiCount, int salesOutLateCount, int skuCount, int quantityCount, double totalSalesAmountAfterTax, int active, int prospect) {
         this.organizationName = organizationName;
@@ -36,9 +37,9 @@ public class Table {
         this.prospect = prospect;
     }
 
-    public Table(String vsi, int salesOutLateCount, String lastSeen, int vCount, double totalSalesAmountAfterTax) {
+    public Table(String vsi, int salesOutLateCount, String lastSeen, int vCount, String totalSales) {
         this.salesOutLateCount = salesOutLateCount;
-        this.totalSalesAmountAfterTax = totalSalesAmountAfterTax;
+        this.totalSales = totalSales;
         this.vsi = vsi;
         this.lastSeen = lastSeen;
         this.vCount = vCount;

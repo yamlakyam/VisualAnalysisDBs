@@ -25,6 +25,7 @@ public class VSMcardGVAdapter extends ArrayAdapter<Table> {
         if (listedView == null) {
             listedView = LayoutInflater.from(getContext()).inflate(R.layout.vsm_card_element, parent, false);
         }
+
         Table vsmCard = getItem(position);
 
         TextView vsmName =listedView.findViewById(R.id.vsmCardNameTxt);
@@ -37,8 +38,7 @@ public class VSMcardGVAdapter extends ArrayAdapter<Table> {
         vsmOutlet.setText(String.valueOf(vsmCard.salesOutLateCount));
         vsmLastActive.setText(vsmCard.lastSeen);
         vsmVcount.setText(String.valueOf(vsmCard.vCount));
-        vsmTsale.setText(String.valueOf(vsmCard.totalSalesAmountAfterTax));
-
+        vsmTsale.setText(vsmCard.totalSales);
 
         return listedView;
     }
