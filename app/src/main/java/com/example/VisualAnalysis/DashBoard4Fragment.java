@@ -76,7 +76,8 @@ public class DashBoard4Fragment extends Fragment {
                     Log.i("size", response.length() + "");
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<ArrayList<Table>> tablesToDisplay = getTableDataFromRequestBody(response);
-                    if(tablesToDisplay!=null){
+//                    if(tablesToDisplay!=null){
+                    if (tablesToDisplay.size() > 0) {
                         initTable(tablesToDisplay.get(0));
                     }
 
@@ -195,7 +196,7 @@ public class DashBoard4Fragment extends Fragment {
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<ArrayList<Table>> tablesToDisplay = DashBoard4Fragment.this.getTableDataFromRequestBody(response);
                     if (index > 0) {
-                        if(tablesToDisplay!=null){
+                        if (tablesToDisplay.size() > 0) {
                             DashBoard4Fragment.this.setUpdatedTables(tablesToDisplay.get(index), view);
                         }
                     }
@@ -264,16 +265,20 @@ class Table2Thread extends Thread {
 
             try {
                 if (i >= 2) {
-                    Thread.sleep(60000);
+                    Thread.sleep(20000);
                     DashBoard4Fragment.activity.runOnUiThread(
                             new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (NavHostFragment.findNavController(DashBoard4Fragment.me).getCurrentDestination().getId() == R.id.dashBoard4Fragment) {
-                                        NavHostFragment.findNavController(DashBoard4Fragment.me).navigate(R.id.action_dashBoard4Fragment_to_vsmCardFragment2);
-                                    } else {
-                                        NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_vsmCardFragment);
-                                    }
+                                    Log.i("current_dest", NavHostFragment.findNavController(DashBoard4Fragment.me).getCurrentDestination() + "");
+
+//                                    NavHostFragment.findNavController(DashBoard3Fragment.me).popBackStack(R.id.dashBoard4Fragment,true);
+//                                    if (NavHostFragment.findNavController(DashBoard4Fragment.me).getCurrentDestination().getId() == R.id.dashBoard4Fragment) {
+                                    NavHostFragment.findNavController(DashBoard4Fragment.me).navigate(R.id.action_dashBoard4Fragment_to_vsmCardFragment2);
+//                                    DashBoard4Fragment.activity.finishAffinity();
+//                                    } else {
+//                                        NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_vsmCardFragment);
+//                                    }
                                 }
                             });
 

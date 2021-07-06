@@ -1,6 +1,7 @@
 package com.example.VisualAnalysis;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +37,7 @@ public class VsmCardFragment extends Fragment {
 
     GridView VSMcardGridView;
     FrameLayout frameLayout;
+    static Activity activity;
 
     public static Fragment me;
     ArrayList<Table> vsmCardList;
@@ -50,6 +52,7 @@ public class VsmCardFragment extends Fragment {
         VSMcardGridView = view.findViewById(R.id.vsmCardGridLayout);
         frameLayout = view.findViewById(R.id.vsmCardFrameLayout);
         me = this;
+        activity=getActivity();
 
         vsmCardList = new ArrayList<>();
 
@@ -191,7 +194,14 @@ class vsmCardThread extends Thread {
                 if (i == 2) {
                     Thread.sleep(20000);
                     Log.i("current frag", NavHostFragment.findNavController(VsmCardFragment.me).getCurrentDestination() + "");
-                    NavHostFragment.findNavController(VsmCardFragment.me).navigate(R.id.action_vsmCardFragment_to_mapActivity);
+                    VsmCardFragment.activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            NavHostFragment.findNavController(DashBoard3Fragment.me).popBackStack(R.id.vsmCardFragment,true);
+                            NavHostFragment.findNavController(VsmCardFragment.me).navigate(R.id.action_vsmCardFragment_to_mapActivity);
+                        }
+                    });
+
                 } else {
                     Thread.sleep(20000);
                 }

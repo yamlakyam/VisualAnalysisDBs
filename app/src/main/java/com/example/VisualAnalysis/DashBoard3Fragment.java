@@ -1,6 +1,7 @@
 package com.example.VisualAnalysis;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,8 +24,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -44,6 +43,7 @@ public class DashBoard3Fragment extends Fragment {
     private TableLayout tableLayout;
     public static Fragment me;
     FrameLayout frameLayout;
+    public static Activity activity;
 
     public static ArrayList<Table> tables = new ArrayList<>();
     public static Handler tableRowsHandler;
@@ -59,8 +59,9 @@ public class DashBoard3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         inflater.getContext().setTheme(R.style.darkTheme);
+        activity = getActivity();
 
-        if(me == null)
+        if (me == null)
             me = this;
         View view = getLayoutInflater().inflate(R.layout.fragment_dash_board3, container, false);
         tableLayout = view.findViewById(R.id.tableLayout);
@@ -101,7 +102,7 @@ public class DashBoard3Fragment extends Fragment {
     }
 
     private void editTableValues(View view, Context context) {
-        Log.i("edit", "I am editing");
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
             if (response != null) {
@@ -128,7 +129,7 @@ public class DashBoard3Fragment extends Fragment {
                     @SuppressLint("HandlerLeak")
                     @Override
                     public void run() {
-                        if (finalI >= 0) {
+                        if (finalI >= 0 && editedTableData.size() > 0) {
                             TableRow tableRow = (TableRow) tableLayout.getChildAt(finalI);
                             TextView textView2 = tableRow.findViewById(R.id.tVSIcount);
                             TextView textView3 = tableRow.findViewById(R.id.tactive);
@@ -177,7 +178,7 @@ public class DashBoard3Fragment extends Fragment {
                 try {
                     frameLayout.setVisibility(View.GONE);
                     ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(response);
-                    if(tablesToDisplay.size() > 0)
+                    if (tablesToDisplay.size() > 0)
                         initTable(tablesToDisplay);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -242,7 +243,7 @@ public class DashBoard3Fragment extends Fragment {
                         TableRow tableRow = tableElements.findViewById(R.id.tableRow);
                         tableLayout.addView(tableElements);
 
-                        Util.animate(tableLayout,tableRow);
+                        Util.animate(tableLayout, tableRow);
                     }
 
                 });
@@ -321,9 +322,28 @@ class TableRowThread extends Thread {
             try {
 
                 if (i == 1) {
-                    Thread.sleep(60000);
-                    Log.i("current_dest", NavHostFragment.findNavController(DashBoard3Fragment.me).getCurrentDestination()+"" );
-                    NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_dashBoard4Fragment);
+                    Thread.sleep(20000);
+                    Log.i("current_dest", NavHostFragment.findNavController(DashBoard3Fragment.me).getCurrentDestination() + "");
+                    DashBoard3Fragment.activity.runOnUiThread(new Runnable() {
+                        @SuppressLint("RestrictedApi")
+                        @Override
+                        public void run() {
+//                            if(NavHostFragment.findNavController(DashBoard3Fragment.me).getPreviousBackStackEntry()!=null){
+//                                Log.i("prev stack entry", NavHostFragment.findNavController(DashBoard3Fragment.me).getPreviousBackStackEntry()+"");
+//                                NavHostFragment.findNavController(DashBoard3Fragment.me).popBackStack(R.id.dashBoard3Fragment,false);
+//                            }
+
+//                                    NavHostFragment.findNavController(DashBoard3Fragment.me).getCurrentDestination().getId()==R.id.dashBoard3Fragment)
+                                NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_dashBoard4Fragment);
+
+//                            else if(NavHostFragment.findNavController(DashBoard3Fragment.me).getCurrentDestination().getId()==R.id.vsmCardFragment){
+//                                NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_vsmCardFragment_to_dashBoard4Fragment);
+//
+//                            }
+//                            NavHostFragment.findNavController(DashBoard3Fragment.me).popBackStack(R.id.dashBoard3Fragment, true);
+                        }
+                    });
+
                 } else {
                     Thread.sleep(20000);
                 }

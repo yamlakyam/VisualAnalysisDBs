@@ -71,26 +71,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         locations.add(loc7);
         locations.add(loc8);
 
-        place_names.add("Branch 1");
-        place_names.add("Branch 2");
-        place_names.add("Branch 3");
-        place_names.add("Branch 4");
-        place_names.add("Branch 5");
-        place_names.add("Branch 6");
-        place_names.add("Branch 7");
-        place_names.add("Branch 8");
+        place_names.add("Van 1");
+        place_names.add("Van 2");
+        place_names.add("Van 3");
+        place_names.add("Van 4");
+        place_names.add("Van 5");
+        place_names.add("Van 6");
+        place_names.add("Van 7");
+        place_names.add("Van 8");
 
 
         Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MapActivity.this, MainActivity.class);
-                intent.putExtra("Last Index",lastIndex+"");
-                Log.i("TAG-mapctivity",""+lastIndex);
-                startActivity(intent);
-            }
-        }, 40000);
+//        h.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(MapActivity.this, MainActivity.class);
+//                intent.putExtra("Last Index",lastIndex+"");
+//                Log.i("TAG-mapctivity",""+lastIndex);
+//                startActivity(intent);
+//            }
+//        }, 40000);
 
     }
 
