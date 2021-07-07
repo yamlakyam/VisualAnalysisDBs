@@ -54,7 +54,27 @@ public class VsmCardFragment extends Fragment {
         me = this;
         activity=getActivity();
 
-        vsmCardList = new ArrayList<>();
+        /*vsmCardList = new ArrayList<>();
+        vsmCardList.add(new Table("VAN1",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN2",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN3",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN4",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN5",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN6",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        vsmCardList.add(new Table("VAN7",12,"3 months ago",12,"12,000"));
+        VSMcardGVAdapter adapter = new VSMcardGVAdapter(requireContext(), vsmCardList);
+        VSMcardGridView.setAdapter(adapter);
+
+         */
 
         makeRequest(getContext());
         updateVsmCard(getContext());

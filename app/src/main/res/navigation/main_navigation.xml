@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/dashBoard3Fragment">
+    app:startDestination="@id/vsmCardFragment">
 
     <fragment
         android:id="@+id/dashBoardMain"
