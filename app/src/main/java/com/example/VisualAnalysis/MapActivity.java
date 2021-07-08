@@ -1,6 +1,8 @@
 package com.example.VisualAnalysis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -92,6 +94,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //            }
 //        }, 40000);
 
+
+
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MapActivity.this, MainActivity.class);
+                intent.putExtra("fragmentNumber",1);
+                startActivity(intent);
+                finish();
+            }
+        }, 15000);
+
     }
 
     @SuppressLint("HandlerLeak")
@@ -181,15 +195,18 @@ class MarkerThread extends Thread {
     public void run() {
         for (int i = 0; i < MapActivity.locations.size(); i++) {
             Log.v("MapIndex", "" + i);
-            Message msg = MapActivity.handler.obtainMessage();
-            msg.obj = "" + i;
-            MapActivity.handler.sendMessage(msg);
+            if(MapActivity.handler!=null){
+                Message msg = MapActivity.handler.obtainMessage();
+                msg.obj = "" + i;
+                MapActivity.handler.sendMessage(msg);
 
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+
 
         }
     }

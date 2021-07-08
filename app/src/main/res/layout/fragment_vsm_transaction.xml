@@ -18,17 +18,18 @@
         android:layout_marginEnd="16dp"
         android:background="@color/cardBackgroundDark1"
         android:gravity="center"
+        android:showDividers="middle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/distributorHeaderVsmTransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Distributor"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
     </TableRow>
 
     <TableRow
@@ -36,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="16dp"
         android:background="@color/cardBackgroundDark1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +53,7 @@
             android:paddingStart="10dp"
             android:text="SN"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/VSMHeader2"
@@ -61,7 +63,7 @@
             android:gravity="end"
             android:text="Voucher No"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/VSMHeader3"
@@ -71,7 +73,7 @@
             android:gravity="end"
             android:text="Outlet"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/VSMHeader4"
@@ -81,7 +83,7 @@
             android:gravity="end"
             android:text="TIN"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/VSMHeader5"
@@ -91,7 +93,7 @@
             android:gravity="end"
             android:text="Date &amp; Time"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/VSMHeader6"
@@ -101,7 +103,7 @@
             android:gravity="end"
             android:text="Item Count"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/VSMHeader7"
@@ -111,7 +113,7 @@
             android:gravity="end"
             android:text="Sub Total"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/VSMHeader8"
@@ -121,7 +123,7 @@
             android:gravity="end"
             android:text="VAT"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/VSMHeader9"
@@ -132,7 +134,7 @@
             android:paddingEnd="10dp"
             android:text="Grand Total"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
     </TableRow>
 

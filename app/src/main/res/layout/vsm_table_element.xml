@@ -18,7 +18,7 @@
         android:paddingEnd="5dp"
         android:text="1"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/vsmElement2"
@@ -28,7 +28,7 @@
         android:paddingEnd="5dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/vsmElement3"
@@ -38,7 +38,7 @@
         android:paddingRight="5dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/vsmElement4"
@@ -48,7 +48,7 @@
         android:paddingEnd="5dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/vsmElement5"
@@ -58,7 +58,7 @@
         android:paddingEnd="5dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/vsmElement6"
@@ -68,7 +68,7 @@
         android:paddingEnd="5dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/vsmElement7"
@@ -78,7 +78,7 @@
         android:paddingEnd="5dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/vsmElement8"
@@ -88,7 +88,7 @@
         android:paddingEnd="5dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/vsmElement9"
@@ -99,7 +99,7 @@
         android:paddingEnd="10dp"
         android:text="TextView"
         android:textColor="#78FA5A"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 </TableRow>
 

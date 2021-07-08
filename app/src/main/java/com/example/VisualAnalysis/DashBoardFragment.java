@@ -127,7 +127,7 @@ public class DashBoardFragment extends Fragment {
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
+//                NavHostFragment.findNavController(DashBoardFragment.this).navigate(R.id.action_dashBoardFragment_to_mapActivity3);
             }
         }, 40000);
 

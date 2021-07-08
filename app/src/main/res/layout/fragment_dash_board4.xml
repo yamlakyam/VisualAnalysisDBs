@@ -3,7 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dashBoard4Fragment"
+    android:id="@+id/DistributorTable"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardBackgroundDark"
@@ -13,7 +13,7 @@
     <TableRow
         android:id="@+id/headerRowDB4"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
@@ -24,10 +24,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/distributorHeaderDB4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Distrutor"
+            android:fontFamily="@font/advent_pro"
+            android:text="Distributor"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
     </TableRow>
@@ -35,8 +36,9 @@
     <TableRow
         android:id="@+id/headerRow2"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="16dp"
         android:background="@color/cardBackgroundDark1"
         app:layout_constraintBottom_toTopOf="@+id/scrolll2"
@@ -50,71 +52,78 @@
             android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/advent_pro"
             android:gravity="start"
             android:paddingStart="10dp"
             android:text="SN"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/t2Header1"
             android:layout_width="175dp"
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/advent_pro"
             android:gravity="start|center_horizontal|center_vertical"
             android:text="VSM"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/t2Header2"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/advent_pro"
             android:gravity="end"
             android:text="Prospect"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/t2Header3"
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/advent_pro"
             android:gravity="end"
-            android:text="Last Seen"
+            android:text="Last Active"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/t2Header4"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/advent_pro"
             android:gravity="end"
             android:text="Total Outlet"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/t2Header5"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/advent_pro"
             android:gravity="end"
             android:text="Total SKU"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/t2Header6"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:fontFamily="@font/advent_pro"
             android:gravity="end"
             android:text="Total Qty"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/t2Header7"
@@ -122,11 +131,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:fontFamily="@font/advent_pro"
             android:gravity="end"
             android:paddingEnd="10dp"
             android:text="Grand Total"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
     </TableRow>
 

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.Request;
@@ -34,11 +35,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DashBoard4Fragment extends Fragment {
+public class DistributorTable extends Fragment {
 
     FrameLayout frameLayout;
     TableLayout tableLayout;
     ScrollView scrollView;
+    TextView distributorTextview;
 
     public static Fragment me;
     public static Activity activity;
@@ -46,6 +48,7 @@ public class DashBoard4Fragment extends Fragment {
     public static Handler tableRowsHandler;
 
     NumberFormat numberFormat;
+    Table2Thread tableRowThread;
 
     String url = "http://192.168.1.248:8001/api/ChartData/GetSalesDataForSingleOrganization";
 
@@ -58,6 +61,8 @@ public class DashBoard4Fragment extends Fragment {
         tableLayout = view.findViewById(R.id.tableLayout2);
         frameLayout = view.findViewById(R.id.progressBarFrame2);
         scrollView = view.findViewById(R.id.scrolll2);
+
+        distributorTextview = view.findViewById(R.id.distributorHeaderDB4);
         me = this;
         activity = getActivity();
 
@@ -67,19 +72,41 @@ public class DashBoard4Fragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        tableRowThread.interrupt();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        tableRowThread.interrupt();
+    }
+
     @SuppressLint("HandlerLeak")
     private void makeRequest(Context context) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
             if (response != null) {
                 try {
-                    Log.i("size", response.length() + "");
                     frameLayout.setVisibility(View.GONE);
-                    ArrayList<ArrayList<Table>> tablesToDisplay = getTableDataFromRequestBody(response);
-//                    if(tablesToDisplay!=null){
+
+                    JSONObject jsonObject = response.getJSONObject(0);
+                    String name = jsonObject.getString("nameOfOrg");
+
+                    distributorTextview.setText(name);
+                    Log.i("name", name);
+
+                    JSONArray jsonArray = jsonObject.getJSONArray("organizationChartDataList");
+
+
+                    ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(jsonArray);
+
                     if (tablesToDisplay.size() > 0) {
-                        initTable(tablesToDisplay.get(0));
+                        initTable(tablesToDisplay);
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -95,28 +122,25 @@ public class DashBoard4Fragment extends Fragment {
 
     }
 
-    public ArrayList<ArrayList<Table>> getTableDataFromRequestBody(JSONArray tables) throws JSONException {
-        ArrayList<ArrayList<Table>> parsedTables = new ArrayList<>();
+    public ArrayList<Table> getTableDataFromRequestBody(JSONArray tables) throws JSONException {
+        ArrayList<Table> parsedTables = new ArrayList<>();
         for (int i = 0; i < tables.length(); i++) {
-            JSONArray jsonArray = tables.getJSONArray(i);
-            ArrayList<Table> parsedTableData = new ArrayList<>();
-            for (int j = 0; j < jsonArray.length(); j++) {
-                JSONObject tableObject = jsonArray.getJSONObject(j);
-                double grandTotal = tableObject.getDouble("totalSalesAmountAfterTax");
-                double roundedGrandTotal = Math.round(grandTotal * 100.0) / 100.0;
+            JSONObject jsonObject = tables.getJSONObject(i);
 
-                Table tableRow = new Table(
-                        tableObject.getString("vsi"),
-                        tableObject.getInt("salesOutLateCount"),
-                        tableObject.getInt("skuCount"),
-                        tableObject.getInt("quantityCount"),
-                        roundedGrandTotal,
-                        tableObject.getInt("prospect"),
-                        tableObject.getString("startTimeStamp")
-                );
-                parsedTableData.add(tableRow);
-            }
-            parsedTables.add(parsedTableData);
+            double grandTotal = jsonObject.getDouble("totalSalesAmountAfterTax");
+            double roundedGrandTotal = Math.round(grandTotal * 100.0) / 100.0;
+
+            Table tableRow = new Table(
+                    jsonObject.getString("vsi"),
+                    jsonObject.getInt("salesOutLateCount"),
+                    jsonObject.getInt("skuCount"),
+                    jsonObject.getInt("quantityCount"),
+                    roundedGrandTotal,
+                    jsonObject.getInt("prospect"),
+                    jsonObject.getString("startTimeStamp")
+            );
+
+            parsedTables.add(tableRow);
         }
         return parsedTables;
     }
@@ -127,14 +151,14 @@ public class DashBoard4Fragment extends Fragment {
 
     private void initRow(int finalI, ArrayList<Table> tableList) {
         View tableElements = LayoutInflater.from(getContext()).inflate(R.layout.table_elements_2, null, false);
-        TextView textView0 = tableElements.findViewById(R.id.t2sn);
-        TextView textView1 = tableElements.findViewById(R.id.t2Vsi);
-        TextView textView2 = tableElements.findViewById(R.id.t2vprospect);
-        TextView textView3 = tableElements.findViewById(R.id.t2lastSeen);
-        TextView textView4 = tableElements.findViewById(R.id.t2totalOutlet);
-        TextView textView5 = tableElements.findViewById(R.id.t2totalSKU);
-        TextView textView6 = tableElements.findViewById(R.id.t2totalQty);
-        TextView textView7 = tableElements.findViewById(R.id.t2totalSales);
+        TextView textViewSN = tableElements.findViewById(R.id.t2sn);
+        TextView textViewVSI = tableElements.findViewById(R.id.t2Vsi);
+        TextView textViewProspects = tableElements.findViewById(R.id.t2vprospect);
+        TextView textViewLastActive = tableElements.findViewById(R.id.t2lastSeen);
+        TextView textViewTotalOutlets = tableElements.findViewById(R.id.t2totalOutlet);
+        TextView textViewTotalSKU = tableElements.findViewById(R.id.t2totalSKU);
+        TextView textViewTotalQty = tableElements.findViewById(R.id.t2totalQty);
+        TextView textViewTotalSales = tableElements.findViewById(R.id.t2totalSales);
 
 
         String orgName = tableList.get(finalI).vsi;
@@ -155,14 +179,14 @@ public class DashBoard4Fragment extends Fragment {
 
         String formattedLastSeen = Util.timeElapsed(lastActive, currentTime);
 
-        textView0.setText(String.valueOf(finalI + 1));
-        textView1.setText(preciseOrgName);
-        textView2.setText(String.valueOf(tableList.get(finalI).prospect));
-        textView3.setText(formattedLastSeen);
-        textView4.setText(String.valueOf(tableList.get(finalI).salesOutLateCount));
-        textView5.setText(String.valueOf(tableList.get(finalI).skuCount));
-        textView6.setText(numberFormat.format(quantityCount));
-        textView7.setText(numberFormat.format(totalSalesAmountAfterTax));
+        textViewSN.setText(String.valueOf(finalI + 1));
+        textViewVSI.setText(preciseOrgName);
+        textViewProspects.setText(String.valueOf(tableList.get(finalI).prospect));
+        textViewLastActive.setText(formattedLastSeen);
+        textViewTotalOutlets.setText(String.valueOf(tableList.get(finalI).salesOutLateCount));
+        textViewTotalSKU.setText(String.valueOf(tableList.get(finalI).skuCount));
+        textViewTotalQty.setText(numberFormat.format(quantityCount));
+        textViewTotalSales.setText(numberFormat.format(totalSalesAmountAfterTax));
 
         TableRow tableRow = tableElements.findViewById(R.id.VSMtableRow);
         tableLayout.addView(tableElements);
@@ -184,22 +208,28 @@ public class DashBoard4Fragment extends Fragment {
             }
         };
 
-        Table2Thread tableRowThread = new Table2Thread(3);
+        tableRowThread = new Table2Thread(3);
         tableRowThread.start();
     }
 
     private void editTableValues(View view, Context context, int index) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
-            if (response != null) {
+            if (response != null ) {
                 try {
                     frameLayout.setVisibility(View.GONE);
-                    ArrayList<ArrayList<Table>> tablesToDisplay = DashBoard4Fragment.this.getTableDataFromRequestBody(response);
+
                     if (index > 0) {
-                        if (tablesToDisplay.size() > 0) {
-                            DashBoard4Fragment.this.setUpdatedTables(tablesToDisplay.get(index), view);
-                        }
+                        JSONObject jsonObject = response.getJSONObject(index);
+                        String name = jsonObject.getString("nameOfOrg");
+
+                        distributorTextview.setText(name);
+                        JSONArray jsonArray = jsonObject.getJSONArray("organizationChartDataList");
+                        ArrayList<Table> tablesToDisplay = getTableDataFromRequestBody(jsonArray);
+                        DistributorTable.this.setUpdatedTables(tablesToDisplay, view);
+
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -259,31 +289,33 @@ class Table2Thread extends Thread {
     public void run() {
 
         for (int i = 0; i < distributordataSize; i++) {
-            Message msg = DashBoard4Fragment.tableRowsHandler.obtainMessage();
+            Message msg = DistributorTable.tableRowsHandler.obtainMessage();
             msg.obj = String.valueOf(i);
-            DashBoard4Fragment.tableRowsHandler.sendMessage(msg);
+            DistributorTable.tableRowsHandler.sendMessage(msg);
 
             try {
                 if (i >= 2) {
-                    Thread.sleep(20000);
-                    DashBoard4Fragment.activity.runOnUiThread(
+                    Thread.sleep(10000);
+                    DistributorTable.activity.runOnUiThread(
                             new Runnable() {
                                 @Override
                                 public void run() {
-                                    Log.i("current_dest", NavHostFragment.findNavController(DashBoard4Fragment.me).getCurrentDestination() + "");
+                                    Log.i("current_dest", NavHostFragment.findNavController(DistributorTable.me).getCurrentDestination() + "");
+//                                    if (NavHostFragment.findNavController(DistributorTable.me).getCurrentDestination().getId() == R.id.vsmCardFragment) {
+//
+//                                        NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.vsmCardFragment, true).build();
+//                                        NavHostFragment.findNavController(DistributorTable.me).navigate(R.id.vsmCardFragment,null, navOptions);
+////
+//                                    }
+//                                    else{
+                                        NavHostFragment.findNavController(DistributorTable.me).navigate(R.id.vsmCardFragment);
 
-//                                    NavHostFragment.findNavController(DashBoard3Fragment.me).popBackStack(R.id.dashBoard4Fragment,true);
-//                                    if (NavHostFragment.findNavController(DashBoard4Fragment.me).getCurrentDestination().getId() == R.id.dashBoard4Fragment) {
-                                    NavHostFragment.findNavController(DashBoard4Fragment.me).navigate(R.id.action_dashBoard4Fragment_to_vsmCardFragment2);
-//                                    DashBoard4Fragment.activity.finishAffinity();
-//                                    } else {
-//                                        NavHostFragment.findNavController(DashBoard3Fragment.me).navigate(R.id.action_dashBoard3Fragment_to_vsmCardFragment);
 //                                    }
                                 }
                             });
 
                 } else {
-                    Thread.sleep(20000);
+                    Thread.sleep(10000);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

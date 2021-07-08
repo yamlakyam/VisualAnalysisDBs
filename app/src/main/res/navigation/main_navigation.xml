@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/vsmCardFragment">
+    app:startDestination="@id/SummaryTable">
 
     <fragment
         android:id="@+id/dashBoardMain"
@@ -18,36 +18,23 @@
     <fragment
         android:id="@+id/dashBoardFragment"
         android:name="com.example.VisualAnalysis.DashBoardFragment"
-        android:label="DashBoardFragment" >
-        <action
-            android:id="@+id/action_dashBoardFragment_to_mapActivity3"
-            app:destination="@id/mapActivity"
- />
-    </fragment>
-    <activity
-        android:id="@+id/mapActivity"
-        android:name="com.example.VisualAnalysis.MapActivity"
-        android:label="activity_map"
-        tools:layout="@layout/activity_map" />
+        android:label="DashBoardFragment" />
     <fragment
-        android:id="@+id/dashBoard3Fragment"
-        android:name="com.example.VisualAnalysis.DashBoard3Fragment"
+        android:id="@+id/SummaryTable"
+        android:name="com.example.VisualAnalysis.SummaryTable"
         android:label="fragment_dash_board3"
         tools:layout="@layout/fragment_dash_board3" >
         <action
-            android:id="@+id/action_dashBoard3Fragment_to_dashBoard4Fragment"
-            app:destination="@id/dashBoard4Fragment" />
-        <action
-            android:id="@+id/action_dashBoard3Fragment_to_vsmCardFragment"
-            app:destination="@id/vsmCardFragment" />
+            android:id="@+id/action_SummaryTable_to_DistributorTable"
+            app:destination="@id/DistributorTable" />
     </fragment>
     <fragment
-        android:id="@+id/dashBoard4Fragment"
-        android:name="com.example.VisualAnalysis.DashBoard4Fragment"
+        android:id="@+id/DistributorTable"
+        android:name="com.example.VisualAnalysis.DistributorTable"
         android:label="fragment_dash_board4"
         tools:layout="@layout/fragment_dash_board4" >
         <action
-            android:id="@+id/action_dashBoard4Fragment_to_vsmCardFragment2"
+            android:id="@+id/action_DistributorTable_to_vsmCardFragment2"
             app:destination="@id/vsmCardFragment" />
     </fragment>
     <fragment
@@ -59,12 +46,5 @@
         android:id="@+id/vsmCardFragment"
         android:name="com.example.VisualAnalysis.VsmCardFragment"
         android:label="fragment_vsm_card"
-        tools:layout="@layout/fragment_vsm_card">
-        <action
-            android:id="@+id/action_vsmCardFragment_to_mapActivity"
-            app:destination="@id/mapActivity" />
-        <action
-            android:id="@+id/action_vsmCardFragment_to_dashBoard4Fragment"
-            app:destination="@id/dashBoard4Fragment" />
-    </fragment>
+        tools:layout="@layout/fragment_vsm_card"/>
 </navigation>

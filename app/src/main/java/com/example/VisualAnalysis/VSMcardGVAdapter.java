@@ -33,12 +33,14 @@ public class VSMcardGVAdapter extends ArrayAdapter<Table> {
         TextView vsmLastActive =listedView.findViewById(R.id.vsmCardlastActive);
         TextView vsmVcount =listedView.findViewById(R.id.vsmCardVcount);
         TextView vsmTsale =listedView.findViewById(R.id.vsmCardTotalSale);
+        TextView vsmDistributor=listedView.findViewById(R.id.distributorVsmCard);
 
         vsmName.setText(vsmCard.vsi);
         vsmOutlet.setText(String.valueOf(vsmCard.salesOutLateCount));
         vsmLastActive.setText(vsmCard.lastSeen);
         vsmVcount.setText(String.valueOf(vsmCard.vCount));
         vsmTsale.setText(vsmCard.totalSales);
+        vsmDistributor.setText(vsmCard.organizationName);
 
         return listedView;
     }
